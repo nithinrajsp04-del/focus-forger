@@ -109,6 +109,47 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:1rem 2
 .missed-card{border-color:rgba(239,68,68,.3)!important;background:rgba(239,68,68,.04)!important;}
 .carried-card{border-color:rgba(245,158,11,.3)!important;}
 
+/* CLASS 11 BOOST SECTION */
+.c11-boost-section{margin:0 0 16px;background:linear-gradient(135deg,rgba(245,158,11,.08),rgba(249,115,22,.04));border:1px solid rgba(245,158,11,.35);border-radius:20px;overflow:hidden;}
+.c11-boost-header{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.4rem;cursor:pointer;user-select:none;}
+.c11-boost-header:hover{background:rgba(245,158,11,.04);}
+.c11-bh-left{display:flex;align-items:center;gap:10px;}
+.c11-bh-icon{font-size:1.2rem;}
+.c11-bh-info{}
+.c11-bh-title{font-size:.92rem;font-weight:800;color:#fcd34d;}
+.c11-bh-sub{font-size:.68rem;font-family:'DM Mono',monospace;color:#f59e0b;margin-top:2px;}
+.c11-bh-right{display:flex;align-items:center;gap:10px;}
+.c11-bh-badge{font-size:.65rem;font-family:'DM Mono',monospace;color:#fcd34d;background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.3);border-radius:6px;padding:3px 9px;}
+.c11-bh-toggle{font-size:.8rem;color:#f59e0b;transition:transform .3s;}
+.c11-bh-toggle.open{transform:rotate(180deg);}
+.c11-boost-body{display:none;padding:.8rem 1.4rem 1.2rem;border-top:1px solid rgba(245,158,11,.15);}
+.c11-boost-body.open{display:block;}
+.c11-subjects{display:flex;flex-direction:column;gap:14px;}
+.c11-subject-block{}
+.c11-subj-header{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+.c11-subj-icon{font-size:.85rem;}
+.c11-subj-name{font-size:.8rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;}
+.c11-subj-name.phy{color:#67e8f9;}
+.c11-subj-name.che{color:#86efac;}
+.c11-subj-name.mat{color:#c4b5fd;}
+.c11-subj-pct{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--text3);}
+.c11-topics{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;}
+.c11-topic-card{border-radius:11px;padding:9px 11px;cursor:pointer;transition:opacity .2s,transform .15s;position:relative;}
+.c11-topic-card:hover{transform:translateY(-1px);}
+.c11-topic-card.done-c11{opacity:.55;}
+.c11-tc-phy{background:rgba(6,182,212,.06);border:1px solid rgba(6,182,212,.15);}
+.c11-tc-che{background:rgba(34,197,94,.06);border:1px solid rgba(34,197,94,.15);}
+.c11-tc-mat{background:rgba(139,92,246,.06);border:1px solid rgba(139,92,246,.15);}
+.c11-tc-name{font-size:.8rem;font-weight:700;line-height:1.3;margin-bottom:3px;padding-right:22px;}
+.c11-tc-wt{font-size:.62rem;font-family:'DM Mono',monospace;margin-bottom:4px;}
+.c11-tc-wt.high{color:#fcd34d;}
+.c11-tc-wt.very-high{color:#fb923c;}
+.c11-tc-tip{font-size:.63rem;opacity:.7;line-height:1.4;}
+.c11-tc-check{position:absolute;top:9px;right:9px;width:18px;height:18px;border-radius:50%;border:1.5px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:9px;transition:all .2s;}
+.c11-tc-check.done{background:var(--green);border-color:var(--green);color:#fff;}
+.c11-progress-bar{height:4px;border-radius:100px;background:rgba(255,255,255,.06);overflow:hidden;margin-bottom:6px;}
+.c11-progress-fill{height:100%;border-radius:100px;background:linear-gradient(90deg,#f59e0b,#f97316);transition:width .6s ease;}
+
 /* HABITS */
 .hero-mini{padding:1.5rem 2.5rem .8rem;}
 .prog-section{padding:0 2.5rem .8rem;}
@@ -335,6 +376,26 @@ footer{text-align:center;padding:1.2rem;font-size:.67rem;color:var(--text3);font
     <button class="plan-tab" onclick="switchPlan('progress')">Progress</button>
   </div>
 
+  <!-- CLASS 11 HIGH-WEIGHTAGE BOOST SECTION -->
+  <div class="c11-boost-section fade-up d3" id="c11BoostSection">
+    <div class="c11-boost-header" onclick="toggleC11Boost()">
+      <div class="c11-bh-left">
+        <div class="c11-bh-icon">⚡</div>
+        <div class="c11-bh-info">
+          <div class="c11-bh-title">Class 11 High-Weightage Topics</div>
+          <div class="c11-bh-sub" id="c11BoostSub">Study these after Class 12 is done · or use spare/buffer time</div>
+        </div>
+      </div>
+      <div class="c11-bh-right">
+        <div class="c11-bh-badge" id="c11BoostBadge">0% done</div>
+        <div class="c11-bh-toggle" id="c11BoostToggle">▼</div>
+      </div>
+    </div>
+    <div class="c11-boost-body" id="c11BoostBody">
+      <div class="c11-subjects" id="c11SubjectsContainer"></div>
+    </div>
+  </div>
+
   <div class="plan-view active" id="planview-weekly">
     <div id="weeklyPlanList"></div>
   </div>
@@ -480,6 +541,119 @@ footer{text-align:center;padding:1.2rem;font-size:.67rem;color:var(--text3);font
 </div>
 
 <script>
+/* ══ CLASS 11 HIGH-WEIGHTAGE TOPICS ══ */
+const C11_TOPICS = {
+  PHY: [
+    {id:'c11p1', name:'Kinematics', weight:'very-high', tip:'2D motion · Projectile · Relative velocity — 3-4 Qs every JEE'},
+    {id:'c11p2', name:'Laws of Motion', weight:'very-high', tip:'Newton\'s laws · Friction · Constraints — highest Physics weightage'},
+    {id:'c11p3', name:'Work, Energy & Power', weight:'high', tip:'Work-energy theorem · Conservation · Collision types'},
+    {id:'c11p4', name:'Rotational Motion', weight:'very-high', tip:'Torque · MOI · Angular momentum — 2-3 Qs guaranteed'},
+    {id:'c11p5', name:'Gravitation', weight:'high', tip:'Kepler\'s laws · Orbital velocity · Escape velocity'},
+    {id:'c11p6', name:'Simple Harmonic Motion', weight:'very-high', tip:'SHM equations · Spring-mass · Pendulum — appears every year'},
+    {id:'c11p7', name:'Waves & Sound', weight:'high', tip:'Wave equation · Superposition · Beats · Doppler effect'},
+    {id:'c11p8', name:'Thermodynamics', weight:'very-high', tip:'Laws of thermo · Carnot cycle · Heat engines'},
+    {id:'c11p9', name:'Kinetic Theory of Gases', weight:'high', tip:'Ideal gas · RMS speed · Degrees of freedom'},
+  ],
+  CHE: [
+    {id:'c11c1', name:'Mole Concept & Stoichiometry', weight:'very-high', tip:'Already in Week 1 — revise thoroughly'},
+    {id:'c11c2', name:'Atomic Structure', weight:'very-high', tip:'Bohr model · Quantum numbers · Electronic config — 2-3 Qs'},
+    {id:'c11c3', name:'Chemical Bonding', weight:'very-high', tip:'VSEPR · Hybridisation · MOT — appears every year'},
+    {id:'c11c4', name:'Chemical Equilibrium', weight:'very-high', tip:'Kc, Kp, Kx · Le Chatelier\'s · Buffer — always asked'},
+    {id:'c11c5', name:'Ionic Equilibrium', weight:'high', tip:'pH · pOH · Buffer solutions · Solubility product'},
+    {id:'c11c6', name:'Thermodynamics (Chem)', weight:'very-high', tip:'ΔH, ΔS, ΔG · Hess\'s law · Bond enthalpy'},
+    {id:'c11c7', name:'Redox Reactions', weight:'high', tip:'Oxidation number · Half-cell method — needed for Electrochemistry'},
+    {id:'c11c8', name:'Hydrocarbons', weight:'high', tip:'Alkanes · Alkenes · Alkynes · Benzene — organic backbone'},
+    {id:'c11c9', name:'Periodic Table & Periodicity', weight:'high', tip:'IE · EA · Electronegativity trends — quick scoring topic'},
+  ],
+  MAT: [
+    {id:'c11m1', name:'Trigonometry', weight:'very-high', tip:'Identities · Equations · Inverse trig — 3-4 Qs every JEE'},
+    {id:'c11m2', name:'Quadratic Equations', weight:'very-high', tip:'Roots · Discriminant · Vieta\'s formulas — always appears'},
+    {id:'c11m3', name:'Sequences & Series', weight:'very-high', tip:'AP · GP · HP · AM-GM inequality — 2-3 Qs guaranteed'},
+    {id:'c11m4', name:'Straight Lines & Circles', weight:'very-high', tip:'Equations · Angle bisectors · Tangents — coordinate backbone'},
+    {id:'c11m5', name:'Conic Sections', weight:'very-high', tip:'Parabola · Ellipse · Hyperbola — 2-3 Qs in JEE Advanced'},
+    {id:'c11m6', name:'Permutations & Combinations', weight:'very-high', tip:'nCr · nPr · Distribution — needed for Probability'},
+    {id:'c11m7', name:'Binomial Theorem', weight:'high', tip:'Expansion · General term · Middle term · Properties'},
+    {id:'c11m8', name:'Limits & Derivatives', weight:'high', tip:'L\'Hôpital · Standard limits — foundation for Calculus'},
+    {id:'c11m9', name:'Sets, Relations & Functions', weight:'high', tip:'Already in Week 1 — domain/range · composite functions'},
+  ]
+};
+
+let c11BoostOpen = false;
+function toggleC11Boost(){
+  c11BoostOpen = !c11BoostOpen;
+  document.getElementById('c11BoostBody').classList.toggle('open', c11BoostOpen);
+  document.getElementById('c11BoostToggle').classList.toggle('open', c11BoostOpen);
+  if(c11BoostOpen) renderC11Topics();
+}
+
+function toggleC11Topic(id){
+  if(!state.chapterDone) state.chapterDone={};
+  state.chapterDone[id] = !state.chapterDone[id];
+  saveH();
+  renderC11Topics();
+  updateC11Badge();
+  showNotif(state.chapterDone[id] ? '⚡ Class 11 topic done! Great work!' : 'Topic unmarked.');
+}
+
+function getC11Stats(){
+  const allIds = [...C11_TOPICS.PHY, ...C11_TOPICS.CHE, ...C11_TOPICS.MAT].map(t=>t.id);
+  const done = allIds.filter(id=>state.chapterDone?.[id]).length;
+  return {done, total: allIds.length};
+}
+
+function updateC11Badge(){
+  const {done, total} = getC11Stats();
+  const pct = Math.round(done/total*100);
+  document.getElementById('c11BoostBadge').textContent = `${done}/${total} done · ${pct}%`;
+  // Update subtitle based on plan progress
+  const c12Done = PLAN_WEEKS.slice(0,15).every(w=>w.chapters.every(c=>state.chapterDone?.[c.id]));
+  document.getElementById('c11BoostSub').textContent = c12Done
+    ? '✅ Class 12 done! Focus here now before revision weeks'
+    : 'Study these after Class 12 is done · or use spare / buffer time';
+  // Show pulsing badge if c12 is done and c11 not started
+  const section = document.getElementById('c11BoostSection');
+  if(c12Done && done === 0){
+    section.style.borderColor='rgba(245,158,11,.7)';
+    section.style.boxShadow='0 0 20px rgba(245,158,11,.15)';
+  } else {
+    section.style.borderColor='';
+    section.style.boxShadow='';
+  }
+}
+
+function renderC11Topics(){
+  const container = document.getElementById('c11SubjectsContainer');
+  if(!container) return;
+  const subjectMeta = {
+    PHY: {label:'Physics', cls:'phy', icon:'⚛️', cardCls:'c11-tc-phy'},
+    CHE: {label:'Chemistry', cls:'che', icon:'🧪', cardCls:'c11-tc-che'},
+    MAT: {label:'Mathematics', cls:'mat', icon:'📐', cardCls:'c11-tc-mat'},
+  };
+  container.innerHTML = Object.entries(C11_TOPICS).map(([subj, topics])=>{
+    const m = subjectMeta[subj];
+    const done = topics.filter(t=>state.chapterDone?.[t.id]).length;
+    const pct = Math.round(done/topics.length*100);
+    const topicsHTML = topics.map(t=>{
+      const isDone = state.chapterDone?.[t.id];
+      return `<div class="c11-topic-card ${m.cardCls} ${isDone?'done-c11':''}" onclick="toggleC11Topic('${t.id}')">
+        <div class="c11-tc-name">${t.name}</div>
+        <div class="c11-tc-wt ${t.weight}">${t.weight==='very-high'?'🔥 Very High Weightage':'⭐ High Weightage'}</div>
+        <div class="c11-tc-tip">${t.tip}</div>
+        <div class="c11-tc-check ${isDone?'done':''}">${isDone?'✓':''}</div>
+      </div>`;
+    }).join('');
+    return `<div class="c11-subject-block">
+      <div class="c11-subj-header">
+        <span class="c11-subj-icon">${m.icon}</span>
+        <span class="c11-subj-name ${m.cls}">${m.label}</span>
+        <span class="c11-subj-pct">${done}/${topics.length} · ${pct}%</span>
+      </div>
+      <div class="c11-progress-bar"><div class="c11-progress-fill" style="width:${pct}%"></div></div>
+      <div class="c11-topics">${topicsHTML}</div>
+    </div>`;
+  }).join('');
+}
+
 /* ══ JEE PLAN DATA ══ */
 const PLAN_WEEKS = [
   {id:'w1', date:'Apr 20', label:'Week 1 — Class 11 Basics', status:'current', chapters:[
@@ -652,7 +826,7 @@ function toggleChapter(chapId,weekId){
       showNotif('Chapter unmarked.');
     }
   }
-  saveH();renderWeeklyPlan();renderMonthlyPlan();renderProgressView();updateGoalStrength();updateHabits();
+  saveH();renderWeeklyPlan();renderMonthlyPlan();renderProgressView();updateGoalStrength();updateHabits();updateC11Badge();
 }
 
 function checkAndCarryForward(){
@@ -933,7 +1107,7 @@ loadData();
 checkAndCarryForward();
 setDate();setSideQuote();
 renderHabits();
-setTimeout(()=>{updateHabits();renderWeeklyPlan();renderMonthlyPlan();renderProgressView();updateGoalStrength();},80);
+setTimeout(()=>{updateHabits();renderWeeklyPlan();renderMonthlyPlan();renderProgressView();updateGoalStrength();updateC11Badge();},80);
 drawTimerRing(timerLeft,timerTotal);updateDisplay();renderTimerSessions();
 </script>
 </body>
