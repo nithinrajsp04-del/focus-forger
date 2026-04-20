@@ -85,17 +85,19 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:1rem 2
 .status-carried{background:rgba(245,158,11,.12);color:#fcd34d;border:1px solid rgba(245,158,11,.2);}
 .week-chapters{padding:.8rem 1.3rem 1rem;}
 .chapter-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:8px;}
-.chapter-card{border-radius:12px;padding:10px 12px;position:relative;cursor:pointer;transition:opacity .2s,transform .15s;}
+
+/* ── CHAPTER CARD with timer button ── */
+.chapter-card{border-radius:12px;padding:10px 12px 44px;position:relative;cursor:default;transition:opacity .2s,transform .15s;}
 .chapter-card:hover{transform:translateY(-1px);}
 .chapter-card.completed{opacity:.65;}
 .cc-subject{font-size:.6rem;font-family:'DM Mono',monospace;font-weight:600;text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px;}
-.cc-name{font-size:.82rem;font-weight:700;line-height:1.3;margin-bottom:3px;}
+.cc-name{font-size:.82rem;font-weight:700;line-height:1.3;margin-bottom:3px;padding-right:28px;}
 .cc-sub{font-size:.68rem;line-height:1.4;opacity:.75;margin-bottom:6px;}
-.cc-c11{font-size:.65rem;opacity:.7;line-height:1.4;border-top:1px solid rgba(255,255,255,.08);padding-top:5px;margin-top:3px;}
+.cc-c11{font-size:.65rem;opacity:.7;line-height:1.4;border-top:1px solid rgba(255,255,255,.08);padding-top:5px;margin-top:3px;margin-bottom:8px;}
 .cc-c11-label{font-weight:700;opacity:.9;}
-.cc-check{position:absolute;top:10px;right:10px;width:20px;height:20px;border-radius:50%;border:1.5px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:10px;transition:all .2s;}
+.cc-check{position:absolute;top:10px;right:10px;width:20px;height:20px;border-radius:50%;border:1.5px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:10px;transition:all .2s;cursor:pointer;z-index:2;}
 .cc-check.done{background:var(--green);border-color:var(--green);color:#fff;}
-.cc-carried{position:absolute;bottom:8px;right:8px;font-size:.58rem;color:var(--amber);font-family:'DM Mono',monospace;background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.2);border-radius:4px;padding:1px 5px;}
+.cc-carried{position:absolute;bottom:36px;right:8px;font-size:.58rem;color:var(--amber);font-family:'DM Mono',monospace;background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.2);border-radius:4px;padding:1px 5px;}
 .phy-card{background:rgba(6,182,212,.06);border:1px solid rgba(6,182,212,.15);}
 .phy-card .cc-subject{color:#67e8f9;}
 .phy-card .cc-name{color:#e0f7ff;}
@@ -108,6 +110,43 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:1rem 2
 .completed-overlay{position:absolute;inset:0;border-radius:12px;background:rgba(34,197,94,.04);pointer-events:none;}
 .missed-card{border-color:rgba(239,68,68,.3)!important;background:rgba(239,68,68,.04)!important;}
 .carried-card{border-color:rgba(245,158,11,.3)!important;}
+
+/* ── START TIMER BUTTON ── */
+.cc-timer-bar{position:absolute;bottom:0;left:0;right:0;padding:6px 8px;border-top:1px solid rgba(255,255,255,.07);display:flex;align-items:center;gap:6px;}
+.btn-start-timer{
+  flex:1;
+  font-family:'Syne',sans-serif;
+  font-size:.68rem;
+  font-weight:700;
+  padding:5px 0;
+  border-radius:7px;
+  border:none;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:5px;
+  transition:all .2s;
+  letter-spacing:.01em;
+}
+.phy-card .btn-start-timer{background:rgba(6,182,212,.18);color:#67e8f9;border:1px solid rgba(6,182,212,.3);}
+.phy-card .btn-start-timer:hover{background:rgba(6,182,212,.35);transform:translateY(-1px);box-shadow:0 4px 14px rgba(6,182,212,.2);}
+.che-card .btn-start-timer{background:rgba(34,197,94,.18);color:#86efac;border:1px solid rgba(34,197,94,.3);}
+.che-card .btn-start-timer:hover{background:rgba(34,197,94,.35);transform:translateY(-1px);box-shadow:0 4px 14px rgba(34,197,94,.2);}
+.mat-card .btn-start-timer{background:rgba(139,92,246,.18);color:#c4b5fd;border:1px solid rgba(139,92,246,.3);}
+.mat-card .btn-start-timer:hover{background:rgba(139,92,246,.35);transform:translateY(-1px);box-shadow:0 4px 14px rgba(139,92,246,.2);}
+.btn-start-timer .bst-icon{font-size:.75rem;}
+.btn-done-mark{
+  width:28px;height:28px;border-radius:7px;border:1.5px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.04);cursor:pointer;display:flex;align-items:center;justify-content:center;
+  font-size:.7rem;color:var(--text3);transition:all .2s;flex-shrink:0;
+}
+.btn-done-mark:hover{background:rgba(34,197,94,.15);border-color:var(--green);color:var(--green);}
+.btn-done-mark.marked{background:rgba(34,197,94,.18);border-color:var(--green);color:var(--green);}
+
+/* ── TIMER LAUNCH FLASH ── */
+@keyframes timerLaunch{0%{transform:scale(1);}40%{transform:scale(.96);}70%{transform:scale(1.03);}100%{transform:scale(1);}}
+.timer-launched{animation:timerLaunch .35s ease;}
 
 /* CLASS 11 BOOST SECTION */
 .c11-boost-section{margin:0 0 16px;background:linear-gradient(135deg,rgba(245,158,11,.08),rgba(249,115,22,.04));border:1px solid rgba(245,158,11,.35);border-radius:20px;overflow:hidden;}
@@ -134,7 +173,7 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:1rem 2
 .c11-subj-name.mat{color:#c4b5fd;}
 .c11-subj-pct{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--text3);}
 .c11-topics{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;}
-.c11-topic-card{border-radius:11px;padding:9px 11px;cursor:pointer;transition:opacity .2s,transform .15s;position:relative;}
+.c11-topic-card{border-radius:11px;padding:9px 11px 38px;cursor:default;transition:opacity .2s,transform .15s;position:relative;}
 .c11-topic-card:hover{transform:translateY(-1px);}
 .c11-topic-card.done-c11{opacity:.55;}
 .c11-tc-phy{background:rgba(6,182,212,.06);border:1px solid rgba(6,182,212,.15);}
@@ -145,10 +184,19 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:1rem 2
 .c11-tc-wt.high{color:#fcd34d;}
 .c11-tc-wt.very-high{color:#fb923c;}
 .c11-tc-tip{font-size:.63rem;opacity:.7;line-height:1.4;}
-.c11-tc-check{position:absolute;top:9px;right:9px;width:18px;height:18px;border-radius:50%;border:1.5px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:9px;transition:all .2s;}
+.c11-tc-check{position:absolute;top:9px;right:9px;width:18px;height:18px;border-radius:50%;border:1.5px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:9px;transition:all .2s;cursor:pointer;z-index:2;}
 .c11-tc-check.done{background:var(--green);border-color:var(--green);color:#fff;}
 .c11-progress-bar{height:4px;border-radius:100px;background:rgba(255,255,255,.06);overflow:hidden;margin-bottom:6px;}
 .c11-progress-fill{height:100%;border-radius:100px;background:linear-gradient(90deg,#f59e0b,#f97316);transition:width .6s ease;}
+
+/* C11 timer bar */
+.c11-timer-bar{position:absolute;bottom:0;left:0;right:0;padding:5px 7px;border-top:1px solid rgba(255,255,255,.07);display:flex;align-items:center;gap:5px;}
+.c11-tc-phy .btn-start-timer{background:rgba(6,182,212,.15);color:#67e8f9;border:1px solid rgba(6,182,212,.25);}
+.c11-tc-phy .btn-start-timer:hover{background:rgba(6,182,212,.3);}
+.c11-tc-che .btn-start-timer{background:rgba(34,197,94,.15);color:#86efac;border:1px solid rgba(34,197,94,.25);}
+.c11-tc-che .btn-start-timer:hover{background:rgba(34,197,94,.3);}
+.c11-tc-mat .btn-start-timer{background:rgba(139,92,246,.15);color:#c4b5fd;border:1px solid rgba(139,92,246,.25);}
+.c11-tc-mat .btn-start-timer:hover{background:rgba(139,92,246,.3);}
 
 /* HABITS */
 .hero-mini{padding:1.5rem 2.5rem .8rem;}
@@ -309,14 +357,19 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:1rem 2
 .ls-tb-dot.dur{background:var(--cyan);}
 .ls-tb-val{font-family:'DM Mono',monospace;font-size:.8rem;font-weight:600;color:var(--text);}
 
+/* ── TOAST ── */
 .notif{position:fixed;top:18px;right:18px;z-index:999;background:var(--surface2);border:1px solid var(--accent);border-radius:13px;padding:10px 15px;font-size:.8rem;color:var(--text);box-shadow:0 8px 28px rgba(0,0,0,.45);transform:translateX(120%);transition:transform .4s cubic-bezier(.34,1.56,.64,1);max-width:290px;}
 .notif.show{transform:translateX(0);}
+
+/* ── TIMER LAUNCH TOAST (special green) ── */
+.notif.timer-toast{border-color:var(--green);background:linear-gradient(135deg,rgba(34,197,94,.15),var(--surface2));}
+
 footer{text-align:center;padding:1.2rem;font-size:.67rem;color:var(--text3);font-family:'DM Mono',monospace;border-top:1px solid var(--border);margin-top:1rem;}
 @keyframes fadeUp{from{opacity:0;transform:translateY(13px);}to{opacity:1;transform:translateY(0);}}
 .fade-up{animation:fadeUp .44s ease forwards;}
 .d1{animation-delay:.04s;}.d2{animation-delay:.08s;}.d3{animation-delay:.12s;}.d4{animation-delay:.16s;}
-@media(max-width:1050px){.timer-layout,.main-grid{grid-template-columns:1fr;}.rings-grid{grid-template-columns:repeat(2,1fr);}.summary-row{grid-template-columns:repeat(2,1fr);}.chapter-row{grid-template-columns:1fr 1fr;}}
-@media(max-width:650px){nav{padding:.8rem 1rem;}.hero,.plan-page,.timer-page,.reports-page,.prog-section,.rings-section,.main-grid,.alert-overlay{padding-left:1rem;padding-right:1rem;}.nav-date{display:none;}.chapter-row{grid-template-columns:1fr;}}
+@media(max-width:1050px){.timer-layout,.main-grid{grid-template-columns:1fr;}.rings-grid{grid-template-columns:repeat(2,1fr);}.summary-row{grid-template-columns:repeat(2,1fr);}.chapter-row{grid-template-columns:1fr 1fr;}.c11-topics{grid-template-columns:1fr 1fr;}}
+@media(max-width:650px){nav{padding:.8rem 1rem;}.hero,.plan-page,.timer-page,.reports-page,.prog-section,.rings-section,.main-grid,.alert-overlay{padding-left:1rem;padding-right:1rem;}.nav-date{display:none;}.chapter-row{grid-template-columns:1fr;}.c11-topics{grid-template-columns:1fr;}}
 ::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:transparent;}::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:4px;}
 </style>
 </head>
@@ -343,10 +396,9 @@ footer{text-align:center;padding:1.2rem;font-size:.67rem;color:var(--text3);font
 <div class="plan-page">
   <div class="plan-header fade-up d1">
     <h2>📚 JEE 2027 Study Plan</h2>
-    <p>// Apr 20 → Oct 2026 · Mark chapters done · missed ones carry forward automatically</p>
+    <p>// Apr 20 → Oct 2026 · Mark chapters done · missed ones carry forward automatically · ▶ tap to start timer</p>
   </div>
 
-  <!-- ALERT -->
   <div class="alert-overlay" id="planAlert">
     <div class="alert-icon">⚠️</div>
     <div class="alert-body">
@@ -360,7 +412,6 @@ footer{text-align:center;padding:1.2rem;font-size:.67rem;color:var(--text3);font
     </div>
   </div>
 
-  <!-- GOAL STRENGTH -->
   <div class="goal-strength-card fade-up d2">
     <div class="gsc-top">
       <div class="gsc-label">IIT Madras Goal Strength</div>
@@ -605,12 +656,10 @@ function updateC11Badge(){
   const {done, total} = getC11Stats();
   const pct = Math.round(done/total*100);
   document.getElementById('c11BoostBadge').textContent = `${done}/${total} done · ${pct}%`;
-  // Update subtitle based on plan progress
   const c12Done = PLAN_WEEKS.slice(0,15).every(w=>w.chapters.every(c=>state.chapterDone?.[c.id]));
   document.getElementById('c11BoostSub').textContent = c12Done
     ? '✅ Class 12 done! Focus here now before revision weeks'
     : 'Study these after Class 12 is done · or use spare / buffer time';
-  // Show pulsing badge if c12 is done and c11 not started
   const section = document.getElementById('c11BoostSection');
   if(c12Done && done === 0){
     section.style.borderColor='rgba(245,158,11,.7)';
@@ -625,9 +674,9 @@ function renderC11Topics(){
   const container = document.getElementById('c11SubjectsContainer');
   if(!container) return;
   const subjectMeta = {
-    PHY: {label:'Physics', cls:'phy', icon:'⚛️', cardCls:'c11-tc-phy'},
-    CHE: {label:'Chemistry', cls:'che', icon:'🧪', cardCls:'c11-tc-che'},
-    MAT: {label:'Mathematics', cls:'mat', icon:'📐', cardCls:'c11-tc-mat'},
+    PHY: {label:'Physics', cls:'phy', icon:'⚛️', cardCls:'c11-tc-phy', timerPrefix:'PHY'},
+    CHE: {label:'Chemistry', cls:'che', icon:'🧪', cardCls:'c11-tc-che', timerPrefix:'CHE'},
+    MAT: {label:'Mathematics', cls:'mat', icon:'📐', cardCls:'c11-tc-mat', timerPrefix:'MAT'},
   };
   container.innerHTML = Object.entries(C11_TOPICS).map(([subj, topics])=>{
     const m = subjectMeta[subj];
@@ -635,11 +684,17 @@ function renderC11Topics(){
     const pct = Math.round(done/topics.length*100);
     const topicsHTML = topics.map(t=>{
       const isDone = state.chapterDone?.[t.id];
-      return `<div class="c11-topic-card ${m.cardCls} ${isDone?'done-c11':''}" onclick="toggleC11Topic('${t.id}')">
+      const timerLabel = `${m.timerPrefix}: ${t.name} (Class 11)`;
+      return `<div class="c11-topic-card ${m.cardCls} ${isDone?'done-c11':''}">
         <div class="c11-tc-name">${t.name}</div>
         <div class="c11-tc-wt ${t.weight}">${t.weight==='very-high'?'🔥 Very High Weightage':'⭐ High Weightage'}</div>
         <div class="c11-tc-tip">${t.tip}</div>
-        <div class="c11-tc-check ${isDone?'done':''}">${isDone?'✓':''}</div>
+        <div class="c11-tc-check ${isDone?'done':''}" onclick="toggleC11Topic('${t.id}')">${isDone?'✓':''}</div>
+        <div class="c11-timer-bar">
+          <button class="btn-start-timer" onclick="launchTimer(${JSON.stringify(timerLabel)},'${t.id}',true)">
+            <span class="bst-icon">▶</span> Start Timer
+          </button>
+        </div>
       </div>`;
     }).join('');
     return `<div class="c11-subject-block">
@@ -771,6 +826,35 @@ function todayStr(){return new Date().toDateString();}
 function getTodaySess(){return sessions.filter(s=>s.date===todayStr());}
 function getTodayMins(){return getTodaySess().reduce((a,s)=>a+s.mins,0);}
 
+/* ══ LAUNCH TIMER FROM CHAPTER CARD ══ */
+function launchTimer(taskName, chapId, isC11){
+  // Navigate to timer page
+  showPage('timer');
+  // Set the task input
+  const input = document.getElementById('timerTaskInput');
+  if(input) input.value = taskName;
+  // Set focus mode
+  setTimerMode('focus');
+  // Auto-start the timer after a brief delay (so UI settles)
+  setTimeout(()=>{
+    if(!timerRunning){
+      toggleTimer();
+    }
+    // Flash the card briefly for feedback
+    if(chapId){
+      const cards = document.querySelectorAll('.chapter-card, .c11-topic-card');
+      cards.forEach(c=>{
+        if(c.innerHTML.includes(chapId)){
+          c.classList.add('timer-launched');
+          setTimeout(()=>c.classList.remove('timer-launched'),400);
+        }
+      });
+    }
+  }, 120);
+  // Show a toast
+  showNotif(`⏱ Timer started — ${taskName}`, true);
+}
+
 /* ══ GOAL STRENGTH ══ */
 function computeGoalStrength(){
   const total=PLAN_WEEKS.reduce((a,w)=>a+w.chapters.length,0);
@@ -813,7 +897,7 @@ function getCurrentWeekId(){
   return PLAN_WEEKS[diff].id;
 }
 
-function toggleChapter(chapId,weekId){
+function toggleChapter(chapId){
   if(!state.chapterDone)state.chapterDone={};
   state.chapterDone[chapId]=!state.chapterDone[chapId];
   const chap=PLAN_WEEKS.flatMap(w=>w.chapters).find(c=>c.id===chapId);
@@ -864,21 +948,32 @@ function weekProgress(week){
   return{done,total:week.chapters.length,pct:week.chapters.length?Math.round(done/week.chapters.length*100):0};
 }
 
-function chapCard(ch,weekStatus){
+function chapCard(ch){
   const isDone=state.chapterDone?.[ch.id];
   const subClass={PHY:'phy-card',CHE:'che-card',MAT:'mat-card'}[ch.sub]||'phy-card';
-  const carriedBadge=ch.carried?'<div class="cc-carried">CARRIED</div>':'';
+  const carriedBadge=ch.carried&&!isDone?'<div class="cc-carried">CARRIED</div>':'';
   const missedClass=ch.carried&&!isDone?'missed-card':'';
   const doneClass=isDone?'completed':'';
-  return`<div class="chapter-card ${subClass} ${missedClass} ${doneClass}" onclick="toggleChapter('${ch.id}','${ch.id}')">
+
+  // Build timer label e.g. "PHY: Units & Measurements"
+  const timerLabel=`${ch.sub}: ${ch.name.replace('[CARRIED] ','')}`;
+
+  return`<div class="chapter-card ${subClass} ${missedClass} ${doneClass}">
     ${isDone?'<div class="completed-overlay"></div>':''}
     <div class="cc-subject">${ch.sub} ${ch.hard?'· HARD':'· EASY'}</div>
     <div class="cc-name">${ch.name}</div>
     <div class="cc-sub">${ch.note}</div>
     <div class="cc-c11"><span class="cc-c11-label">Class 11 needed: </span>${ch.c11}</div>
-    <div class="cc-check ${isDone?'done':''}">${isDone?'✓':''}</div>
+    <div class="cc-check ${isDone?'done':''}" onclick="toggleChapter('${ch.id}')">${isDone?'✓':''}</div>
     ${carriedBadge}
-  </div>`;}
+    <div class="cc-timer-bar">
+      <button class="btn-start-timer" onclick="launchTimer(${JSON.stringify(timerLabel)}, '${ch.id}', false)">
+        <span class="bst-icon">▶</span> Start Timer
+      </button>
+      <div class="btn-done-mark ${isDone?'marked':''}" title="Mark done" onclick="toggleChapter('${ch.id}')">✓</div>
+    </div>
+  </div>`;
+}
 
 function renderWeeklyPlan(){
   const curId=getCurrentWeekId();
@@ -905,7 +1000,7 @@ function renderWeeklyPlan(){
         </div>
       </div>
       <div class="week-chapters" style="display:${idx===curIdx?'block':'none'}">
-        <div class="chapter-row">${week.chapters.map(ch=>chapCard(ch,statusLabel)).join('')}</div>
+        <div class="chapter-row">${week.chapters.map(ch=>chapCard(ch)).join('')}</div>
       </div>
     </div>`;
   }).join('');
@@ -1097,7 +1192,14 @@ function renderMonthly(){
 
 /* ══ NOTIFICATION ══ */
 let nT=null;
-function showNotif(msg){const n=document.getElementById('notif');document.getElementById('notifMsg').textContent=msg;n.classList.add('show');clearTimeout(nT);nT=setTimeout(()=>n.classList.remove('show'),3600);}
+function showNotif(msg, isTimer){
+  const n=document.getElementById('notif');
+  document.getElementById('notifMsg').textContent=msg;
+  n.className='notif'+(isTimer?' timer-toast':'');
+  n.classList.add('show');
+  clearTimeout(nT);
+  nT=setTimeout(()=>n.classList.remove('show'),3600);
+}
 
 /* ══ INIT ══ */
 function setDate(){const d=new Date();document.getElementById('navDate').textContent=d.toLocaleDateString('en-IN',{weekday:'short',day:'numeric',month:'short',year:'numeric'});if(document.getElementById('footerYear'))document.getElementById('footerYear').textContent=d.getFullYear();}
