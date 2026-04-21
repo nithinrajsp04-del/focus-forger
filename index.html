@@ -691,9 +691,7 @@ function renderC11Topics(){
         <div class="c11-tc-tip">${t.tip}</div>
         <div class="c11-tc-check ${isDone?'done':''}" onclick="toggleC11Topic('${t.id}')">${isDone?'✓':''}</div>
         <div class="c11-timer-bar">
-          <button class="btn-start-timer" onclick="launchTimer(${JSON.stringify(timerLabel)},'${t.id}',true)">
-            <span class="bst-icon">▶</span> Start Timer
-          </button>
+          <button class="btn-start-timer" onclick="launchTimerSafe(this)" data-task="${btoa(encodeURIComponent(timerLabel))}"><span class="bst-icon">▶</span> Start Timer</button>
         </div>
       </div>`;
     }).join('');
@@ -827,31 +825,52 @@ function getTodaySess(){return sessions.filter(s=>s.date===todayStr());}
 function getTodayMins(){return getTodaySess().reduce((a,s)=>a+s.mins,0);}
 
 /* ══ LAUNCH TIMER FROM CHAPTER CARD ══ */
+function launchTimerSafe(btn){
+  // data-task is base64-encoded to avoid any quote issues
+  try {
+    const encoded = btn.getAttribute('data-task') || '';
+    const name = encoded ? decodeURIComponent(atob(encoded)) : 'Focus Session';
+    launchTimer(name);
+  } catch(e) {
+    launchTimer('Focus Session');
+  }
+}
 function launchTimer(taskName, chapId, isC11){
-  // Navigate to timer page
+  // 1. Stop any running timer cleanly
+  if(timerRunning){
+    clearInterval(timerInterval);
+    timerInterval = null;
+    timerRunning = false;
+    sessionStartTs = null;
+  }
+
+  // 2. Navigate to timer page first (makes canvas visible)
   showPage('timer');
-  // Set the task input
+
+  // 3. Set task label
   const input = document.getElementById('timerTaskInput');
   if(input) input.value = taskName;
-  // Set focus mode
-  setTimerMode('focus');
-  // Auto-start the timer after a brief delay (so UI settles)
+
+  // 4. After page is painted, reset + start
   setTimeout(()=>{
-    if(!timerRunning){
-      toggleTimer();
-    }
-    // Flash the card briefly for feedback
-    if(chapId){
-      const cards = document.querySelectorAll('.chapter-card, .c11-topic-card');
-      cards.forEach(c=>{
-        if(c.innerHTML.includes(chapId)){
-          c.classList.add('timer-launched');
-          setTimeout(()=>c.classList.remove('timer-launched'),400);
-        }
-      });
-    }
-  }, 120);
-  // Show a toast
+    // Reset to fresh focus state
+    timerMode = 'focus';
+    timerTotal = currentPreset * 60;
+    timerLeft  = currentPreset * 60;
+    sessionStartTs = null;
+
+    // Sync UI
+    document.querySelectorAll('.timer-mode-btn').forEach((b,i)=>b.classList.toggle('active',i===0));
+    document.getElementById('timerModeLbl').textContent = 'FOCUS SESSION';
+    document.getElementById('timerStartBtn').textContent = '▶ Start';
+    updateDisplay();
+    drawTimerRing(timerLeft, timerTotal);
+    resetLive();
+
+    // Now start
+    toggleTimer();
+  }, 80);
+
   showNotif(`⏱ Timer started — ${taskName}`, true);
 }
 
@@ -967,7 +986,7 @@ function chapCard(ch){
     <div class="cc-check ${isDone?'done':''}" onclick="toggleChapter('${ch.id}')">${isDone?'✓':''}</div>
     ${carriedBadge}
     <div class="cc-timer-bar">
-      <button class="btn-start-timer" onclick="launchTimer(${JSON.stringify(timerLabel)}, '${ch.id}', false)">
+      <button class="btn-start-timer" onclick="launchTimerSafe(this)" data-task="${btoa(encodeURIComponent(timerLabel))}">
         <span class="bst-icon">▶</span> Start Timer
       </button>
       <div class="btn-done-mark ${isDone?'marked':''}" title="Mark done" onclick="toggleChapter('${ch.id}')">✓</div>
