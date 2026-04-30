@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
@@ -86,7 +85,7 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:1rem 2
 .week-chapters{padding:.8rem 1.3rem 1rem;}
 .chapter-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:8px;}
 
-/* ── CHAPTER CARD with timer button ── */
+/* CHAPTER CARD */
 .chapter-card{border-radius:12px;padding:10px 12px 44px;position:relative;cursor:default;transition:opacity .2s,transform .15s;}
 .chapter-card:hover{transform:translateY(-1px);}
 .chapter-card.completed{opacity:.65;}
@@ -111,24 +110,9 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:1rem 2
 .missed-card{border-color:rgba(239,68,68,.3)!important;background:rgba(239,68,68,.04)!important;}
 .carried-card{border-color:rgba(245,158,11,.3)!important;}
 
-/* ── START TIMER BUTTON ── */
+/* START TIMER BUTTON */
 .cc-timer-bar{position:absolute;bottom:0;left:0;right:0;padding:6px 8px;border-top:1px solid rgba(255,255,255,.07);display:flex;align-items:center;gap:6px;}
-.btn-start-timer{
-  flex:1;
-  font-family:'Syne',sans-serif;
-  font-size:.68rem;
-  font-weight:700;
-  padding:5px 0;
-  border-radius:7px;
-  border:none;
-  cursor:pointer;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:5px;
-  transition:all .2s;
-  letter-spacing:.01em;
-}
+.btn-start-timer{flex:1;font-family:'Syne',sans-serif;font-size:.68rem;font-weight:700;padding:5px 0;border-radius:7px;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px;transition:all .2s;letter-spacing:.01em;}
 .phy-card .btn-start-timer{background:rgba(6,182,212,.18);color:#67e8f9;border:1px solid rgba(6,182,212,.3);}
 .phy-card .btn-start-timer:hover{background:rgba(6,182,212,.35);transform:translateY(-1px);box-shadow:0 4px 14px rgba(6,182,212,.2);}
 .che-card .btn-start-timer{background:rgba(34,197,94,.18);color:#86efac;border:1px solid rgba(34,197,94,.3);}
@@ -136,17 +120,9 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:1rem 2
 .mat-card .btn-start-timer{background:rgba(139,92,246,.18);color:#c4b5fd;border:1px solid rgba(139,92,246,.3);}
 .mat-card .btn-start-timer:hover{background:rgba(139,92,246,.35);transform:translateY(-1px);box-shadow:0 4px 14px rgba(139,92,246,.2);}
 .btn-start-timer .bst-icon{font-size:.75rem;}
-.btn-done-mark{
-  width:28px;height:28px;border-radius:7px;border:1.5px solid rgba(255,255,255,.12);
-  background:rgba(255,255,255,.04);cursor:pointer;display:flex;align-items:center;justify-content:center;
-  font-size:.7rem;color:var(--text3);transition:all .2s;flex-shrink:0;
-}
+.btn-done-mark{width:28px;height:28px;border-radius:7px;border:1.5px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.7rem;color:var(--text3);transition:all .2s;flex-shrink:0;}
 .btn-done-mark:hover{background:rgba(34,197,94,.15);border-color:var(--green);color:var(--green);}
 .btn-done-mark.marked{background:rgba(34,197,94,.18);border-color:var(--green);color:var(--green);}
-
-/* ── TIMER LAUNCH FLASH ── */
-@keyframes timerLaunch{0%{transform:scale(1);}40%{transform:scale(.96);}70%{transform:scale(1.03);}100%{transform:scale(1);}}
-.timer-launched{animation:timerLaunch .35s ease;}
 
 /* CLASS 11 BOOST SECTION */
 .c11-boost-section{margin:0 0 16px;background:linear-gradient(135deg,rgba(245,158,11,.08),rgba(249,115,22,.04));border:1px solid rgba(245,158,11,.35);border-radius:20px;overflow:hidden;}
@@ -154,7 +130,6 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:1rem 2
 .c11-boost-header:hover{background:rgba(245,158,11,.04);}
 .c11-bh-left{display:flex;align-items:center;gap:10px;}
 .c11-bh-icon{font-size:1.2rem;}
-.c11-bh-info{}
 .c11-bh-title{font-size:.92rem;font-weight:800;color:#fcd34d;}
 .c11-bh-sub{font-size:.68rem;font-family:'DM Mono',monospace;color:#f59e0b;margin-top:2px;}
 .c11-bh-right{display:flex;align-items:center;gap:10px;}
@@ -164,7 +139,6 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:1rem 2
 .c11-boost-body{display:none;padding:.8rem 1.4rem 1.2rem;border-top:1px solid rgba(245,158,11,.15);}
 .c11-boost-body.open{display:block;}
 .c11-subjects{display:flex;flex-direction:column;gap:14px;}
-.c11-subject-block{}
 .c11-subj-header{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
 .c11-subj-icon{font-size:.85rem;}
 .c11-subj-name{font-size:.8rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;}
@@ -188,8 +162,6 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:1rem 2
 .c11-tc-check.done{background:var(--green);border-color:var(--green);color:#fff;}
 .c11-progress-bar{height:4px;border-radius:100px;background:rgba(255,255,255,.06);overflow:hidden;margin-bottom:6px;}
 .c11-progress-fill{height:100%;border-radius:100px;background:linear-gradient(90deg,#f59e0b,#f97316);transition:width .6s ease;}
-
-/* C11 timer bar */
 .c11-timer-bar{position:absolute;bottom:0;left:0;right:0;padding:5px 7px;border-top:1px solid rgba(255,255,255,.07);display:flex;align-items:center;gap:5px;}
 .c11-tc-phy .btn-start-timer{background:rgba(6,182,212,.15);color:#67e8f9;border:1px solid rgba(6,182,212,.25);}
 .c11-tc-phy .btn-start-timer:hover{background:rgba(6,182,212,.3);}
@@ -357,11 +329,9 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:1rem 2
 .ls-tb-dot.dur{background:var(--cyan);}
 .ls-tb-val{font-family:'DM Mono',monospace;font-size:.8rem;font-weight:600;color:var(--text);}
 
-/* ── TOAST ── */
+/* TOAST */
 .notif{position:fixed;top:18px;right:18px;z-index:999;background:var(--surface2);border:1px solid var(--accent);border-radius:13px;padding:10px 15px;font-size:.8rem;color:var(--text);box-shadow:0 8px 28px rgba(0,0,0,.45);transform:translateX(120%);transition:transform .4s cubic-bezier(.34,1.56,.64,1);max-width:290px;}
 .notif.show{transform:translateX(0);}
-
-/* ── TIMER LAUNCH TOAST (special green) ── */
 .notif.timer-toast{border-color:var(--green);background:linear-gradient(135deg,rgba(34,197,94,.15),var(--surface2));}
 
 footer{text-align:center;padding:1.2rem;font-size:.67rem;color:var(--text3);font-family:'DM Mono',monospace;border-top:1px solid var(--border);margin-top:1rem;}
@@ -403,7 +373,7 @@ footer{text-align:center;padding:1.2rem;font-size:.67rem;color:var(--text3);font
     <div class="alert-icon">⚠️</div>
     <div class="alert-body">
       <div class="alert-title" id="alertTitle">Chapters carried forward!</div>
-      <div class="alert-msg" id="alertMsg">You have missed chapters. They have moved to this week. Focus now — every delay pushes your IIT Madras dream further.</div>
+      <div class="alert-msg" id="alertMsg"></div>
       <div class="alert-strength">
         <div class="alert-str-label">Goal strength</div>
         <div class="alert-bar"><div class="alert-bar-fill" id="alertBarFill" style="width:100%"></div></div>
@@ -656,18 +626,6 @@ function updateC11Badge(){
   const {done, total} = getC11Stats();
   const pct = Math.round(done/total*100);
   document.getElementById('c11BoostBadge').textContent = `${done}/${total} done · ${pct}%`;
-  const c12Done = PLAN_WEEKS.slice(0,15).every(w=>w.chapters.every(c=>state.chapterDone?.[c.id]));
-  document.getElementById('c11BoostSub').textContent = c12Done
-    ? '✅ Class 12 done! Focus here now before revision weeks'
-    : 'Study these after Class 12 is done · or use spare / buffer time';
-  const section = document.getElementById('c11BoostSection');
-  if(c12Done && done === 0){
-    section.style.borderColor='rgba(245,158,11,.7)';
-    section.style.boxShadow='0 0 20px rgba(245,158,11,.15)';
-  } else {
-    section.style.borderColor='';
-    section.style.boxShadow='';
-  }
 }
 
 function renderC11Topics(){
@@ -709,107 +667,127 @@ function renderC11Topics(){
 
 /* ══ JEE PLAN DATA ══ */
 const PLAN_WEEKS = [
-  {id:'w1', date:'Apr 20', label:'Week 1 — Class 11 Basics', status:'current', chapters:[
-    {id:'w1p1', sub:'PHY', name:'Units & Measurements', note:'Class 11 foundation for all Physics', c11:'SI units · Dimensions · Scientific notation', hard:false, carried:false},
-    {id:'w1c1', sub:'CHE', name:'Mole Concept', note:'Foundation for Solutions & Electrochemistry', c11:'Mole · Molar mass · Molarity · Molality · Mole fraction', hard:false, carried:false},
-    {id:'w1m1', sub:'MAT', name:'Relations & Functions', note:'Ch 1 — revise Sets from Class 11 first', c11:'Sets: Union · Intersection · Complement · Power set', hard:false, carried:false},
+  {id:'w1', date:'Apr 20', label:'Week 1 — Class 11 Basics', chapters:[
+    {id:'w1p1', sub:'PHY', name:'Units & Measurements', note:'Class 11 foundation for all Physics', c11:'SI units · Dimensions · Scientific notation', hard:false},
+    {id:'w1c1', sub:'CHE', name:'Mole Concept', note:'Foundation for Solutions & Electrochemistry', c11:'Mole · Molar mass · Molarity · Molality · Mole fraction', hard:false},
+    {id:'w1m1', sub:'MAT', name:'Relations & Functions', note:'Ch 1 — revise Sets from Class 11 first', c11:'Sets: Union · Intersection · Complement · Power set', hard:false},
   ]},
-  {id:'w2', date:'Apr 27', label:'Week 2 — Class 12 begins!', status:'upcoming', chapters:[
-    {id:'w2p1', sub:'PHY', name:'Electric Charges & Fields', note:'Class 12 Ch 1', c11:'Coulomb\'s law idea · Force concept · Vectors basics', hard:false, carried:false},
-    {id:'w2c1', sub:'CHE', name:'Solutions', note:'Class 12 Ch 1 — needs Mole Concept done', c11:'Concentration terms · Colligative properties basics', hard:false, carried:false},
-    {id:'w2m1', sub:'MAT', name:'Inverse Trig Functions', note:'Ch 2 — revise Trig Functions first', c11:'Trig functions: sin,cos,tan · Principal values · Range & domain', hard:false, carried:false},
+  {id:'w2', date:'Apr 27', label:'Week 2 — Class 12 begins!', chapters:[
+    {id:'w2p1', sub:'PHY', name:'Electric Charges & Fields', note:'Class 12 Ch 1', c11:'Coulomb\'s law idea · Force concept · Vectors basics', hard:false},
+    {id:'w2c1', sub:'CHE', name:'Solutions', note:'Class 12 Ch 1 — needs Mole Concept done', c11:'Concentration terms · Colligative properties basics', hard:false},
+    {id:'w2m1', sub:'MAT', name:'Inverse Trig Functions', note:'Ch 2 — revise Trig Functions first', c11:'Trig functions: sin,cos,tan · Principal values · Range & domain', hard:false},
   ]},
-  {id:'w3', date:'May 4', label:'Week 3', status:'upcoming', chapters:[
-    {id:'w3p1', sub:'PHY', name:'Electrostatic Potential & Capacitance', note:'Class 12 Ch 2', c11:'Work & Energy · Potential energy · Conservative forces · Integration basics', hard:true, carried:false},
-    {id:'w3c1', sub:'CHE', name:'Electrochemistry', note:'Needs Redox Reactions + Mole Concept', c11:'Redox Reactions · Oxidation number · Balancing equations', hard:true, carried:false},
-    {id:'w3m1', sub:'MAT', name:'Matrices & Determinants', note:'Ch 3-4', c11:'Linear Equations · Basic Algebra', hard:true, carried:false},
+  {id:'w3', date:'May 4', label:'Week 3', chapters:[
+    {id:'w3p1', sub:'PHY', name:'Electrostatic Potential & Capacitance', note:'Class 12 Ch 2', c11:'Work & Energy · Potential energy · Conservative forces · Integration basics', hard:true},
+    {id:'w3c1', sub:'CHE', name:'Electrochemistry', note:'Needs Redox Reactions + Mole Concept', c11:'Redox Reactions · Oxidation number · Balancing equations', hard:true},
+    {id:'w3m1', sub:'MAT', name:'Matrices & Determinants', note:'Ch 3-4', c11:'Linear Equations · Basic Algebra', hard:true},
   ]},
-  {id:'w4', date:'May 11', label:'Week 4', status:'upcoming', chapters:[
-    {id:'w4p1', sub:'PHY', name:'Current Electricity', note:'Class 12 Ch 3', c11:'Charge & current basics · Ohm\'s law · Resistance idea', hard:false, carried:false},
-    {id:'w4c1', sub:'CHE', name:'Chemical Kinetics', note:'Needs Equilibrium + Rate basics', c11:'Chemical Equilibrium · Kc, Kp · Le Chatelier\'s principle', hard:true, carried:false},
-    {id:'w4m1', sub:'MAT', name:'Continuity & Differentiability', note:'Ch 5 — revise Limits first', c11:'Limits & Derivatives (Class 11 Ch 13) · Chain rule', hard:true, carried:false},
+  {id:'w4', date:'May 11', label:'Week 4', chapters:[
+    {id:'w4p1', sub:'PHY', name:'Current Electricity', note:'Class 12 Ch 3', c11:'Charge & current basics · Ohm\'s law · Resistance idea', hard:false},
+    {id:'w4c1', sub:'CHE', name:'Chemical Kinetics', note:'Needs Equilibrium + Rate basics', c11:'Chemical Equilibrium · Kc, Kp · Le Chatelier\'s principle', hard:true},
+    {id:'w4m1', sub:'MAT', name:'Continuity & Differentiability', note:'Ch 5 — revise Limits first', c11:'Limits & Derivatives (Class 11 Ch 13) · Chain rule', hard:true},
   ]},
-  {id:'w5', date:'May 18', label:'Week 5', status:'upcoming', chapters:[
-    {id:'w5p1', sub:'PHY', name:'Moving Charges & Magnetism', note:'Needs Vectors + Circular Motion', c11:'Vectors · Cross product · Circular motion · Laws of Motion', hard:true, carried:false},
-    {id:'w5c1', sub:'CHE', name:'Surface Chemistry', note:'Needs States of Matter', c11:'States of Matter · Colloids · Tyndall effect', hard:false, carried:false},
-    {id:'w5m1', sub:'MAT', name:'Applications of Derivatives', note:'Ch 6', c11:'Straight Lines · Maxima-Minima idea', hard:true, carried:false},
+  {id:'w5', date:'May 18', label:'Week 5', chapters:[
+    {id:'w5p1', sub:'PHY', name:'Moving Charges & Magnetism', note:'Needs Vectors + Circular Motion', c11:'Vectors · Cross product · Circular motion · Laws of Motion', hard:true},
+    {id:'w5c1', sub:'CHE', name:'Surface Chemistry', note:'Needs States of Matter', c11:'States of Matter · Colloids · Tyndall effect', hard:false},
+    {id:'w5m1', sub:'MAT', name:'Applications of Derivatives', note:'Ch 6', c11:'Straight Lines · Maxima-Minima idea', hard:true},
   ]},
-  {id:'w6', date:'May 25', label:'Week 6', status:'upcoming', chapters:[
-    {id:'w6p1', sub:'PHY', name:'Magnetism & Matter', note:'Class 12 Ch 5', c11:'Magnetic field basics · Units', hard:false, carried:false},
-    {id:'w6c1', sub:'CHE', name:'p-Block Elements (Gr 15–16)', note:'Needs Periodic Table + Bonding', c11:'Periodic Table · Chemical Bonding · VSEPR theory', hard:false, carried:false},
-    {id:'w6m1', sub:'MAT', name:'Integrals + Applications', note:'Ch 7-8 — push hard!', c11:'Derivatives · Algebra · Trigonometric functions', hard:true, carried:false},
+  {id:'w6', date:'May 25', label:'Week 6', chapters:[
+    {id:'w6p1', sub:'PHY', name:'Magnetism & Matter', note:'Class 12 Ch 5', c11:'Magnetic field basics · Units', hard:false},
+    {id:'w6c1', sub:'CHE', name:'p-Block Elements (Gr 15–16)', note:'Needs Periodic Table + Bonding', c11:'Periodic Table · Chemical Bonding · VSEPR theory', hard:false},
+    {id:'w6m1', sub:'MAT', name:'Integrals + Applications', note:'Ch 7-8 — push hard!', c11:'Derivatives · Algebra · Trigonometric functions', hard:true},
   ]},
-  {id:'w7', date:'Jun 1', label:'Week 7', status:'upcoming', chapters:[
-    {id:'w7p1', sub:'PHY', name:'Electromagnetic Induction', note:'Needs Work & Energy + Differentiation', c11:'Faraday\'s law idea · Rate of change · Energy conservation', hard:true, carried:false},
-    {id:'w7c1', sub:'CHE', name:'p-Block Elements (Gr 17–18)', note:'Needs Periodic Table + Halogens', c11:'Periodic Table · Halogen basics', hard:false, carried:false},
-    {id:'w7m1', sub:'MAT', name:'Diff. Equations + Vectors + 3D', note:'Ch 9-11 — FINISH MATHS SYLLABUS!', c11:'Intro to 3D Geometry (Class 11 Ch 12) · Integration', hard:true, carried:false},
+  {id:'w7', date:'Jun 1', label:'Week 7', chapters:[
+    {id:'w7p1', sub:'PHY', name:'Electromagnetic Induction', note:'Needs Work & Energy + Differentiation', c11:'Faraday\'s law idea · Rate of change · Energy conservation', hard:true},
+    {id:'w7c1', sub:'CHE', name:'p-Block Elements (Gr 17–18)', note:'Needs Periodic Table + Halogens', c11:'Periodic Table · Halogen basics', hard:false},
+    {id:'w7m1', sub:'MAT', name:'Diff. Equations + Vectors + 3D', note:'Ch 9-11 — FINISH MATHS SYLLABUS!', c11:'Intro to 3D Geometry (Class 11 Ch 12) · Integration', hard:true},
   ]},
-  {id:'w8', date:'Jun 8', label:'Week 8', status:'upcoming', chapters:[
-    {id:'w8p1', sub:'PHY', name:'Alternating Current', note:'Needs Oscillations + SHM + Trig', c11:'Simple Harmonic Motion · sin/cos functions · Angular frequency', hard:true, carried:false},
-    {id:'w8c1', sub:'CHE', name:'d & f Block Elements', note:'Needs Config + Oxidation States', c11:'Electronic Configuration · Oxidation states · Periodic Table', hard:true, carried:false},
-    {id:'w8m1', sub:'MAT', name:'Linear Programming + Probability', note:'Ch 12-13 — final Maths chapters!', c11:'Linear Inequalities (Class 11 Ch 6) · Probability (Class 11 Ch 16)', hard:false, carried:false},
+  {id:'w8', date:'Jun 8', label:'Week 8', chapters:[
+    {id:'w8p1', sub:'PHY', name:'Alternating Current', note:'Needs Oscillations + SHM + Trig', c11:'Simple Harmonic Motion · sin/cos functions · Angular frequency', hard:true},
+    {id:'w8c1', sub:'CHE', name:'d & f Block Elements', note:'Needs Config + Oxidation States', c11:'Electronic Configuration · Oxidation states · Periodic Table', hard:true},
+    {id:'w8m1', sub:'MAT', name:'Linear Programming + Probability', note:'Ch 12-13 — final Maths chapters!', c11:'Linear Inequalities (Class 11 Ch 6) · Probability (Class 11 Ch 16)', hard:false},
   ]},
-  {id:'w9', date:'Jun 15', label:'Week 9', status:'upcoming', chapters:[
-    {id:'w9p1', sub:'PHY', name:'EM Waves', note:'Needs Waves chapter', c11:'Waves: speed · frequency · wavelength · transverse vs longitudinal', hard:false, carried:false},
-    {id:'w9c1', sub:'CHE', name:'Coordination Compounds', note:'Needs Bonding + d-block', c11:'Chemical Bonding · d-Block Elements · VSEPR theory · Hybridisation', hard:true, carried:false},
+  {id:'w9', date:'Jun 15', label:'Week 9', chapters:[
+    {id:'w9p1', sub:'PHY', name:'EM Waves', note:'Needs Waves chapter', c11:'Waves: speed · frequency · wavelength · transverse vs longitudinal', hard:false},
+    {id:'w9c1', sub:'CHE', name:'Coordination Compounds', note:'Needs Bonding + d-block', c11:'Chemical Bonding · d-Block Elements · VSEPR theory · Hybridisation', hard:true},
   ]},
-  {id:'w10', date:'Jun 22', label:'Week 10', status:'upcoming', chapters:[
-    {id:'w10p1', sub:'PHY', name:'Ray Optics', note:'Needs Geometry + Snell\'s law', c11:'Angle of incidence · Reflection · Refraction · Refractive index', hard:false, carried:false},
-    {id:'w10c1', sub:'CHE', name:'Haloalkanes & Haloarenes', note:'Needs Organic basics + IUPAC', c11:'Organic Chemistry basics · IUPAC Nomenclature · Hydrocarbons', hard:false, carried:false},
+  {id:'w10', date:'Jun 22', label:'Week 10', chapters:[
+    {id:'w10p1', sub:'PHY', name:'Ray Optics', note:'Needs Geometry + Snell\'s law', c11:'Angle of incidence · Reflection · Refraction · Refractive index', hard:false},
+    {id:'w10c1', sub:'CHE', name:'Haloalkanes & Haloarenes', note:'Needs Organic basics + IUPAC', c11:'Organic Chemistry basics · IUPAC Nomenclature · Hydrocarbons', hard:false},
   ]},
-  {id:'w11', date:'Jun 29', label:'Week 11', status:'upcoming', chapters:[
-    {id:'w11p1', sub:'PHY', name:'Wave Optics', note:'Needs Waves + Superposition', c11:'Superposition principle · Path difference · Interference idea', hard:true, carried:false},
-    {id:'w11c1', sub:'CHE', name:'Alcohols, Phenols & Ethers', note:'Needs Functional Groups + Mechanisms', c11:'Functional Groups · Reaction mechanisms (SN1, SN2)', hard:true, carried:false},
+  {id:'w11', date:'Jun 29', label:'Week 11', chapters:[
+    {id:'w11p1', sub:'PHY', name:'Wave Optics', note:'Needs Waves + Superposition', c11:'Superposition principle · Path difference · Interference idea', hard:true},
+    {id:'w11c1', sub:'CHE', name:'Alcohols, Phenols & Ethers', note:'Needs Functional Groups + Mechanisms', c11:'Functional Groups · Reaction mechanisms (SN1, SN2)', hard:true},
   ]},
-  {id:'w12', date:'Jul 6', label:'Week 12', status:'upcoming', chapters:[
-    {id:'w12p1', sub:'PHY', name:'Dual Nature of Radiation', note:'Needs KE + Units basics', c11:'Work & KE · Units of energy · Photoelectric basics', hard:false, carried:false},
-    {id:'w12c1', sub:'CHE', name:'Aldehydes, Ketones & Carboxylic Acids', note:'Needs Carbonyl + IUPAC', c11:'Carbonyl Group basics · IUPAC Nomenclature · Organic mechanisms', hard:true, carried:false},
+  {id:'w12', date:'Jul 6', label:'Week 12', chapters:[
+    {id:'w12p1', sub:'PHY', name:'Dual Nature of Radiation', note:'Needs KE + Units basics', c11:'Work & KE · Units of energy · Photoelectric basics', hard:false},
+    {id:'w12c1', sub:'CHE', name:'Aldehydes, Ketones & Carboxylic Acids', note:'Needs Carbonyl + IUPAC', c11:'Carbonyl Group basics · IUPAC Nomenclature · Organic mechanisms', hard:true},
   ]},
-  {id:'w13', date:'Jul 13', label:'Week 13', status:'upcoming', chapters:[
-    {id:'w13p1', sub:'PHY', name:'Atoms', note:'Needs Atomic Structure + Circular Motion', c11:'Structure of Atom · Bohr model · Energy levels · Circular motion', hard:false, carried:false},
-    {id:'w13c1', sub:'CHE', name:'Amines', note:'Needs Nitrogen compounds + Organic naming', c11:'Nitrogen compounds basics · Functional Groups · IUPAC naming', hard:false, carried:false},
+  {id:'w13', date:'Jul 13', label:'Week 13', chapters:[
+    {id:'w13p1', sub:'PHY', name:'Atoms', note:'Needs Atomic Structure + Circular Motion', c11:'Structure of Atom · Bohr model · Energy levels · Circular motion', hard:false},
+    {id:'w13c1', sub:'CHE', name:'Amines', note:'Needs Nitrogen compounds + Organic naming', c11:'Nitrogen compounds basics · Functional Groups · IUPAC naming', hard:false},
   ]},
-  {id:'w14', date:'Jul 20', label:'Week 14', status:'upcoming', chapters:[
-    {id:'w14p1', sub:'PHY', name:'Nuclei', note:'Needs Atomic Structure + Logarithms', c11:'Atomic structure · Radioactivity basics · Exponential functions', hard:true, carried:false},
-    {id:'w14c1', sub:'CHE', name:'Biomolecules & Polymers', note:'Needs Organic basics', c11:'Organic Chemistry basics · Functional Groups', hard:false, carried:false},
+  {id:'w14', date:'Jul 20', label:'Week 14', chapters:[
+    {id:'w14p1', sub:'PHY', name:'Nuclei', note:'Needs Atomic Structure + Logarithms', c11:'Atomic structure · Radioactivity basics · Exponential functions', hard:true},
+    {id:'w14c1', sub:'CHE', name:'Biomolecules & Polymers', note:'Needs Organic basics', c11:'Organic Chemistry basics · Functional Groups', hard:false},
   ]},
-  {id:'w15', date:'Jul 27', label:'Week 15', status:'upcoming', chapters:[
-    {id:'w15p1', sub:'PHY', name:'Semiconductor Electronics', note:'Needs basic circuits', c11:'Basic circuits · Current Electricity concepts', hard:false, carried:false},
-    {id:'w15c1', sub:'CHE', name:'Chemistry in Everyday Life', note:'Light chapter — mostly theory', c11:'Basic Organic concepts · Functional Groups', hard:false, carried:false},
+  {id:'w15', date:'Jul 27', label:'Week 15', chapters:[
+    {id:'w15p1', sub:'PHY', name:'Semiconductor Electronics', note:'Needs basic circuits', c11:'Basic circuits · Current Electricity concepts', hard:false},
+    {id:'w15c1', sub:'CHE', name:'Chemistry in Everyday Life', note:'Light chapter — mostly theory', c11:'Basic Organic concepts · Functional Groups', hard:false},
   ]},
-  {id:'w16', date:'Aug 3', label:'Week 16 — Revision: Electrostatics + Physical Chemistry', status:'upcoming', chapters:[
-    {id:'w16p1', sub:'PHY', name:'Revision: Electrostatics + Current + Magnetism', note:'Formula sheets + PYQs', c11:'Review all concepts studied', hard:false, carried:false},
-    {id:'w16c1', sub:'CHE', name:'Revision: Physical Chemistry', note:'Solutions + Kinetics + Electrochemistry', c11:'Review all Physical Chemistry chapters', hard:false, carried:false},
+  {id:'w16', date:'Aug 3', label:'Week 16 — Revision: Electrostatics + Physical Chemistry', chapters:[
+    {id:'w16p1', sub:'PHY', name:'Revision: Electrostatics + Current + Magnetism', note:'Formula sheets + PYQs', c11:'Review all concepts studied', hard:false},
+    {id:'w16c1', sub:'CHE', name:'Revision: Physical Chemistry', note:'Solutions + Kinetics + Electrochemistry', c11:'Review all Physical Chemistry chapters', hard:false},
   ]},
-  {id:'w17', date:'Aug 17', label:'Week 17 — Revision: Optics + Organic Chemistry', status:'upcoming', chapters:[
-    {id:'w17p1', sub:'PHY', name:'Revision: Optics + Modern Physics', note:'Ray + Wave + Dual + Atoms + Nuclei', c11:'Review all chapters', hard:false, carried:false},
-    {id:'w17c1', sub:'CHE', name:'Revision: Inorganic + Organic', note:'p/d block + all organic chapters', c11:'Review all chapters', hard:false, carried:false},
+  {id:'w17', date:'Aug 17', label:'Week 17 — Revision: Optics + Organic Chemistry', chapters:[
+    {id:'w17p1', sub:'PHY', name:'Revision: Optics + Modern Physics', note:'Ray + Wave + Dual + Atoms + Nuclei', c11:'Review all chapters', hard:false},
+    {id:'w17c1', sub:'CHE', name:'Revision: Inorganic + Organic', note:'p/d block + all organic chapters', c11:'Review all chapters', hard:false},
   ]},
-  {id:'w18', date:'Sep 1', label:'Week 18 — JEE Main PYQs', status:'upcoming', chapters:[
-    {id:'w18p1', sub:'PHY', name:'JEE Main PYQs — Physics', note:'Last 10 years topic-wise', c11:'All chapters covered', hard:true, carried:false},
-    {id:'w18c1', sub:'CHE', name:'JEE Main PYQs — Chemistry', note:'Last 10 years topic-wise', c11:'All chapters covered', hard:true, carried:false},
+  {id:'w18', date:'Sep 1', label:'Week 18 — JEE Main PYQs', chapters:[
+    {id:'w18p1', sub:'PHY', name:'JEE Main PYQs — Physics', note:'Last 10 years topic-wise', c11:'All chapters covered', hard:true},
+    {id:'w18c1', sub:'CHE', name:'JEE Main PYQs — Chemistry', note:'Last 10 years topic-wise', c11:'All chapters covered', hard:true},
   ]},
-  {id:'w19', date:'Sep 15', label:'Week 19 — Mock Tests', status:'upcoming', chapters:[
-    {id:'w19p1', sub:'PHY', name:'Mock Tests 1-2 + Weak topic fix', note:'Full 3h papers + analysis', c11:'All chapters', hard:true, carried:false},
-    {id:'w19c1', sub:'CHE', name:'Mock Tests 1-2 + Weak topic fix', note:'Full 3h papers + analysis', c11:'All chapters', hard:true, carried:false},
+  {id:'w19', date:'Sep 15', label:'Week 19 — Mock Tests', chapters:[
+    {id:'w19p1', sub:'PHY', name:'Mock Tests 1-2 + Weak topic fix', note:'Full 3h papers + analysis', c11:'All chapters', hard:true},
+    {id:'w19c1', sub:'CHE', name:'Mock Tests 1-2 + Weak topic fix', note:'Full 3h papers + analysis', c11:'All chapters', hard:true},
   ]},
-  {id:'w20', date:'Oct 1', label:'Week 20 — Final Revision + Mock 3', status:'upcoming', chapters:[
-    {id:'w20p1', sub:'PHY', name:'Final Revision + Mock Test 3', note:'Formula sheets + quick recall', c11:'All chapters', hard:false, carried:false},
-    {id:'w20c1', sub:'CHE', name:'Final Revision + Mock Test 3', note:'Key reactions + named reactions', c11:'All chapters', hard:false, carried:false},
+  {id:'w20', date:'Oct 1', label:'Week 20 — Final Revision + Mock 3', chapters:[
+    {id:'w20p1', sub:'PHY', name:'Final Revision + Mock Test 3', note:'Formula sheets + quick recall', c11:'All chapters', hard:false},
+    {id:'w20c1', sub:'CHE', name:'Final Revision + Mock Test 3', note:'Key reactions + named reactions', c11:'All chapters', hard:false},
   ]},
 ];
 
 /* ══ QUOTES ══ */
-const QUOTES=["The cost of discipline is always less than the cost of regret. Stay in the fight.","Every expert was once a beginner who refused to quit.","Your only competition is the person you were yesterday.","Consistency transforms average into excellence.","The future belongs to those who prepare for it today.","One day you will thank yourself for not giving up."];
+const QUOTES=["The cost of discipline is always less than the cost of regret. Stay in the fight.","Every expert was once a beginner who refused to quit.","Your only competition is the person you were yesterday.","Consistency transforms average into excellence.","The future belongs to those who prepare for it today.","One day you will thank yourself for not giving up.","Hard work beats talent when talent doesn't work hard."];
 
 /* ══ STATE ══ */
 function defaultHabits(){return{daily:[{id:1,name:"Study Physics 2 hours",done:false,streak:0},{id:2,name:"Study Chemistry 2 hours",done:false,streak:0},{id:3,name:"Solve 15 Maths problems",done:false,streak:0},{id:4,name:"No social media during study",done:false,streak:0}],weekly:[{id:5,name:"Complete both weekly chapters (Phy + Che)",done:false,streak:0},{id:6,name:"Solve 1 full JEE mock paper",done:false,streak:0},{id:7,name:"Revise previous week's chapters",done:false,streak:0}],monthly:[{id:8,name:"Revise entire month's syllabus",done:false,streak:0},{id:9,name:"Track & review study hours",done:false,streak:0},{id:10,name:"Set goals for next month",done:false,streak:0}]};}
-function defaultState(){return{currentTab:'daily',habits:defaultHabits(),lastReset:new Date().toDateString(),nextId:20,totalStreak:0,bestStreak:0,chapterDone:{},goalStrength:100,missedCount:0};}
+function defaultState(){return{currentTab:'daily',habits:defaultHabits(),lastReset:new Date().toDateString(),nextId:20,totalStreak:0,bestStreak:0,chapterDone:{},goalStrength:100,
+  /* KEY FIX: track which week we already carried from, so it only runs ONCE */
+  carriedFromWeekId: null
+};}
+
 let state=defaultState(),sessions=[];
+
 function loadData(){
-  try{const s=localStorage.getItem('ff_jee_state');if(s){const p=JSON.parse(s);if(p.lastReset!==new Date().toDateString()){const ok=p.habits.daily.every(h=>h.done);p.totalStreak=ok?(p.totalStreak||0)+1:0;p.bestStreak=Math.max(p.bestStreak||0,p.totalStreak);p.habits.daily.forEach(h=>h.done=false);p.lastReset=new Date().toDateString();}state={...defaultState(),...p};}}catch(e){}
+  try{
+    const s=localStorage.getItem('ff_jee_state');
+    if(s){
+      const p=JSON.parse(s);
+      // Daily reset
+      if(p.lastReset!==new Date().toDateString()){
+        const ok=p.habits&&p.habits.daily&&p.habits.daily.every(h=>h.done);
+        p.totalStreak=ok?(p.totalStreak||0)+1:0;
+        p.bestStreak=Math.max(p.bestStreak||0,p.totalStreak);
+        if(p.habits&&p.habits.daily) p.habits.daily.forEach(h=>h.done=false);
+        p.lastReset=new Date().toDateString();
+      }
+      state={...defaultState(),...p};
+    }
+  }catch(e){console.warn('State load error',e);}
   try{sessions=JSON.parse(localStorage.getItem('ff_jee_sessions')||'[]');}catch(e){sessions=[];}
 }
+
 function saveH(){try{localStorage.setItem('ff_jee_state',JSON.stringify(state));}catch(e){}}
 function saveS(){try{localStorage.setItem('ff_jee_sessions',JSON.stringify(sessions));}catch(e){}}
 
@@ -824,71 +802,57 @@ function todayStr(){return new Date().toDateString();}
 function getTodaySess(){return sessions.filter(s=>s.date===todayStr());}
 function getTodayMins(){return getTodaySess().reduce((a,s)=>a+s.mins,0);}
 
-/* ══ LAUNCH TIMER FROM CHAPTER CARD ══ */
+/* ══ TIMER LAUNCH ══ */
 function launchTimerSafe(btn){
-  // data-task is base64-encoded to avoid any quote issues
-  try {
-    const encoded = btn.getAttribute('data-task') || '';
-    const name = encoded ? decodeURIComponent(atob(encoded)) : 'Focus Session';
-    launchTimer(name);
-  } catch(e) {
-    launchTimer('Focus Session');
-  }
+  try{const encoded=btn.getAttribute('data-task')||'';const name=encoded?decodeURIComponent(atob(encoded)):'Focus Session';launchTimer(name);}catch(e){launchTimer('Focus Session');}
 }
-function launchTimer(taskName, chapId, isC11){
-  // 1. Stop any running timer cleanly
-  if(timerRunning){
-    clearInterval(timerInterval);
-    timerInterval = null;
-    timerRunning = false;
-    sessionStartTs = null;
-  }
-
-  // 2. Navigate to timer page first (makes canvas visible)
+function launchTimer(taskName){
+  if(timerRunning){clearInterval(timerInterval);timerInterval=null;timerRunning=false;sessionStartTs=null;}
   showPage('timer');
-
-  // 3. Set task label
-  const input = document.getElementById('timerTaskInput');
-  if(input) input.value = taskName;
-
-  // 4. After page is painted, reset + start
+  const input=document.getElementById('timerTaskInput');
+  if(input)input.value=taskName;
   setTimeout(()=>{
-    // Reset to fresh focus state
-    timerMode = 'focus';
-    timerTotal = currentPreset * 60;
-    timerLeft  = currentPreset * 60;
-    sessionStartTs = null;
-
-    // Sync UI
+    timerMode='focus';timerTotal=currentPreset*60;timerLeft=currentPreset*60;sessionStartTs=null;
     document.querySelectorAll('.timer-mode-btn').forEach((b,i)=>b.classList.toggle('active',i===0));
-    document.getElementById('timerModeLbl').textContent = 'FOCUS SESSION';
-    document.getElementById('timerStartBtn').textContent = '▶ Start';
-    updateDisplay();
-    drawTimerRing(timerLeft, timerTotal);
-    resetLive();
-
-    // Now start
+    document.getElementById('timerModeLbl').textContent='FOCUS SESSION';
+    document.getElementById('timerStartBtn').textContent='▶ Start';
+    updateDisplay();drawTimerRing(timerLeft,timerTotal);resetLive();
     toggleTimer();
-  }, 80);
-
-  showNotif(`⏱ Timer started — ${taskName}`, true);
+  },80);
+  showNotif(`⏱ Timer started — ${taskName}`,true);
 }
 
-/* ══ GOAL STRENGTH ══ */
+/* ══ GOAL STRENGTH ══
+   Counts chapters from PREVIOUS weeks that are still not done (not marked in chapterDone).
+   Does NOT depend on carried copies — just checks original chapter ids. */
+function getMissedCount(){
+  const curIdx = getCurrentWeekIdx();
+  let missed = 0;
+  PLAN_WEEKS.forEach((week, idx)=>{
+    if(idx < curIdx){
+      week.chapters.forEach(ch=>{
+        if(!state.chapterDone?.[ch.id]) missed++;
+      });
+    }
+  });
+  return missed;
+}
+
 function computeGoalStrength(){
   const total=PLAN_WEEKS.reduce((a,w)=>a+w.chapters.length,0);
-  const done=Object.keys(state.chapterDone||{}).filter(k=>state.chapterDone[k]).length;
-  const missed=state.missedCount||0;
-  let str=100-Math.min(80,missed*8);
-  return{str:Math.max(5,Math.round(str)),done,total};}
+  const done=PLAN_WEEKS.flatMap(w=>w.chapters).filter(c=>state.chapterDone?.[c.id]).length;
+  const missed=getMissedCount();
+  const str=Math.max(5,Math.round(100-Math.min(80,missed*8)));
+  return{str,done,total,missed};}
 
 function updateGoalStrength(){
-  const{str,done,total}=computeGoalStrength();
+  const{str,done,total,missed}=computeGoalStrength();
   const pct=Math.round(done/total*100);
   document.getElementById('goalStrPct').textContent=str+'%';
   document.getElementById('goalStrFill').style.width=str+'%';
   document.getElementById('goalStrFill').style.background=str>70?'linear-gradient(90deg,#6366f1,#06b6d4)':str>40?'linear-gradient(90deg,#f59e0b,#ef4444)':'linear-gradient(90deg,#ef4444,#7f1d1d)';
-  document.getElementById('goalStrSub').textContent=str>=90?'All on track · Keep completing your weekly chapters':str>=70?`${state.missedCount} carried chapters · Push harder this week!`:`DANGER: ${state.missedCount} missed chapters · IIT Madras requires daily consistency!`;
+  document.getElementById('goalStrSub').textContent=str>=90?'All on track · Keep completing your weekly chapters':str>=70?`${missed} carried chapters · Push harder this week!`:`DANGER: ${missed} missed chapters · IIT Madras requires daily consistency!`;
+
   const alertEl=document.getElementById('planAlert');
   const alertFill=document.getElementById('alertBarFill');
   const alertVal=document.getElementById('alertStrVal');
@@ -896,85 +860,163 @@ function updateGoalStrength(){
   alertFill.style.background=str>70?'#22c55e':str>40?'#f59e0b':'#ef4444';
   alertVal.textContent=str+'%';
   alertVal.style.color=str>70?'#86efac':str>40?'#fcd34d':'#fca5a5';
-  if(state.missedCount>0){
+
+  if(missed>0){
     alertEl.classList.add('show');
-    document.getElementById('alertTitle').textContent=`⚠️ ${state.missedCount} chapter(s) carried forward!`;
-    document.getElementById('alertMsg').textContent=`You have ${state.missedCount} incomplete chapter${state.missedCount>1?'s':''} carried to this week. Your IIT Madras goal strength dropped to ${str}%. Every missed chapter costs you. Focus NOW — there is NO shortcut to IIT Madras.`;
-  }else{alertEl.classList.remove('show');}
+    document.getElementById('alertTitle').textContent=`⚠️ ${missed} chapter(s) not yet completed!`;
+    document.getElementById('alertMsg').textContent=`You have ${missed} incomplete chapter${missed>1?'s':''} from past weeks. Your IIT Madras goal strength is at ${str}%. Focus NOW — there is NO shortcut to IIT Madras.`;
+  }else{
+    alertEl.classList.remove('show');
+  }
+
   const planRing=document.getElementById('planRing');
   if(planRing)drawRing('planRing',pct,'#6366f1','#818cf8',90);
   document.getElementById('plan-pct').textContent=pct+'%';
 }
 
 /* ══ PLAN RENDER ══ */
-function getCurrentWeekId(){
+function getCurrentWeekIdx(){
   const now=new Date();
   const start=new Date('2026-04-20');
   const diff=Math.floor((now-start)/(7*24*3600*1000));
-  if(diff<0)return'w1';
-  if(diff>=PLAN_WEEKS.length)return PLAN_WEEKS[PLAN_WEEKS.length-1].id;
-  return PLAN_WEEKS[diff].id;
+  if(diff<0)return 0;
+  if(diff>=PLAN_WEEKS.length)return PLAN_WEEKS.length-1;
+  return diff;
 }
+function getCurrentWeekId(){return PLAN_WEEKS[getCurrentWeekIdx()].id;}
 
-function toggleChapter(chapId){
-  if(!state.chapterDone)state.chapterDone={};
-  state.chapterDone[chapId]=!state.chapterDone[chapId];
-  const chap=PLAN_WEEKS.flatMap(w=>w.chapters).find(c=>c.id===chapId);
-  if(chap){
-    if(state.chapterDone[chapId]){
-      if(chap.carried&&state.missedCount>0)state.missedCount--;
-      chap.carried=false;
-      showNotif('✅ Chapter marked done! Keep going!');
-    }else{
-      showNotif('Chapter unmarked.');
-    }
-  }
-  saveH();renderWeeklyPlan();renderMonthlyPlan();renderProgressView();updateGoalStrength();updateHabits();updateC11Badge();
-}
-
+/* ══ KEY FIX: checkAndCarryForward only runs ONCE per week transition ══
+   It stores carried chapter IDs in state.carriedChapIds (a Set-like object).
+   On re-render it reads from that store — never re-adds duplicates. */
 function checkAndCarryForward(){
-  const curId=getCurrentWeekId();
-  const curIdx=PLAN_WEEKS.findIndex(w=>w.id===curId);
-  if(curIdx<=0)return;
-  const prevWeek=PLAN_WEEKS[curIdx-1];
-  let carried=0;
-  prevWeek.chapters.forEach(ch=>{
-    if(!state.chapterDone?.[ch.id]&&!ch.carried){
-      ch.carried=true;
-      if(!PLAN_WEEKS[curIdx].chapters.find(c=>c.id===ch.id+'_c')){
-        const copy={...ch,id:ch.id+'_c',carried:true,name:'[CARRIED] '+ch.name};
-        PLAN_WEEKS[curIdx].chapters.unshift(copy);
-        carried++;
-        if(!state.missedCount)state.missedCount=0;
-        state.missedCount++;
-      }
-    }
+  const curIdx = getCurrentWeekIdx();
+  if(curIdx === 0) return; // first week, nothing to carry
+
+  // Build the set of chapter IDs already in the current week (originals)
+  const curWeekOrigIds = new Set(PLAN_WEEKS[curIdx].chapters.map(c=>c.id));
+
+  // Remove any stale carried copies from ALL weeks (cleanup from old code)
+  PLAN_WEEKS.forEach(week=>{
+    week.chapters = week.chapters.filter(c=>!c.carried);
   });
-  if(carried>0){saveH();}
+
+  // Now add carried copies for ALL previous weeks' undone chapters (into current week)
+  // but only if not already present as a carried copy
+  if(!state.carriedChapIds) state.carriedChapIds = {};
+
+  const carriedToAdd = [];
+  for(let i = 0; i < curIdx; i++){
+    PLAN_WEEKS[i].chapters.forEach(ch=>{
+      if(!state.chapterDone?.[ch.id]){
+        const carriedId = ch.id + '_c';
+        // Only add if not already tracked AND not already in current week
+        if(!state.carriedChapIds[carriedId] && !curWeekOrigIds.has(carriedId)){
+          state.carriedChapIds[carriedId] = true;
+          carriedToAdd.push({
+            ...ch,
+            id: carriedId,
+            originalId: ch.id,
+            carried: true,
+            name: '[CARRIED] ' + ch.name
+          });
+        }
+      }
+    });
+  }
+
+  if(carriedToAdd.length > 0){
+    // Prepend to current week
+    PLAN_WEEKS[curIdx].chapters = [...carriedToAdd, ...PLAN_WEEKS[curIdx].chapters];
+    saveH();
+  }
 }
 
-function getWeekStatus(week){
-  const curId=getCurrentWeekId();
-  const curIdx=PLAN_WEEKS.findIndex(w=>w.id===curId);
-  const wIdx=PLAN_WEEKS.findIndex(w=>w.id===week.id);
-  if(wIdx<curIdx)return'done-week';
-  if(wIdx===curIdx)return'current';
-  return'upcoming';
+/* When a carried chapter is checked done, also mark its original as done */
+function toggleChapter(chapId){
+  if(!state.chapterDone) state.chapterDone={};
+
+  // Find if this is a carried copy — if so, also mark the original
+  const isCarried = chapId.endsWith('_c');
+  const originalId = isCarried ? chapId.replace(/_c$/, '') : chapId;
+
+  const newDone = !state.chapterDone[originalId];
+  state.chapterDone[originalId] = newDone;
+  if(isCarried) state.chapterDone[chapId] = newDone;
+
+  // If undone, we might need to re-add carried copy next render
+  // If done, remove from carriedChapIds so it won't re-appear as carried
+  if(newDone && state.carriedChapIds){
+    delete state.carriedChapIds[originalId + '_c'];
+  }
+
+  showNotif(newDone ? '✅ Chapter marked done! Keep going!' : 'Chapter unmarked.');
+  saveH();
+
+  // Rebuild carried list from scratch based on current completion state
+  rebuildCarriedChapters();
+  renderWeeklyPlan();
+  renderMonthlyPlan();
+  renderProgressView();
+  updateGoalStrength();
+  updateHabits();
+  updateC11Badge();
+}
+
+/* Rebuild carried chapters fresh (no duplicates) */
+function rebuildCarriedChapters(){
+  const curIdx = getCurrentWeekIdx();
+
+  // Strip all carried copies from every week
+  PLAN_WEEKS.forEach(week=>{
+    week.chapters = week.chapters.filter(c=>!c.carried);
+  });
+
+  // Reset carriedChapIds
+  state.carriedChapIds = {};
+
+  if(curIdx === 0) return;
+
+  const carriedToAdd = [];
+  for(let i = 0; i < curIdx; i++){
+    PLAN_WEEKS[i].chapters.forEach(ch=>{
+      if(!state.chapterDone?.[ch.id]){
+        const carriedId = ch.id + '_c';
+        state.carriedChapIds[carriedId] = true;
+        carriedToAdd.push({
+          ...ch,
+          id: carriedId,
+          originalId: ch.id,
+          carried: true,
+          name: '[CARRIED] ' + ch.name
+        });
+      }
+    });
+  }
+
+  if(carriedToAdd.length > 0){
+    PLAN_WEEKS[curIdx].chapters = [...carriedToAdd, ...PLAN_WEEKS[curIdx].chapters];
+  }
+
+  saveH();
 }
 
 function weekProgress(week){
-  const done=week.chapters.filter(c=>state.chapterDone?.[c.id]).length;
+  const done=week.chapters.filter(c=>{
+    // For carried chapters, check the original id
+    const checkId = c.originalId || c.id;
+    return state.chapterDone?.[checkId];
+  }).length;
   return{done,total:week.chapters.length,pct:week.chapters.length?Math.round(done/week.chapters.length*100):0};
 }
 
 function chapCard(ch){
-  const isDone=state.chapterDone?.[ch.id];
+  // Use originalId for done check so carried+original stay in sync
+  const checkId = ch.originalId || ch.id;
+  const isDone=state.chapterDone?.[checkId];
   const subClass={PHY:'phy-card',CHE:'che-card',MAT:'mat-card'}[ch.sub]||'phy-card';
   const carriedBadge=ch.carried&&!isDone?'<div class="cc-carried">CARRIED</div>':'';
   const missedClass=ch.carried&&!isDone?'missed-card':'';
   const doneClass=isDone?'completed':'';
-
-  // Build timer label e.g. "PHY: Units & Measurements"
   const timerLabel=`${ch.sub}: ${ch.name.replace('[CARRIED] ','')}`;
 
   return`<div class="chapter-card ${subClass} ${missedClass} ${doneClass}">
@@ -995,8 +1037,7 @@ function chapCard(ch){
 }
 
 function renderWeeklyPlan(){
-  const curId=getCurrentWeekId();
-  const curIdx=PLAN_WEEKS.findIndex(w=>w.id===curId);
+  const curIdx=getCurrentWeekIdx();
   const el=document.getElementById('weeklyPlanList');
   if(!el)return;
   el.innerHTML=PLAN_WEEKS.map((week,idx)=>{
@@ -1004,10 +1045,10 @@ function renderWeeklyPlan(){
     let statusLabel='upcoming',statusCls='status-upcoming';
     if(idx<curIdx){statusLabel=pct===100?'Done':'Missed';statusCls=pct===100?'status-done':'status-missed';}
     else if(idx===curIdx){statusLabel='Current Week';statusCls='status-current';}
-    const carried=week.chapters.some(c=>c.carried&&!state.chapterDone?.[c.id]);
-    if(carried){statusLabel='Has carried chapters';statusCls='status-carried';}
+    const hasCarried=week.chapters.some(c=>c.carried&&!state.chapterDone?.[c.originalId||c.id]);
+    if(hasCarried&&idx===curIdx){statusLabel='Has carried chapters';statusCls='status-carried';}
     return`<div class="week-block">
-      <div class="week-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'block':'none'">
+      <div class="week-header" onclick="toggleWeekBody(this)">
         <div class="wh-left">
           <div class="wh-date">${week.date}</div>
           <div class="wh-title">${week.label}</div>
@@ -1025,6 +1066,11 @@ function renderWeeklyPlan(){
   }).join('');
 }
 
+function toggleWeekBody(header){
+  const body=header.nextElementSibling;
+  body.style.display=body.style.display==='none'?'block':'none';
+}
+
 function renderMonthlyPlan(){
   const months=['April 2026','May 2026','June 2026','July 2026','August 2026','September 2026','October 2026'];
   const monthMap={apr:[0,1],may:[2,3,4,5],jun:[6,7,8,9],jul:[10,11,12,13,14],aug:[15,16],sep:[17,18],oct:[19]};
@@ -1034,8 +1080,10 @@ function renderMonthlyPlan(){
   el.innerHTML=keys.map((key,mi)=>{
     const wkIdxs=monthMap[key];
     const weeks=wkIdxs.map(i=>PLAN_WEEKS[i]).filter(Boolean);
-    const totalCh=weeks.reduce((a,w)=>a+w.chapters.length,0);
-    const doneCh=weeks.reduce((a,w)=>a+w.chapters.filter(c=>state.chapterDone?.[c.id]).length,0);
+    // For monthly count only original (non-carried) chapters
+    const origChaps=weeks.flatMap(w=>w.chapters.filter(c=>!c.carried));
+    const totalCh=origChaps.length;
+    const doneCh=origChaps.filter(c=>state.chapterDone?.[c.id]).length;
     const pct=totalCh?Math.round(doneCh/totalCh*100):0;
     return`<div class="week-block" style="margin-bottom:16px;">
       <div class="week-header">
@@ -1046,32 +1094,35 @@ function renderMonthlyPlan(){
         </div>
       </div>
       <div class="week-chapters">
-        ${weeks.map(w=>`<div style="font-size:.72rem;font-family:'DM Mono',monospace;color:var(--text3);margin-bottom:6px;padding-top:6px;">${w.date} · ${w.label}</div><div class="chapter-row">${w.chapters.map(ch=>chapCard(ch)).join('')}</div>`).join('<div style="height:8px;"></div>')}
+        ${weeks.map(w=>`<div style="font-size:.72rem;font-family:'DM Mono',monospace;color:var(--text3);margin-bottom:6px;padding-top:6px;">${w.date} · ${w.label}</div><div class="chapter-row">${w.chapters.filter(c=>!c.carried).map(ch=>chapCard(ch)).join('')}</div>`).join('<div style="height:8px;"></div>')}
       </div>
     </div>`;
   }).join('');
 }
 
 function renderProgressView(){
-  const total=PLAN_WEEKS.reduce((a,w)=>a+w.chapters.length,0);
-  const done=Object.keys(state.chapterDone||{}).filter(k=>state.chapterDone[k]).length;
-  const{str}=computeGoalStrength();
-  const phyTotal=PLAN_WEEKS.reduce((a,w)=>a+w.chapters.filter(c=>c.sub==='PHY').length,0);
-  const cheTotal=PLAN_WEEKS.reduce((a,w)=>a+w.chapters.filter(c=>c.sub==='CHE').length,0);
-  const matTotal=PLAN_WEEKS.reduce((a,w)=>a+w.chapters.filter(c=>c.sub==='MAT').length,0);
-  const phyDone=PLAN_WEEKS.flatMap(w=>w.chapters.filter(c=>c.sub==='PHY'&&state.chapterDone?.[c.id])).length;
-  const cheDone=PLAN_WEEKS.flatMap(w=>w.chapters.filter(c=>c.sub==='CHE'&&state.chapterDone?.[c.id])).length;
-  const matDone=PLAN_WEEKS.flatMap(w=>w.chapters.filter(c=>c.sub==='MAT'&&state.chapterDone?.[c.id])).length;
+  const allOrig=PLAN_WEEKS.flatMap(w=>w.chapters.filter(c=>!c.carried));
+  const total=allOrig.length;
+  const done=allOrig.filter(c=>state.chapterDone?.[c.id]).length;
+  const{str,missed}=computeGoalStrength();
+  const subjects=['PHY','CHE','MAT'];
+  const subData=subjects.map(sub=>{
+    const t=allOrig.filter(c=>c.sub===sub).length;
+    const d=allOrig.filter(c=>c.sub===sub&&state.chapterDone?.[c.id]).length;
+    return{sub,t,d};
+  });
+  const colors={PHY:'#06b6d4',CHE:'#22c55e',MAT:'#8b5cf6'};
+  const names={PHY:'Physics',CHE:'Chemistry',MAT:'Mathematics'};
   const el=document.getElementById('progressView');
   if(!el)return;
   el.innerHTML=`
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px;">
-      ${[['Physics','PHY',phyDone,phyTotal,'#06b6d4'],['Chemistry','CHE',cheDone,cheTotal,'#22c55e'],['Maths','MAT',matDone,matTotal,'#8b5cf6']].map(([name,sub,d,t,color])=>`
+      ${subData.map(({sub,t,d})=>`
         <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.1rem;text-align:center;">
-          <div style="font-size:.7rem;font-family:'DM Mono',monospace;color:var(--text3);margin-bottom:6px;">${name}</div>
-          <div style="font-size:1.5rem;font-weight:800;color:${color};margin-bottom:4px;">${d}/${t}</div>
+          <div style="font-size:.7rem;font-family:'DM Mono',monospace;color:var(--text3);margin-bottom:6px;">${names[sub]}</div>
+          <div style="font-size:1.5rem;font-weight:800;color:${colors[sub]};margin-bottom:4px;">${d}/${t}</div>
           <div style="height:5px;border-radius:100px;background:rgba(255,255,255,.06);overflow:hidden;">
-            <div style="height:100%;border-radius:100px;background:${color};width:${t?Math.round(d/t*100):0}%;transition:width .8s;"></div>
+            <div style="height:100%;border-radius:100px;background:${colors[sub]};width:${t?Math.round(d/t*100):0}%;transition:width .8s;"></div>
           </div>
           <div style="font-size:.65rem;font-family:'DM Mono',monospace;color:var(--text3);margin-top:4px;">${t?Math.round(d/t*100):0}% done</div>
         </div>`).join('')}
@@ -1191,7 +1242,8 @@ function sessionHTML(s,showDate){return`<div class="log-sess"><div class="ls-row
 function renderLog(cId,coId,list,showDate){const el=document.getElementById(cId),ce=document.getElementById(coId);if(ce)ce.textContent=`${list.length} session${list.length!==1?'s':''}`;if(!el)return;if(!list.length){el.innerHTML='<div class="log-empty">No sessions in this period yet.</div>';return;}el.innerHTML=[...list].reverse().map(s=>sessionHTML(s,showDate)).join('');}
 function renderDaily(){
   const today=getTodaySess(),todayMins=getTodayMins();
-  const{done:planDone,total:planTotal}=computeGoalStrength();
+  const allOrig=PLAN_WEEKS.flatMap(w=>w.chapters.filter(c=>!c.carried));
+  const planDone=allOrig.filter(c=>state.chapterDone?.[c.id]).length,planTotal=allOrig.length;
   document.getElementById('dailySummary').innerHTML=`<div class="sum-card"><div class="sum-icon">⏱</div><div class="sum-val">${fmtMins(todayMins)}</div><div class="sum-lbl">Focus today</div></div><div class="sum-card"><div class="sum-icon">📚</div><div class="sum-val">${planDone}/${planTotal}</div><div class="sum-lbl">Chapters done</div></div><div class="sum-card"><div class="sum-icon">🎯</div><div class="sum-val">${today.length}</div><div class="sum-lbl">Sessions</div></div><div class="sum-card"><div class="sum-icon">🔥</div><div class="sum-val">${state.totalStreak||0}</div><div class="sum-lbl">Day streak</div></div>`;
   const bars=[];for(let i=6;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);bars.push({l:i===0?'Today':d.toLocaleDateString('en-IN',{weekday:'short'}),v:getMinsForDay(d.toDateString())});}
   renderBarChart('dailyChart',bars);renderLog('dailyLog','dailyLogCount',today,false);
@@ -1211,7 +1263,7 @@ function renderMonthly(){
 
 /* ══ NOTIFICATION ══ */
 let nT=null;
-function showNotif(msg, isTimer){
+function showNotif(msg,isTimer){
   const n=document.getElementById('notif');
   document.getElementById('notifMsg').textContent=msg;
   n.className='notif'+(isTimer?' timer-toast':'');
@@ -1222,14 +1274,24 @@ function showNotif(msg, isTimer){
 
 /* ══ INIT ══ */
 function setDate(){const d=new Date();document.getElementById('navDate').textContent=d.toLocaleDateString('en-IN',{weekday:'short',day:'numeric',month:'short',year:'numeric'});if(document.getElementById('footerYear'))document.getElementById('footerYear').textContent=d.getFullYear();}
-function setSideQuote(){const day=new Date().getDay();document.getElementById('sideQuote').textContent=`"${QUOTES[day%QUOTES.length]}"`;;}
+function setSideQuote(){const day=new Date().getDay();document.getElementById('sideQuote').textContent=`"${QUOTES[day%QUOTES.length]}"}`;}
 
 loadData();
-checkAndCarryForward();
+// Always rebuild carried from scratch on load (safe, idempotent)
+rebuildCarriedChapters();
 setDate();setSideQuote();
 renderHabits();
-setTimeout(()=>{updateHabits();renderWeeklyPlan();renderMonthlyPlan();renderProgressView();updateGoalStrength();updateC11Badge();},80);
-drawTimerRing(timerLeft,timerTotal);updateDisplay();renderTimerSessions();
+setTimeout(()=>{
+  updateHabits();
+  renderWeeklyPlan();
+  renderMonthlyPlan();
+  renderProgressView();
+  updateGoalStrength();
+  updateC11Badge();
+},80);
+drawTimerRing(timerLeft,timerTotal);
+updateDisplay();
+renderTimerSessions();
 </script>
 </body>
 </html>
