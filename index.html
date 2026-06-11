@@ -728,6 +728,20 @@ footer{text-align:center;padding:1.2rem;font-size:.67rem;color:var(--text3);font
 <div class="page" id="page-reports">
 <div class="reports-page">
   <div class="page-header fade-up d1"><h2>📊 Reports</h2><p>// full session history · subject · start · end · duration</p></div>
+  <div class="log-card fade-up d2" style="margin-bottom:1rem;">
+    <div class="log-header"><div class="log-title">💾 Backup &amp; Sync (across devices)</div></div>
+    <div style="font-size:.75rem;font-family:'DM Mono',monospace;color:var(--text2);line-height:1.7;padding:0 0 .8rem;">
+      This file stores your data only on THIS device/browser. To use it on your phone AND laptop:<br/>
+      1. Tap <b>Export Backup</b> here → saves a small .json file.<br/>
+      2. Send that file to your other device (WhatsApp/Drive/email) and open this same HTML there.<br/>
+      3. Tap <b>Import Backup</b> and pick that .json file — your progress will sync over.<br/>
+      Do this each time before switching devices to keep both in sync.
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn-add" onclick="exportBackup()">⬇ Export Backup</button>
+      <label class="btn-open-add" style="cursor:pointer;">⬆ Import Backup<input type="file" accept="application/json" onchange="importBackupFile(this)" style="display:none;"/></label>
+    </div>
+  </div>
   <div class="report-tabs fade-up d2">
     <button class="report-tab active" onclick="switchReport('daily')">Daily</button>
     <button class="report-tab" onclick="switchReport('weekly')">Weekly</button>
@@ -1180,6 +1194,40 @@ let state=defaultState(),sessions=[];
 function loadData(){try{const s=localStorage.getItem('ff_jee_state_nit');if(s){const p=JSON.parse(s);if(p.lastReset!==new Date().toDateString()){const ok=p.habits&&p.habits.daily&&p.habits.daily.every(h=>h.done);p.totalStreak=ok?(p.totalStreak||0)+1:0;p.bestStreak=Math.max(p.bestStreak||0,p.totalStreak);if(p.habits&&p.habits.daily)p.habits.daily.forEach(h=>h.done=false);p.lastReset=new Date().toDateString();}state={...defaultState(),...p};}}catch(e){console.warn('State load error',e);}try{sessions=JSON.parse(localStorage.getItem('ff_jee_sessions_nit')||'[]');}catch(e){sessions=[];}}
 function saveH(){try{localStorage.setItem('ff_jee_state_nit',JSON.stringify(state));}catch(e){}}
 function saveS(){try{localStorage.setItem('ff_jee_sessions_nit',JSON.stringify(sessions));}catch(e){}}
+function exportBackup(){
+  const data={state,sessions,testState,exportedAt:new Date().toISOString(),version:1};
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;a.download='focusforge_backup_'+new Date().toISOString().slice(0,10)+'.json';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  showNotif('Backup downloaded ✅ — send it to your other device');
+}
+function importBackupFile(input){
+  const file=input.files&&input.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=function(e){
+    try{
+      const data=JSON.parse(e.target.result);
+      if(!data||!data.state)throw new Error('bad file');
+      state={...defaultState(),...data.state};
+      sessions=Array.isArray(data.sessions)?data.sessions:[];
+      testState=data.testState||{};
+      saveH();saveS();saveTestState();
+      rebuildCarriedChapters();
+      renderHabits();updateHabits();
+      renderWeeklyPlan();renderMonthlyPlan();renderProgressView();
+      updateGoalStrength();updateC11Badge();
+      renderTestPages();
+      renderReports();
+      drawTimerRing(timerLeft,timerTotal);
+      showNotif('Backup restored ✅ — this device is now in sync');
+    }catch(err){showNotif('❌ Invalid backup file');}
+  };
+  reader.readAsText(file);
+  input.value='';
+}
 
 /* ══ TIME HELPERS ══ */
 function fmt(ts){if(!ts)return'—';return new Date(ts).toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit',hour12:true});}
