@@ -97,6 +97,18 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:1rem 2
 .nav-right{display:flex;align-items:center;gap:8px;}
 .nav-date{font-family:'DM Mono',monospace;font-size:.7rem;color:var(--text3);background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:5px 10px;}
 .nav-streak{font-size:.72rem;color:var(--amber);font-family:'DM Mono',monospace;background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.2);border-radius:8px;padding:5px 10px;}
+/* ══ EXAM COUNTDOWN BANNER ══ */
+.exam-countdown{position:relative;z-index:10;padding:10px 2.5rem;display:flex;align-items:center;justify-content:center;gap:20px;background:linear-gradient(135deg,rgba(239,68,68,.1),rgba(139,92,246,.08));border-bottom:1px solid rgba(239,68,68,.2);flex-wrap:wrap;}
+.ecd-label{font-size:.65rem;font-family:'DM Mono',monospace;color:#fca5a5;text-transform:uppercase;letter-spacing:.12em;text-align:center;margin-bottom:2px;}
+.ecd-units{display:flex;gap:10px;align-items:center;}
+.ecd-block{display:flex;flex-direction:column;align-items:center;background:rgba(0,0,0,.3);border:1px solid rgba(239,68,68,.3);border-radius:10px;padding:6px 14px;min-width:58px;}
+.ecd-num{font-family:'DM Mono',monospace;font-size:1.5rem;font-weight:800;color:#ff6b6b;line-height:1;transition:color .3s;}
+.ecd-unit{font-size:.5rem;color:#fca5a5;text-transform:uppercase;letter-spacing:.1em;margin-top:2px;}
+.ecd-sep{font-family:'DM Mono',monospace;font-size:1.4rem;font-weight:800;color:rgba(239,68,68,.4);margin-bottom:10px;}
+.ecd-title{font-size:.72rem;font-weight:800;color:#fbbf24;font-family:'DM Mono',monospace;white-space:nowrap;}
+@media(max-width:650px){.exam-countdown{padding:8px 1rem;gap:10px;}.ecd-block{min-width:46px;padding:5px 8px;}.ecd-num{font-size:1.2rem;}}
+
+/* ══ STUDY CLOCK WIDGET ══ */
 .page{display:none;position:relative;z-index:1;}
 .page.active{display:block;}
 
@@ -507,6 +519,20 @@ footer{text-align:center;padding:1.2rem;font-size:.67rem;color:var(--text3);font
   <div class="mb-quote-ticker" id="mbQuote">Loading...</div>
 </div>
 
+<!-- EXAM COUNTDOWN -->
+<div class="exam-countdown">
+  <div class="ecd-title">🎯 JEE 2027 — Oct 24, 2026</div>
+  <div class="ecd-units">
+    <div class="ecd-block"><div class="ecd-num" id="ecdDays">--</div><div class="ecd-unit">Days</div></div>
+    <div class="ecd-sep">:</div>
+    <div class="ecd-block"><div class="ecd-num" id="ecdHours">--</div><div class="ecd-unit">Hours</div></div>
+    <div class="ecd-sep">:</div>
+    <div class="ecd-block"><div class="ecd-num" id="ecdMins">--</div><div class="ecd-unit">Mins</div></div>
+    <div class="ecd-sep">:</div>
+    <div class="ecd-block"><div class="ecd-num" id="ecdSecs">--</div><div class="ecd-unit">Secs</div></div>
+  </div>
+</div>
+
 <nav>
   <div class="logo"><div class="logo-icon">⚡</div>FocusForge<span>&nbsp;/ JEE 2027</span></div>
   <div class="nav-pills">
@@ -679,6 +705,7 @@ footer{text-align:center;padding:1.2rem;font-size:.67rem;color:var(--text3);font
 <div class="page" id="page-timer">
 <div class="timer-page">
   <div class="page-header fade-up d1"><h2>⏱ Focus Timer</h2><p>// every session logs subject · start time · end time · duration · breaks = Sudoku ONLY — no phone allowed</p></div>
+
   <div class="timer-layout">
     <div class="timer-clock-card fade-up d2">
       <div class="timer-mode-tabs">
@@ -1460,6 +1487,27 @@ function showNotif(msg,isTimer){const n=document.getElementById('notif');documen
 
 /* ══ INIT ══ */
 function setDate(){const d=new Date();document.getElementById('navDate').textContent=d.toLocaleDateString('en-IN',{weekday:'short',day:'numeric',month:'short',year:'numeric'});if(document.getElementById('footerYear'))document.getElementById('footerYear').textContent=d.getFullYear();}
+
+/* ══ EXAM COUNTDOWN ══ */
+function tickClock(){
+  const now=new Date();
+  const deadline=new Date('2026-10-24T23:59:59');
+  const diff=Math.max(0,deadline-now);
+  const d=Math.floor(diff/(1000*60*60*24));
+  const h=Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+  const m=Math.floor((diff%(1000*60*60))/(1000*60));
+  const s=Math.floor((diff%(1000*60))/1000);
+  const ecdD=document.getElementById('ecdDays');
+  const ecdH=document.getElementById('ecdHours');
+  const ecdM=document.getElementById('ecdMins');
+  const ecdS=document.getElementById('ecdSecs');
+  if(ecdD)ecdD.textContent=String(d).padStart(2,'0');
+  if(ecdH)ecdH.textContent=String(h).padStart(2,'0');
+  if(ecdM)ecdM.textContent=String(m).padStart(2,'0');
+  if(ecdS){ecdS.textContent=String(s).padStart(2,'0');ecdS.style.color=s%2===0?'#ff6b6b':'#fbbf24';}
+}
+tickClock();
+setInterval(tickClock,1000);
 function setSideQuote(){const day=new Date().getDay();document.getElementById('sideQuote').textContent=`"${QUOTES[day%QUOTES.length]}"`;}
 
 loadData();
