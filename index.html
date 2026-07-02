@@ -521,7 +521,7 @@ footer{text-align:center;padding:1.2rem;font-size:.67rem;color:var(--text3);font
 
 <!-- EXAM COUNTDOWN -->
 <div class="exam-countdown">
-  <div class="ecd-title">🎯 JEE 2027 — Oct 24, 2026</div>
+  <div class="ecd-title">🎯 JEE 2027 — Oct 31, 2026</div>
   <div class="ecd-units">
     <div class="ecd-block"><div class="ecd-num" id="ecdDays">--</div><div class="ecd-unit">Days</div></div>
     <div class="ecd-sep">:</div>
@@ -553,7 +553,7 @@ footer{text-align:center;padding:1.2rem;font-size:.67rem;color:var(--text3);font
 <div class="plan-page">
   <div class="plan-header fade-up d1">
     <h2>📚 JEE 2027 Study Plan</h2>
-    <p>// Jun 13 → Oct 24, 2026 · 20 weeks · NIT Trichy target · Mark chapters done · missed ones carry forward</p>
+    <p>// Jul 02 → Oct 31, 2026 · 18 weeks · NIT Trichy target · Mark chapters done · missed ones carry forward</p>
   </div>
 
   <div class="alert-overlay" id="planAlert">
@@ -693,12 +693,12 @@ footer{text-align:center;padding:1.2rem;font-size:.67rem;color:var(--text3);font
       <div class="fd-year"><div class="fd-yr-label">Now</div><div class="fd-bar"><div class="fd-fill" style="width:80%;background:#22c55e"></div></div><div class="fd-yr-text" style="color:#86efac">Full potential</div></div>
       <div class="fd-year"><div class="fd-yr-label">1 mo</div><div class="fd-bar"><div class="fd-fill" style="width:60%;background:#f59e0b"></div></div><div class="fd-yr-text" style="color:#fcd34d">Slowly slipping</div></div>
       <div class="fd-year"><div class="fd-yr-label">3 mo</div><div class="fd-bar"><div class="fd-fill" style="width:35%;background:#f97316"></div></div><div class="fd-yr-text" style="color:#fdba74">Others overtake</div></div>
-      <div class="fd-year"><div class="fd-yr-label">Oct 24</div><div class="fd-bar"><div class="fd-fill" style="width:4%;background:#7f1d1d"></div></div><div class="fd-yr-text" style="color:#f87171">Regret is real</div></div>
+      <div class="fd-year"><div class="fd-yr-label">Oct 31</div><div class="fd-bar"><div class="fd-fill" style="width:4%;background:#7f1d1d"></div></div><div class="fd-yr-text" style="color:#f87171">Regret is real</div></div>
     </div>
     <div class="quote-card"><div class="qc-title">Remember this</div><div class="qc-text" id="sideQuote">"The cost of discipline is always less than the cost of regret."</div></div>
   </div>
 </div>
-<footer>FocusForge · JEE 2027 · Jun 13 – Oct 24, 2026 · Target: NIT Trichy · <span id="footerYear"></span></footer>
+<footer>FocusForge · JEE 2027 · Jul 02 – Oct 31, 2026 · Target: NIT Trichy · <span id="footerYear"></span></footer>
 </div>
 
 <!-- TIMER PAGE -->
@@ -733,8 +733,14 @@ footer{text-align:center;padding:1.2rem;font-size:.67rem;color:var(--text3);font
       <div class="preset-row">
         <button class="preset-btn active" onclick="setPreset(25)" data-mins="25">25 min</button>
         <button class="preset-btn" onclick="setPreset(45)" data-mins="45">45 min</button>
-        <button class="preset-btn" onclick="setPreset(60)" data-mins="60">60 min</button>
+        <button class="preset-btn" onclick="setPreset(60)" data-mins="60">1 hr</button>
         <button class="preset-btn" onclick="setPreset(90)" data-mins="90">90 min</button>
+        <button class="preset-btn" onclick="setPreset(120)" data-mins="120">2 hr</button>
+        <button class="preset-btn" onclick="setPreset(180)" data-mins="180">3 hr</button>
+      </div>
+      <div class="preset-row" style="margin-top:2px;">
+        <input type="number" id="customTimerInput" min="1" max="600" placeholder="Custom minutes" style="width:130px;background:var(--bg3);border:1px solid var(--border2);border-radius:8px;padding:6px 12px;color:var(--text);font-family:'DM Mono',monospace;font-size:.72rem;outline:none;"/>
+        <button class="preset-btn" onclick="setCustomTimer()" style="border-color:var(--accent);color:var(--accent2);">✓ Set Custom Time</button>
       </div>
     </div>
     <div class="timer-right fade-up d3">
@@ -808,7 +814,7 @@ const FIRE_MSGS = [
   {title:'💀 Regret hits different at 18',msg:'Imagine sitting in a random college three years from now, watching NIT Trichy students on LinkedIn, knowing you had months to prepare and wasted them. That feeling can still be avoided. But only if you open the book RIGHT NOW.'},
   {title:'🏛️ NIT Trichy CSE has 120 seats',msg:'~12 lakh students write JEE Main. NIT Trichy CSE has 120 seats. That is 0.01%. You need to be better than 99.99% of aspirants. Does your effort today reflect that? Because it should.'},
   {title:'⚔️ This is a war of consistency',msg:'JEE is not a test. It is a war of consistency. Warriors do not skip training because they do not "feel like it." They train hardest when it hurts most. Be a warrior. Open the book NOW.'},
-  {title:'🎯 October 24 is the point of no return',msg:'You have a fixed end date: Oct 24, 2026. After that, whatever you have prepared is what you have. Time is the ONE resource you cannot buy back. Every day you waste now is permanent. USE TODAY.'},
+  {title:'🎯 October 31 is the point of no return',msg:'You have a fixed end date: Oct 31, 2026. After that, whatever you have prepared is what you have. Time is the ONE resource you cannot buy back. Every day you waste now is permanent. USE TODAY.'},
   {title:'😤 Stop reading motivational quotes',msg:'You know what the best motivation is? Finishing a chapter. Stop looking for motivation and START. The motivation comes AFTER you start, not before. Open the book. Right now. Go.'},
   {title:'📉 Your goal strength is dropping',msg:'Every chapter you miss weakens your position. NIT Trichy does not care about your reasons. It cares about your rank. Your rank depends on what you studied. Study NOW.'},
 ];
@@ -840,7 +846,7 @@ const BANNER_QUOTES = [
   'Stop planning. Start solving.',
   'Your competition never sleeps.',
   'Every chapter = one step closer.',
-  'Oct 24 is non-negotiable.',
+  'Oct 31 is non-negotiable.',
   'No phone during study. No exceptions.',
   'You asked for NIT Trichy. Now earn it.',
 ];
@@ -848,7 +854,7 @@ const BANNER_QUOTES = [
 /* ══ MOTIVATION BANNER ══ */
 function updateMotiveBanner(){
   const now = new Date();
-  const end = new Date('2026-10-24');
+  const end = new Date('2026-10-31');
   const daysLeft = Math.max(0, Math.ceil((end - now) / (1000*60*60*24)));
   document.getElementById('mbDaysNum').textContent = daysLeft;
   document.getElementById('fmDaysLeft').textContent = daysLeft;
@@ -862,7 +868,7 @@ function updateMotiveBanner(){
     '✅ Good effort — but do not stop here. Keep pushing.';
   document.getElementById('mbHeadline').textContent = headline;
   const studied = todayMins > 0 ? `${fmtMins(todayMins)} studied today` : 'NOT studied today';
-  document.getElementById('mbSub').textContent = `${studied} · ${daysLeft} days to Oct 24, 2026 · Target: NIT Trichy`;
+  document.getElementById('mbSub').textContent = `${studied} · ${daysLeft} days to Oct 31, 2026 · Target: NIT Trichy`;
   const q = BANNER_QUOTES[Math.floor(Date.now()/30000) % BANNER_QUOTES.length];
   document.getElementById('mbQuote').textContent = q;
 }
@@ -903,56 +909,53 @@ function checkFireMode(){
   checkTestReminders();
 }
 
-/* ══ TEST SCHEDULE DATA ══ */
-// Weekly tests: every Sunday, chapters from that week
+/* ══ TEST SCHEDULE DATA — regenerated to start Jul 2026 / end Oct 31, 2026 ══ */
 const WEEKLY_TESTS = [
-  {id:'wt1',date:'Jun 14',label:'Weekly Test 1',type:'weekly',chapters:['PHY: Units & Measurements','CHE: Mole Concept','MAT: Relations & Functions']},
-  {id:'wt2',date:'Jun 21',label:'Weekly Test 2',type:'weekly',chapters:['PHY: Electric Charges & Fields','CHE: Solutions','MAT: Inverse Trig Functions']},
-  {id:'wt3',date:'Jun 28',label:'Weekly Test 3',type:'weekly',chapters:['PHY: Electrostatic Potential & Capacitance','CHE: Electrochemistry','MAT: Matrices & Determinants']},
-  {id:'wt4',date:'Jul 05',label:'Weekly Test 4',type:'weekly',chapters:['PHY: Current Electricity','CHE: Chemical Kinetics','MAT: Continuity & Differentiability']},
-  {id:'wt5',date:'Jul 12',label:'Weekly Test 5',type:'weekly',chapters:['PHY: Moving Charges & Magnetism','CHE: Surface Chemistry','MAT: Applications of Derivatives']},
-  {id:'wt6',date:'Jul 19',label:'Weekly Test 6',type:'weekly',chapters:['PHY: Magnetism & Matter','CHE: p-Block (Gr 15-16)','MAT: Integrals + Applications']},
-  {id:'wt7',date:'Jul 26',label:'Weekly Test 7',type:'weekly',chapters:['PHY: Electromagnetic Induction','CHE: p-Block (Gr 17-18)','MAT: Differential Equations + Vectors']},
-  {id:'wt8',date:'Aug 02',label:'Weekly Test 8',type:'weekly',chapters:['PHY: Alternating Current','CHE: d & f Block Elements','MAT: Linear Programming + Probability']},
-  {id:'wt9',date:'Aug 09',label:'Weekly Test 9',type:'weekly',chapters:['PHY: EM Waves','CHE: Coordination Compounds','MAT: All Maths Chapters So Far']},
-  {id:'wt10',date:'Aug 16',label:'Weekly Test 10',type:'weekly',chapters:['PHY: Ray Optics','CHE: Haloalkanes & Haloarenes','MAT: Full Syllabus Revision Round']},
-  {id:'wt11',date:'Aug 23',label:'Weekly Test 11',type:'weekly',chapters:['PHY: Wave Optics','CHE: Alcohols, Phenols & Ethers','MAT: Calculus Focus Test']},
-  {id:'wt12',date:'Aug 30',label:'Weekly Test 12',type:'weekly',chapters:['PHY: Dual Nature of Radiation','CHE: Aldehydes, Ketones & Carboxylic Acids','MAT: Coordinate Geometry Focus']},
-  {id:'wt13',date:'Sep 06',label:'Weekly Test 13',type:'weekly',chapters:['PHY: Atoms','CHE: Amines','MAT: Algebra + Probability']},
-  {id:'wt14',date:'Sep 13',label:'Weekly Test 14',type:'weekly',chapters:['PHY: Nuclei','CHE: Biomolecules & Polymers','MAT: Full Maths Mock']},
-  {id:'wt15',date:'Sep 20',label:'Weekly Test 15',type:'weekly',chapters:['PHY: Semiconductor Electronics','CHE: Chemistry in Everyday Life','MAT: Full Maths Mock 2']},
-  {id:'wt16',date:'Sep 27',label:'Weekly Test 16',type:'weekly',chapters:['PHY: Revision — Electrostatics + Magnetism','CHE: Revision — Physical Chemistry','MAT: Revision — All topics']},
-  {id:'wt17',date:'Oct 04',label:'Weekly Test 17',type:'weekly',chapters:['PHY: Revision — Optics + Modern Physics','CHE: Revision — Organic + Inorganic','MAT: Full Revision Mock']},
-  {id:'wt18',date:'Oct 11',label:'Weekly Test 18',type:'weekly',chapters:['PHY + CHE + MAT: JEE Main PYQs — Full Mixed Paper']},
-  {id:'wt19',date:'Oct 18',label:'Weekly Test 19',type:'weekly',chapters:['PHY + CHE + MAT: Mock Test — Full 3hr JEE Paper']},
-  {id:'wt20',date:'Oct 24',label:'FINAL Test',type:'weekly',chapters:['PHY + CHE + MAT: Grand Final Mock — Everything']},
+  {id:'wt1',date:'Jul 05',label:'Weekly Test 1',type:'weekly',chapters:['PHY: Units & Measurements','CHE: Haloalkanes & Haloarenes','MAT: Relations & Functions + Inverse Trig Functions']},
+  {id:'wt2',date:'Jul 12',label:'Weekly Test 2',type:'weekly',chapters:['PHY: Electric Charges & Fields','CHE: Alcohols, Phenols & Ethers','MAT: Matrices & Determinants + Continuity & Differentiability']},
+  {id:'wt3',date:'Jul 19',label:'Weekly Test 3',type:'weekly',chapters:['PHY: Electrostatic Potential & Capacitance','CHE: Aldehydes, Ketones & Carboxylic Acids','MAT: Applications of Derivatives + Integrals']},
+  {id:'wt4',date:'Jul 26',label:'Weekly Test 4',type:'weekly',chapters:['PHY: Current Electricity','CHE: Amines','MAT: Applications of Integrals + Differential Equations']},
+  {id:'wt5',date:'Aug 02',label:'Weekly Test 5',type:'weekly',chapters:['PHY: Moving Charges & Magnetism','CHE: Biomolecules & Polymers','MAT: Vectors + Three Dimensional Geometry']},
+  {id:'wt6',date:'Aug 09',label:'Weekly Test 6',type:'weekly',chapters:['PHY: Magnetism & Matter','CHE: Solutions','MAT: Linear Programming + Probability']},
+  {id:'wt7',date:'Aug 16',label:'Weekly Test 7',type:'weekly',chapters:['PHY: Electromagnetic Induction','CHE: Electrochemistry','MAT: Full Maths Revision Round 1']},
+  {id:'wt8',date:'Aug 23',label:'Weekly Test 8',type:'weekly',chapters:['PHY: Alternating Current','CHE: Chemical Kinetics','MAT: Full Maths Revision Round 2']},
+  {id:'wt9',date:'Aug 30',label:'Weekly Test 9',type:'weekly',chapters:['PHY: EM Waves','CHE: d & f Block Elements','MAT: Full Maths Mock Test']},
+  {id:'wt10',date:'Sep 06',label:'Weekly Test 10',type:'weekly',chapters:['PHY: Ray Optics','CHE: Coordination Compounds','MAT: Coordinate Geometry Focus']},
+  {id:'wt11',date:'Sep 13',label:'Weekly Test 11',type:'weekly',chapters:['PHY: Wave Optics','CHE: Mole Concept (recap)','MAT: Calculus Focus Test']},
+  {id:'wt12',date:'Sep 20',label:'Weekly Test 12',type:'weekly',chapters:['PHY: Dual Nature of Radiation','CHE: Surface Chemistry','MAT: Algebra + Probability Focus']},
+  {id:'wt13',date:'Sep 27',label:'Weekly Test 13',type:'weekly',chapters:['PHY: Atoms','CHE: p-Block (Gr 15-16)','MAT: Full Mixed Test 1']},
+  {id:'wt14',date:'Oct 04',label:'Weekly Test 14',type:'weekly',chapters:['PHY: Nuclei','CHE: p-Block (Gr 17-18)','MAT: Full Mixed Test 2']},
+  {id:'wt15',date:'Oct 11',label:'Weekly Test 15',type:'weekly',chapters:['PHY: Semiconductor Electronics','CHE: Chemistry in Everyday Life','MAT: Full Mixed Test 3']},
+  {id:'wt16',date:'Oct 18',label:'Weekly Test 16',type:'weekly',chapters:['PHY: Revision — Electrostatics + Magnetism + Optics','CHE: Revision — Organic + Physical Chemistry','MAT: Full Revision Mock']},
+  {id:'wt17',date:'Oct 25',label:'Weekly Test 17',type:'weekly',chapters:['PHY + CHE + MAT: JEE Main PYQs — Full Mixed Paper']},
+  {id:'wt18',date:'Oct 31',label:'FINAL Test',type:'weekly',chapters:['PHY + CHE + MAT: Grand Final Mock — Everything']},
 ];
 
 const MONTHLY_TESTS = [
-  {id:'mt1',date:'Jul 05',label:'Monthly Test 1 — June',type:'monthly',
+  {id:'mt1',date:'Jul 26',label:'Monthly Test 1 — July',type:'monthly',
    chapters:[
-     'PHY: Units & Measurements, Electric Charges, Electrostatic Potential, Current Electricity, Moving Charges',
-     'CHE: Mole Concept, Solutions, Electrochemistry, Chemical Kinetics, Surface Chemistry',
-     'MAT: Relations & Functions, Inverse Trig, Matrices & Determinants, Continuity, Applications of Derivatives',
+     'PHY: Units & Measurements, Electric Charges, Electrostatic Potential, Current Electricity',
+     'CHE: Haloalkanes, Alcohols/Phenols/Ethers, Aldehydes/Ketones/Carboxylic Acids, Amines',
+     'MAT: Relations & Functions, Inverse Trig, Matrices & Determinants, Continuity, Applications of Derivatives, Integrals, Applications of Integrals, Differential Equations',
    ],
-   note:'Full June syllabus · 3 hour mock test format · Analyse every mistake'},
-  {id:'mt2',date:'Aug 02',label:'Monthly Test 2 — July',type:'monthly',
+   note:'Full July syllabus · 3 hour mock test format · Analyse every mistake'},
+  {id:'mt2',date:'Aug 30',label:'Monthly Test 2 — August',type:'monthly',
    chapters:[
-     'PHY: Magnetism & Matter, EM Induction, Alternating Current, EM Waves, Ray Optics (partial)',
-     'CHE: p-Block (Gr 15-18), d & f Block, Coordination Compounds, Haloalkanes',
-     'MAT: Integrals, Applications of Integrals, Differential Equations, Vectors, 3D Geometry, Linear Programming, Probability',
+     'PHY: Moving Charges, Magnetism & Matter, EM Induction, Alternating Current, EM Waves',
+     'CHE: Biomolecules & Polymers, Solutions, Electrochemistry, Chemical Kinetics, d & f Block',
+     'MAT: Vectors, 3D Geometry, Linear Programming, Probability + full Maths revision',
    ],
-   note:'Full July syllabus + June revision · 3 hour paper · Identify weak chapters'},
-  {id:'mt3',date:'Sep 06',label:'Monthly Test 3 — August',type:'monthly',
+   note:'Full August syllabus + July revision · 3 hour paper · Identify weak chapters'},
+  {id:'mt3',date:'Sep 27',label:'Monthly Test 3 — September',type:'monthly',
    chapters:[
-     'PHY: Wave Optics, Dual Nature, Atoms, Nuclei, Semiconductor Electronics',
-     'CHE: Alcohols/Phenols/Ethers, Aldehydes/Ketones/Carboxylic Acids, Amines, Biomolecules, Polymers, Chemistry in Everyday Life',
+     'PHY: Ray Optics, Wave Optics, Dual Nature, Atoms',
+     'CHE: Coordination Compounds, Mole Concept, Surface Chemistry, p-Block (Gr 15-18)',
      'MAT: Complete Maths syllabus — all chapters',
    ],
-   note:'Full Physics + Chemistry + complete Maths · This is your checkpoint before full revision'},
-  {id:'mt4',date:'Oct 04',label:'Monthly Test 4 — September (Grand Mock)',type:'monthly',
+   note:'Full Physics + Chemistry + complete Maths · This is your checkpoint before final revision'},
+  {id:'mt4',date:'Oct 25',label:'Monthly Test 4 — October (Grand Mock)',type:'monthly',
    chapters:[
-     'PHY: Complete Class 12 Physics — all 15 chapters',
+     'PHY: Complete Class 12 Physics — all chapters',
      'CHE: Complete Class 12 Chemistry — Physical + Inorganic + Organic',
      'MAT: Complete Mathematics — all chapters',
    ],
@@ -1102,7 +1105,7 @@ const C11_TOPICS={
     {id:'c11p9',name:'Kinetic Theory of Gases',weight:'high',tip:'Ideal gas · RMS speed · Degrees of freedom'},
   ],
   CHE:[
-    {id:'c11c1',name:'Mole Concept & Stoichiometry',weight:'very-high',tip:'Already in Week 1 — revise thoroughly'},
+    {id:'c11c1',name:'Mole Concept & Stoichiometry',weight:'very-high',tip:'Revise thoroughly — foundation for everything'},
     {id:'c11c2',name:'Atomic Structure',weight:'very-high',tip:'Bohr model · Quantum numbers · Electronic config — 2-3 Qs'},
     {id:'c11c3',name:'Chemical Bonding',weight:'very-high',tip:'VSEPR · Hybridisation · MOT — appears every year'},
     {id:'c11c4',name:'Chemical Equilibrium',weight:'very-high',tip:'Kc, Kp, Kx · Le Chatelier\'s · Buffer — always asked'},
@@ -1121,7 +1124,7 @@ const C11_TOPICS={
     {id:'c11m6',name:'Permutations & Combinations',weight:'very-high',tip:'nCr · nPr · Distribution — needed for Probability'},
     {id:'c11m7',name:'Binomial Theorem',weight:'high',tip:'Expansion · General term · Middle term · Properties'},
     {id:'c11m8',name:'Limits & Derivatives',weight:'high',tip:'L\'Hôpital · Standard limits — foundation for Calculus'},
-    {id:'c11m9',name:'Sets, Relations & Functions',weight:'high',tip:'Already in Week 1 — domain/range · composite functions'},
+    {id:'c11m9',name:'Sets, Relations & Functions',weight:'high',tip:'Domain/range · composite functions'},
   ]
 };
 let c11BoostOpen=false;
@@ -1131,95 +1134,91 @@ function getC11Stats(){const allIds=[...C11_TOPICS.PHY,...C11_TOPICS.CHE,...C11_
 function updateC11Badge(){const{done,total}=getC11Stats();const pct=Math.round(done/total*100);document.getElementById('c11BoostBadge').textContent=`${done}/${total} done · ${pct}%`;}
 function renderC11Topics(){const container=document.getElementById('c11SubjectsContainer');if(!container)return;const subjectMeta={PHY:{label:'Physics',cls:'phy',icon:'⚛️',cardCls:'c11-tc-phy',timerPrefix:'PHY'},CHE:{label:'Chemistry',cls:'che',icon:'🧪',cardCls:'c11-tc-che',timerPrefix:'CHE'},MAT:{label:'Mathematics',cls:'mat',icon:'📐',cardCls:'c11-tc-mat',timerPrefix:'MAT'}};container.innerHTML=Object.entries(C11_TOPICS).map(([subj,topics])=>{const m=subjectMeta[subj];const done=topics.filter(t=>state.chapterDone?.[t.id]).length;const pct=Math.round(done/topics.length*100);const topicsHTML=topics.map(t=>{const isDone=state.chapterDone?.[t.id];const timerLabel=`${m.timerPrefix}: ${t.name} (Class 11)`;return`<div class="c11-topic-card ${m.cardCls} ${isDone?'done-c11':''}"><div class="c11-tc-name">${t.name}</div><div class="c11-tc-wt ${t.weight}">${t.weight==='very-high'?'🔥 Very High Weightage':'⭐ High Weightage'}</div><div class="c11-tc-tip">${t.tip}</div><div class="c11-tc-check ${isDone?'done':''}" onclick="toggleC11Topic('${t.id}')">${isDone?'✓':''}</div><div class="c11-timer-bar"><button class="btn-start-timer small" onclick="launchTimerSafe(this)" data-task="${btoa(encodeURIComponent(timerLabel))}"><span class="bst-icon">▶</span> Start</button></div></div>`;}).join('');return`<div class="c11-subject-block"><div class="c11-subj-header"><span class="c11-subj-icon">${m.icon}</span><span class="c11-subj-name ${m.cls}">${m.label}</span><span class="c11-subj-pct">${done}/${topics.length} · ${pct}%</span></div><div class="c11-progress-bar"><div class="c11-progress-fill" style="width:${pct}%"></div></div><div class="c11-topics">${topicsHTML}</div></div>`;}).join('');}
 
-/* ══ JEE PLAN DATA — MAY 27 TO OCT 14, 2026 (20 weeks) ══ */
+/* ══ JEE PLAN DATA — JUL 02 TO OCT 31, 2026 (18 weeks) ══ */
 const PLAN_WEEKS = [
-  {id:'w1',date:'Jun 13',start:'2026-06-13',label:'Week 1 — Class 11 Basics',chapters:[
+  {id:'w1',date:'Jul 02',start:'2026-07-02',label:'Week 1',chapters:[
     {id:'w1p1',sub:'PHY',name:'Units & Measurements',note:'Class 11 foundation for all Physics',c11:'SI units · Dimensions · Scientific notation',hard:false},
-    {id:'w1c1',sub:'CHE',name:'Mole Concept',note:'Foundation for Solutions & Electrochemistry',c11:'Mole · Molar mass · Molarity · Molality · Mole fraction',hard:false},
-    {id:'w1m1',sub:'MAT',name:'Relations & Functions',note:'Ch 1 — revise Sets from Class 11 first',c11:'Sets: Union · Intersection · Complement · Power set',hard:false},
+    {id:'w1c1',sub:'CHE',name:'Haloalkanes & Haloarenes',note:'Starting chapter — high weightage, scoring organic topic',c11:'Organic Chemistry basics · IUPAC Nomenclature · Hydrocarbons',hard:false},
+    {id:'w1m1',sub:'MAT',name:'Relations & Functions',note:'Ch 1',c11:'Sets: Union · Intersection · Complement · Power set',hard:false},
+    {id:'w1m2',sub:'MAT',name:'Inverse Trig Functions',note:'Ch 2 — revise Trig Functions first',c11:'Trig functions: sin,cos,tan · Principal values · Range & domain',hard:false},
   ]},
-  {id:'w2',date:'Jun 14',start:'2026-06-14',label:'Week 2 — Class 12 begins!',chapters:[
+  {id:'w2',date:'Jul 09',start:'2026-07-09',label:'Week 2',chapters:[
     {id:'w2p1',sub:'PHY',name:'Electric Charges & Fields',note:'Class 12 Ch 1',c11:'Coulomb\'s law idea · Force concept · Vectors basics',hard:false},
-    {id:'w2c1',sub:'CHE',name:'Solutions',note:'Class 12 Ch 1 — needs Mole Concept done',c11:'Concentration terms · Colligative properties basics',hard:false},
-    {id:'w2m1',sub:'MAT',name:'Inverse Trig Functions',note:'Ch 2 — revise Trig Functions first',c11:'Trig functions: sin,cos,tan · Principal values · Range & domain',hard:false},
+    {id:'w2c1',sub:'CHE',name:'Alcohols, Phenols & Ethers',note:'Needs Functional Groups + Mechanisms',c11:'Functional Groups · Reaction mechanisms (SN1, SN2)',hard:true},
+    {id:'w2m1',sub:'MAT',name:'Matrices & Determinants',note:'Ch 3',c11:'Linear Equations · Basic Algebra',hard:true},
+    {id:'w2m2',sub:'MAT',name:'Continuity & Differentiability',note:'Ch 4 — revise Limits first',c11:'Limits & Derivatives (Class 11) · Chain rule',hard:true},
   ]},
-  {id:'w3',date:'Jun 21',start:'2026-06-21',label:'Week 3',chapters:[
+  {id:'w3',date:'Jul 16',start:'2026-07-16',label:'Week 3',chapters:[
     {id:'w3p1',sub:'PHY',name:'Electrostatic Potential & Capacitance',note:'Class 12 Ch 2',c11:'Work & Energy · Potential energy · Conservative forces',hard:true},
-    {id:'w3c1',sub:'CHE',name:'Electrochemistry',note:'Needs Redox Reactions + Mole Concept',c11:'Redox Reactions · Oxidation number · Balancing equations',hard:true},
-    {id:'w3m1',sub:'MAT',name:'Matrices & Determinants',note:'Ch 3-4',c11:'Linear Equations · Basic Algebra',hard:true},
+    {id:'w3c1',sub:'CHE',name:'Aldehydes, Ketones & Carboxylic Acids',note:'Needs Carbonyl + IUPAC',c11:'Carbonyl Group basics · IUPAC Nomenclature · Organic mechanisms',hard:true},
+    {id:'w3m1',sub:'MAT',name:'Applications of Derivatives',note:'Ch 5',c11:'Straight Lines · Maxima-Minima idea',hard:true},
+    {id:'w3m2',sub:'MAT',name:'Integrals',note:'Ch 6',c11:'Derivatives · Algebra · Trigonometric functions',hard:true},
   ]},
-  {id:'w4',date:'Jun 28',start:'2026-06-28',label:'Week 4',chapters:[
+  {id:'w4',date:'Jul 23',start:'2026-07-23',label:'Week 4',chapters:[
     {id:'w4p1',sub:'PHY',name:'Current Electricity',note:'Class 12 Ch 3',c11:'Charge & current basics · Ohm\'s law · Resistance idea',hard:false},
-    {id:'w4c1',sub:'CHE',name:'Chemical Kinetics',note:'Needs Equilibrium + Rate basics',c11:'Chemical Equilibrium · Kc, Kp · Le Chatelier\'s principle',hard:true},
-    {id:'w4m1',sub:'MAT',name:'Continuity & Differentiability',note:'Ch 5 — revise Limits first',c11:'Limits & Derivatives (Class 11 Ch 13) · Chain rule',hard:true},
+    {id:'w4c1',sub:'CHE',name:'Amines',note:'Needs Nitrogen compounds + Organic naming',c11:'Nitrogen compounds basics · Functional Groups · IUPAC naming',hard:false},
+    {id:'w4m1',sub:'MAT',name:'Applications of Integrals',note:'Ch 7',c11:'Integration basics · Area under curves',hard:true},
+    {id:'w4m2',sub:'MAT',name:'Differential Equations',note:'Ch 8',c11:'Derivatives · Integration',hard:true},
   ]},
-  {id:'w5',date:'Jul 05',start:'2026-07-05',label:'Week 5',chapters:[
+  {id:'w5',date:'Jul 30',start:'2026-07-30',label:'Week 5',chapters:[
     {id:'w5p1',sub:'PHY',name:'Moving Charges & Magnetism',note:'Needs Vectors + Circular Motion',c11:'Vectors · Cross product · Circular motion · Laws of Motion',hard:true},
-    {id:'w5c1',sub:'CHE',name:'Surface Chemistry',note:'Needs States of Matter',c11:'States of Matter · Colloids · Tyndall effect',hard:false},
-    {id:'w5m1',sub:'MAT',name:'Applications of Derivatives',note:'Ch 6',c11:'Straight Lines · Maxima-Minima idea',hard:true},
+    {id:'w5c1',sub:'CHE',name:'Biomolecules & Polymers',note:'Needs Organic basics',c11:'Organic Chemistry basics · Functional Groups',hard:false},
+    {id:'w5m1',sub:'MAT',name:'Vectors',note:'Ch 9',c11:'Basic geometry · Trigonometry',hard:false},
+    {id:'w5m2',sub:'MAT',name:'Three Dimensional Geometry',note:'Ch 10 — FINISH MATHS SYLLABUS soon!',c11:'Coordinate geometry basics · Vectors',hard:true},
   ]},
-  {id:'w6',date:'Jul 12',start:'2026-07-12',label:'Week 6',chapters:[
+  {id:'w6',date:'Aug 06',start:'2026-08-06',label:'Week 6',chapters:[
     {id:'w6p1',sub:'PHY',name:'Magnetism & Matter',note:'Class 12 Ch 5',c11:'Magnetic field basics · Units',hard:false},
-    {id:'w6c1',sub:'CHE',name:'p-Block Elements (Gr 15–16)',note:'Needs Periodic Table + Bonding',c11:'Periodic Table · Chemical Bonding · VSEPR theory',hard:false},
-    {id:'w6m1',sub:'MAT',name:'Integrals + Applications',note:'Ch 7-8 — push hard!',c11:'Derivatives · Algebra · Trigonometric functions',hard:true},
+    {id:'w6c1',sub:'CHE',name:'Solutions',note:'Needs Mole Concept',c11:'Mole · Molar mass · Molarity · Molality · Mole fraction',hard:false},
+    {id:'w6m1',sub:'MAT',name:'Linear Programming',note:'Ch 11 — final Maths chapters!',c11:'Linear Inequalities (Class 11)',hard:false},
+    {id:'w6m2',sub:'MAT',name:'Probability',note:'Ch 12 — MATHS SYLLABUS COMPLETE! 🎉',c11:'Probability (Class 11 Ch 16) · Permutations & Combinations',hard:false},
   ]},
-  {id:'w7',date:'Jul 19',start:'2026-07-19',label:'Week 7',chapters:[
+  {id:'w7',date:'Aug 13',start:'2026-08-13',label:'Week 7',chapters:[
     {id:'w7p1',sub:'PHY',name:'Electromagnetic Induction',note:'Needs Work & Energy + Differentiation',c11:'Faraday\'s law idea · Rate of change · Energy conservation',hard:true},
-    {id:'w7c1',sub:'CHE',name:'p-Block Elements (Gr 17–18)',note:'Needs Periodic Table + Halogens',c11:'Periodic Table · Halogen basics',hard:false},
-    {id:'w7m1',sub:'MAT',name:'Diff. Equations + Vectors + 3D',note:'Ch 9-11 — FINISH MATHS SYLLABUS!',c11:'Intro to 3D Geometry (Class 11 Ch 12) · Integration',hard:true},
+    {id:'w7c1',sub:'CHE',name:'Electrochemistry',note:'Needs Redox Reactions + Mole Concept',c11:'Redox Reactions · Oxidation number · Balancing equations',hard:true},
   ]},
-  {id:'w8',date:'Jul 26',start:'2026-07-26',label:'Week 8',chapters:[
+  {id:'w8',date:'Aug 20',start:'2026-08-20',label:'Week 8',chapters:[
     {id:'w8p1',sub:'PHY',name:'Alternating Current',note:'Needs Oscillations + SHM + Trig',c11:'Simple Harmonic Motion · sin/cos functions · Angular frequency',hard:true},
-    {id:'w8c1',sub:'CHE',name:'d & f Block Elements',note:'Needs Config + Oxidation States',c11:'Electronic Configuration · Oxidation states · Periodic Table',hard:true},
-    {id:'w8m1',sub:'MAT',name:'Linear Programming + Probability',note:'Ch 12-13 — final Maths chapters!',c11:'Linear Inequalities (Class 11 Ch 6) · Probability (Class 11 Ch 16)',hard:false},
+    {id:'w8c1',sub:'CHE',name:'Chemical Kinetics',note:'Needs Equilibrium + Rate basics',c11:'Chemical Equilibrium · Kc, Kp · Le Chatelier\'s principle',hard:true},
   ]},
-  {id:'w9',date:'Aug 02',start:'2026-08-02',label:'Week 9',chapters:[
+  {id:'w9',date:'Aug 27',start:'2026-08-27',label:'Week 9',chapters:[
     {id:'w9p1',sub:'PHY',name:'EM Waves',note:'Needs Waves chapter',c11:'Waves: speed · frequency · wavelength · transverse vs longitudinal',hard:false},
-    {id:'w9c1',sub:'CHE',name:'Coordination Compounds',note:'Needs Bonding + d-block',c11:'Chemical Bonding · d-Block Elements · VSEPR theory',hard:true},
+    {id:'w9c1',sub:'CHE',name:'d & f Block Elements',note:'Needs Config + Oxidation States',c11:'Electronic Configuration · Oxidation states · Periodic Table',hard:true},
   ]},
-  {id:'w10',date:'Aug 09',start:'2026-08-09',label:'Week 10',chapters:[
+  {id:'w10',date:'Sep 03',start:'2026-09-03',label:'Week 10',chapters:[
     {id:'w10p1',sub:'PHY',name:'Ray Optics',note:'Needs Geometry + Snell\'s law',c11:'Angle of incidence · Reflection · Refraction · Refractive index',hard:false},
-    {id:'w10c1',sub:'CHE',name:'Haloalkanes & Haloarenes',note:'Needs Organic basics + IUPAC',c11:'Organic Chemistry basics · IUPAC Nomenclature · Hydrocarbons',hard:false},
+    {id:'w10c1',sub:'CHE',name:'Coordination Compounds',note:'Needs Bonding + d-block',c11:'Chemical Bonding · d-Block Elements · VSEPR theory',hard:true},
   ]},
-  {id:'w11',date:'Aug 16',start:'2026-08-16',label:'Week 11',chapters:[
+  {id:'w11',date:'Sep 10',start:'2026-09-10',label:'Week 11',chapters:[
     {id:'w11p1',sub:'PHY',name:'Wave Optics',note:'Needs Waves + Superposition',c11:'Superposition principle · Path difference · Interference idea',hard:true},
-    {id:'w11c1',sub:'CHE',name:'Alcohols, Phenols & Ethers',note:'Needs Functional Groups + Mechanisms',c11:'Functional Groups · Reaction mechanisms (SN1, SN2)',hard:true},
+    {id:'w11c1',sub:'CHE',name:'Mole Concept',note:'Recap + deepen — foundation topic',c11:'Mole · Molar mass · Molarity · Molality · Mole fraction',hard:false},
   ]},
-  {id:'w12',date:'Aug 23',start:'2026-08-23',label:'Week 12',chapters:[
+  {id:'w12',date:'Sep 17',start:'2026-09-17',label:'Week 12',chapters:[
     {id:'w12p1',sub:'PHY',name:'Dual Nature of Radiation',note:'Needs KE + Units basics',c11:'Work & KE · Units of energy · Photoelectric basics',hard:false},
-    {id:'w12c1',sub:'CHE',name:'Aldehydes, Ketones & Carboxylic Acids',note:'Needs Carbonyl + IUPAC',c11:'Carbonyl Group basics · IUPAC Nomenclature · Organic mechanisms',hard:true},
+    {id:'w12c1',sub:'CHE',name:'Surface Chemistry',note:'Needs States of Matter',c11:'States of Matter · Colloids · Tyndall effect',hard:false},
   ]},
-  {id:'w13',date:'Aug 30',start:'2026-08-30',label:'Week 13',chapters:[
+  {id:'w13',date:'Sep 24',start:'2026-09-24',label:'Week 13',chapters:[
     {id:'w13p1',sub:'PHY',name:'Atoms',note:'Needs Atomic Structure + Circular Motion',c11:'Structure of Atom · Bohr model · Energy levels · Circular motion',hard:false},
-    {id:'w13c1',sub:'CHE',name:'Amines',note:'Needs Nitrogen compounds + Organic naming',c11:'Nitrogen compounds basics · Functional Groups · IUPAC naming',hard:false},
+    {id:'w13c1',sub:'CHE',name:'p-Block Elements (Gr 15–16)',note:'Needs Periodic Table + Bonding',c11:'Periodic Table · Chemical Bonding · VSEPR theory',hard:false},
   ]},
-  {id:'w14',date:'Sep 06',start:'2026-09-06',label:'Week 14',chapters:[
+  {id:'w14',date:'Oct 01',start:'2026-10-01',label:'Week 14',chapters:[
     {id:'w14p1',sub:'PHY',name:'Nuclei',note:'Needs Atomic Structure + Logarithms',c11:'Atomic structure · Radioactivity basics · Exponential functions',hard:true},
-    {id:'w14c1',sub:'CHE',name:'Biomolecules & Polymers',note:'Needs Organic basics',c11:'Organic Chemistry basics · Functional Groups',hard:false},
+    {id:'w14c1',sub:'CHE',name:'p-Block Elements (Gr 17–18)',note:'Needs Periodic Table + Halogens',c11:'Periodic Table · Halogen basics',hard:false},
   ]},
-  {id:'w15',date:'Sep 13',start:'2026-09-13',label:'Week 15',chapters:[
-    {id:'w15p1',sub:'PHY',name:'Semiconductor Electronics',note:'Needs basic circuits',c11:'Basic circuits · Current Electricity concepts',hard:false},
-    {id:'w15c1',sub:'CHE',name:'Chemistry in Everyday Life',note:'Light chapter — mostly theory',c11:'Basic Organic concepts · Functional Groups',hard:false},
+  {id:'w15',date:'Oct 08',start:'2026-10-08',label:'Week 15 — Class 12 syllabus complete!',chapters:[
+    {id:'w15p1',sub:'PHY',name:'Semiconductor Electronics',note:'Needs basic circuits — LAST Physics chapter!',c11:'Basic circuits · Current Electricity concepts',hard:false},
+    {id:'w15c1',sub:'CHE',name:'Chemistry in Everyday Life',note:'Light chapter — LAST Chemistry chapter!',c11:'Basic Organic concepts · Functional Groups',hard:false},
   ]},
-  {id:'w16',date:'Sep 20',start:'2026-09-20',label:'Week 16 — Revision: Electrostatics + Physical Chemistry',chapters:[
-    {id:'w16p1',sub:'PHY',name:'Revision: Electrostatics + Current + Magnetism',note:'Formula sheets + PYQs',c11:'Review all concepts studied',hard:false},
-    {id:'w16c1',sub:'CHE',name:'Revision: Physical Chemistry',note:'Solutions + Kinetics + Electrochemistry',c11:'Review all Physical Chemistry chapters',hard:false},
+  {id:'w16',date:'Oct 15',start:'2026-10-15',label:'Week 16 — Full Revision Round 1',chapters:[
+    {id:'w16p1',sub:'PHY',name:'Revision: Electrostatics + Current + Magnetism + Optics',note:'Formula sheets + PYQs',c11:'Review all concepts studied',hard:false},
+    {id:'w16c1',sub:'CHE',name:'Revision: Organic + Physical Chemistry',note:'Haloalkanes → Biomolecules + Solutions → Kinetics',c11:'Review all chapters',hard:false},
   ]},
-  {id:'w17',date:'Sep 27',start:'2026-09-27',label:'Week 17 — Revision: Optics + Organic Chemistry',chapters:[
-    {id:'w17p1',sub:'PHY',name:'Revision: Optics + Modern Physics',note:'Ray + Wave + Dual + Atoms + Nuclei',c11:'Review all chapters',hard:false},
-    {id:'w17c1',sub:'CHE',name:'Revision: Inorganic + Organic',note:'p/d block + all organic chapters',c11:'Review all chapters',hard:false},
+  {id:'w17',date:'Oct 22',start:'2026-10-22',label:'Week 17 — JEE Main PYQs + Mock Tests',chapters:[
+    {id:'w17p1',sub:'PHY',name:'JEE Main PYQs + Mock Test — Physics',note:'Last 10 years topic-wise + full mock',c11:'All chapters covered',hard:true},
+    {id:'w17c1',sub:'CHE',name:'JEE Main PYQs + Mock Test — Chemistry',note:'Last 10 years topic-wise + full mock',c11:'All chapters covered',hard:true},
   ]},
-  {id:'w18',date:'Oct 04',start:'2026-10-04',label:'Week 18 — JEE Main PYQs',chapters:[
-    {id:'w18p1',sub:'PHY',name:'JEE Main PYQs — Physics',note:'Last 10 years topic-wise',c11:'All chapters covered',hard:true},
-    {id:'w18c1',sub:'CHE',name:'JEE Main PYQs — Chemistry',note:'Last 10 years topic-wise',c11:'All chapters covered',hard:true},
-  ]},
-  {id:'w19',date:'Oct 11',start:'2026-10-11',label:'Week 19 — Mock Tests',chapters:[
-    {id:'w19p1',sub:'PHY',name:'Mock Tests 1-2 + Weak topic fix',note:'Full 3h papers + analysis',c11:'All chapters',hard:true},
-    {id:'w19c1',sub:'CHE',name:'Mock Tests 1-2 + Weak topic fix',note:'Full 3h papers + analysis',c11:'All chapters',hard:true},
-  ]},
-  {id:'w20',date:'Oct 18',start:'2026-10-18',label:'Week 20 — Final Revision + Mock 3',chapters:[
-    {id:'w20p1',sub:'PHY',name:'Final Revision + Mock Test 3',note:'Formula sheets + quick recall',c11:'All chapters',hard:false},
-    {id:'w20c1',sub:'CHE',name:'Final Revision + Mock Test 3',note:'Key reactions + named reactions',c11:'All chapters',hard:false},
+  {id:'w18',date:'Oct 29',start:'2026-10-29',label:'Week 18 — Final Push (ends Oct 31)',chapters:[
+    {id:'w18p1',sub:'PHY',name:'Final Revision + Grand Mock Test',note:'Formula sheets + quick recall — exam is Oct 31!',c11:'All chapters',hard:false},
+    {id:'w18c1',sub:'CHE',name:'Final Revision + Grand Mock Test',note:'Key reactions + named reactions — exam is Oct 31!',c11:'All chapters',hard:false},
   ]},
 ];
 
@@ -1299,7 +1298,7 @@ async function exportProgressImage(){
     y+=70;
   });
   ctx.fillStyle='#525780';ctx.font='13px monospace';
-  ctx.fillText('Target: NIT Trichy CSE · JEE Mains 2027 · Jun 13 – Oct 24, 2026',30,h-25);
+  ctx.fillText('Target: NIT Trichy CSE · JEE Mains 2027 · Jul 02 – Oct 31, 2026',30,h-25);
   canvas.toBlob(async(blob)=>{
     const filename='focusforge_progress_'+new Date().toISOString().slice(0,10)+'.png';
     try{
@@ -1392,8 +1391,8 @@ function weekProgress(week){const done=week.chapters.filter(c=>{const checkId=c.
 function chapCard(ch){const checkId=ch.originalId||ch.id;const isDone=state.chapterDone?.[checkId];const subClass={PHY:'phy-card',CHE:'che-card',MAT:'mat-card'}[ch.sub]||'phy-card';const carriedBadge=ch.carried&&!isDone?'<div class="cc-carried">CARRIED</div>':'';const missedClass=ch.carried&&!isDone?'missed-card':'';const doneClass=isDone?'completed':'';const timerLabel=`${ch.sub}: ${ch.name.replace('[CARRIED] ','')}`;return`<div class="chapter-card ${subClass} ${missedClass} ${doneClass}">${isDone?'<div class="completed-overlay"></div>':''}<div class="cc-subject">${ch.sub} ${ch.hard?'· HARD':'· EASY'}</div><div class="cc-name">${ch.name}</div><div class="cc-sub">${ch.note}</div><div class="cc-c11"><span class="cc-c11-label">Class 11 needed: </span>${ch.c11}</div><div class="cc-check ${isDone?'done':''}" onclick="toggleChapter('${ch.id}')">${isDone?'✓':''}</div>${carriedBadge}<div class="cc-timer-bar"><button class="btn-start-timer" onclick="launchTimerSafe(this)" data-task="${btoa(encodeURIComponent(timerLabel))}"><span class="bst-icon">▶</span> Start Timer</button><div class="btn-done-mark ${isDone?'marked':''}" title="Mark done" onclick="toggleChapter('${ch.id}')">✓</div></div></div>`;}
 function renderWeeklyPlan(){const curIdx=getCurrentWeekIdx();const el=document.getElementById('weeklyPlanList');if(!el)return;el.innerHTML=PLAN_WEEKS.map((week,idx)=>{const{done,total,pct}=weekProgress(week);let statusLabel='upcoming',statusCls='status-upcoming';if(idx<curIdx){statusLabel=pct===100?'Done':'Missed';statusCls=pct===100?'status-done':'status-missed';}else if(idx===curIdx){statusLabel='Current Week';statusCls='status-current';}const hasCarried=week.chapters.some(c=>c.carried&&!state.chapterDone?.[c.originalId||c.id]);if(hasCarried&&idx===curIdx){statusLabel='Has carried chapters';statusCls='status-carried';}return`<div class="week-block"><div class="week-header" onclick="toggleWeekBody(this)"><div class="wh-left"><div class="wh-date">${week.date}</div><div class="wh-title">${week.label}</div></div><div class="wh-progress"><div class="wh-bar"><div class="wh-bar-fill" style="width:${pct}%"></div></div><div class="wh-pct">${pct}%</div><div class="wh-status ${statusCls}">${statusLabel}</div></div></div><div class="week-chapters" style="display:${idx===curIdx?'block':'none'}"><div class="chapter-row">${week.chapters.map(ch=>chapCard(ch)).join('')}</div></div></div>`;}).join('');}
 function toggleWeekBody(header){const body=header.nextElementSibling;body.style.display=body.style.display==='none'?'block':'none';}
-function renderMonthlyPlan(){const months=['June 2026','July 2026','August 2026','September 2026','October 2026'];const monthMap={jun:[0,1,2,3],jul:[4,5,6,7],aug:[8,9,10,11,12],sep:[13,14,15,16],oct:[17,18,19]};const el=document.getElementById('monthlyPlanList');if(!el)return;const keys=Object.keys(monthMap);el.innerHTML=keys.map((key,mi)=>{const wkIdxs=monthMap[key];const weeks=wkIdxs.map(i=>PLAN_WEEKS[i]).filter(Boolean);const origChaps=weeks.flatMap(w=>w.chapters.filter(c=>!c.carried));const totalCh=origChaps.length;const doneCh=origChaps.filter(c=>state.chapterDone?.[c.id]).length;const pct=totalCh?Math.round(doneCh/totalCh*100):0;return`<div class="week-block" style="margin-bottom:16px;"><div class="week-header"><div class="wh-left"><div class="wh-title">${months[mi]||key}</div></div><div class="wh-progress"><div class="wh-bar" style="width:120px"><div class="wh-bar-fill" style="width:${pct}%"></div></div><div class="wh-pct">${pct}% (${doneCh}/${totalCh} chapters)</div></div></div><div class="week-chapters">${weeks.map(w=>`<div style="font-size:.72rem;font-family:'DM Mono',monospace;color:var(--text3);margin-bottom:6px;padding-top:6px;">${w.date} · ${w.label}</div><div class="chapter-row">${w.chapters.filter(c=>!c.carried).map(ch=>chapCard(ch)).join('')}</div>`).join('<div style="height:8px;"></div>')}</div></div>`;}).join('');}
-function renderProgressView(){const allOrig=PLAN_WEEKS.flatMap(w=>w.chapters.filter(c=>!c.carried));const total=allOrig.length;const done=allOrig.filter(c=>state.chapterDone?.[c.id]).length;const{str,missed}=computeGoalStrength();const subjects=['PHY','CHE','MAT'];const subData=subjects.map(sub=>{const t=allOrig.filter(c=>c.sub===sub).length;const d=allOrig.filter(c=>c.sub===sub&&state.chapterDone?.[c.id]).length;return{sub,t,d};});const colors={PHY:'#06b6d4',CHE:'#22c55e',MAT:'#8b5cf6'};const names={PHY:'Physics',CHE:'Chemistry',MAT:'Mathematics'};const el=document.getElementById('progressView');if(!el)return;el.innerHTML=`<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px;">${subData.map(({sub,t,d})=>`<div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.1rem;text-align:center;"><div style="font-size:.7rem;font-family:'DM Mono',monospace;color:var(--text3);margin-bottom:6px;">${names[sub]}</div><div style="font-size:1.5rem;font-weight:800;color:${colors[sub]};margin-bottom:4px;">${d}/${t}</div><div style="height:5px;border-radius:100px;background:rgba(255,255,255,.06);overflow:hidden;"><div style="height:100%;border-radius:100px;background:${colors[sub]};width:${t?Math.round(d/t*100):0}%;transition:width .8s;"></div></div><div style="font-size:.65rem;font-family:'DM Mono',monospace;color:var(--text3);margin-top:4px;">${t?Math.round(d/t*100):0}% done</div></div>`).join('')}</div><div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.2rem;margin-bottom:12px;"><div style="font-size:.8rem;font-weight:700;margin-bottom:1rem;">Overall plan progress</div><div style="display:flex;align-items:center;gap:12px;margin-bottom:8px;"><div style="font-size:.68rem;font-family:'DM Mono',monospace;color:var(--text3);width:120px;">Chapters completed</div><div style="flex:1;height:8px;border-radius:100px;background:rgba(255,255,255,.06);overflow:hidden;"><div style="height:100%;border-radius:100px;background:linear-gradient(90deg,#6366f1,#06b6d4);width:${total?Math.round(done/total*100):0}%;transition:width .8s;"></div></div><div style="font-size:.72rem;font-family:'DM Mono',monospace;color:var(--accent2);">${done}/${total}</div></div><div style="display:flex;align-items:center;gap:12px;"><div style="font-size:.68rem;font-family:'DM Mono',monospace;color:var(--text3);width:120px;">NIT Trichy goal strength</div><div style="flex:1;height:8px;border-radius:100px;background:rgba(255,255,255,.06);overflow:hidden;"><div style="height:100%;border-radius:100px;background:${str>70?'linear-gradient(90deg,#22c55e,#06b6d4)':str>40?'linear-gradient(90deg,#f59e0b,#ef4444)':'#ef4444'};width:${str}%;transition:width .8s;"></div></div><div style="font-size:.72rem;font-family:'DM Mono',monospace;color:${str>70?'var(--green)':str>40?'var(--amber)':'var(--red)'};">${str}%</div></div></div><div style="background:linear-gradient(135deg,rgba(99,102,241,.08),rgba(139,92,246,.04));border:1px solid rgba(99,102,241,.25);border-radius:16px;padding:1.1rem;"><div style="font-size:.8rem;font-weight:700;color:var(--accent2);margin-bottom:.5rem;">Target deadlines → NIT Trichy 2027</div><div style="font-size:.78rem;color:var(--text2);line-height:1.8;">Maths syllabus done → end of July 2026<br>Physics + Chemistry → end of August 2026<br>Full revision → September 2026<br>PYQs + Mock Tests → September–October 2026<br>Final deadline → <b style="color:#ef4444;">October 24, 2026</b> → NIT Trichy JEE 2027 🎯</div></div>`;}
+function renderMonthlyPlan(){const months=['July 2026','August 2026','September 2026','October 2026'];const monthMap={jul:[0,1,2,3,4],aug:[5,6,7,8],sep:[9,10,11,12,13],oct:[14,15,16,17]};const el=document.getElementById('monthlyPlanList');if(!el)return;const keys=Object.keys(monthMap);el.innerHTML=keys.map((key,mi)=>{const wkIdxs=monthMap[key];const weeks=wkIdxs.map(i=>PLAN_WEEKS[i]).filter(Boolean);const origChaps=weeks.flatMap(w=>w.chapters.filter(c=>!c.carried));const totalCh=origChaps.length;const doneCh=origChaps.filter(c=>state.chapterDone?.[c.id]).length;const pct=totalCh?Math.round(doneCh/totalCh*100):0;return`<div class="week-block" style="margin-bottom:16px;"><div class="week-header"><div class="wh-left"><div class="wh-title">${months[mi]||key}</div></div><div class="wh-progress"><div class="wh-bar" style="width:120px"><div class="wh-bar-fill" style="width:${pct}%"></div></div><div class="wh-pct">${pct}% (${doneCh}/${totalCh} chapters)</div></div></div><div class="week-chapters">${weeks.map(w=>`<div style="font-size:.72rem;font-family:'DM Mono',monospace;color:var(--text3);margin-bottom:6px;padding-top:6px;">${w.date} · ${w.label}</div><div class="chapter-row">${w.chapters.filter(c=>!c.carried).map(ch=>chapCard(ch)).join('')}</div>`).join('<div style="height:8px;"></div>')}</div></div>`;}).join('');}
+function renderProgressView(){const allOrig=PLAN_WEEKS.flatMap(w=>w.chapters.filter(c=>!c.carried));const total=allOrig.length;const done=allOrig.filter(c=>state.chapterDone?.[c.id]).length;const{str,missed}=computeGoalStrength();const subjects=['PHY','CHE','MAT'];const subData=subjects.map(sub=>{const t=allOrig.filter(c=>c.sub===sub).length;const d=allOrig.filter(c=>c.sub===sub&&state.chapterDone?.[c.id]).length;return{sub,t,d};});const colors={PHY:'#06b6d4',CHE:'#22c55e',MAT:'#8b5cf6'};const names={PHY:'Physics',CHE:'Chemistry',MAT:'Mathematics'};const el=document.getElementById('progressView');if(!el)return;el.innerHTML=`<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px;">${subData.map(({sub,t,d})=>`<div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.1rem;text-align:center;"><div style="font-size:.7rem;font-family:'DM Mono',monospace;color:var(--text3);margin-bottom:6px;">${names[sub]}</div><div style="font-size:1.5rem;font-weight:800;color:${colors[sub]};margin-bottom:4px;">${d}/${t}</div><div style="height:5px;border-radius:100px;background:rgba(255,255,255,.06);overflow:hidden;"><div style="height:100%;border-radius:100px;background:${colors[sub]};width:${t?Math.round(d/t*100):0}%;transition:width .8s;"></div></div><div style="font-size:.65rem;font-family:'DM Mono',monospace;color:var(--text3);margin-top:4px;">${t?Math.round(d/t*100):0}% done</div></div>`).join('')}</div><div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.2rem;margin-bottom:12px;"><div style="font-size:.8rem;font-weight:700;margin-bottom:1rem;">Overall plan progress</div><div style="display:flex;align-items:center;gap:12px;margin-bottom:8px;"><div style="font-size:.68rem;font-family:'DM Mono',monospace;color:var(--text3);width:120px;">Chapters completed</div><div style="flex:1;height:8px;border-radius:100px;background:rgba(255,255,255,.06);overflow:hidden;"><div style="height:100%;border-radius:100px;background:linear-gradient(90deg,#6366f1,#06b6d4);width:${total?Math.round(done/total*100):0}%;transition:width .8s;"></div></div><div style="font-size:.72rem;font-family:'DM Mono',monospace;color:var(--accent2);">${done}/${total}</div></div><div style="display:flex;align-items:center;gap:12px;"><div style="font-size:.68rem;font-family:'DM Mono',monospace;color:var(--text3);width:120px;">NIT Trichy goal strength</div><div style="flex:1;height:8px;border-radius:100px;background:rgba(255,255,255,.06);overflow:hidden;"><div style="height:100%;border-radius:100px;background:${str>70?'linear-gradient(90deg,#22c55e,#06b6d4)':str>40?'linear-gradient(90deg,#f59e0b,#ef4444)':'#ef4444'};width:${str}%;transition:width .8s;"></div></div><div style="font-size:.72rem;font-family:'DM Mono',monospace;color:${str>70?'var(--green)':str>40?'var(--amber)':'var(--red)'};">${str}%</div></div></div><div style="background:linear-gradient(135deg,rgba(99,102,241,.08),rgba(139,92,246,.04));border:1px solid rgba(99,102,241,.25);border-radius:16px;padding:1.1rem;"><div style="font-size:.8rem;font-weight:700;color:var(--accent2);margin-bottom:.5rem;">Target deadlines → NIT Trichy 2027</div><div style="font-size:.78rem;color:var(--text2);line-height:1.8;">Maths syllabus done → mid August 2026<br>Physics + Chemistry → early October 2026<br>Full revision → mid October 2026<br>PYQs + Mock Tests → late October 2026<br>Final deadline → <b style="color:#ef4444;">October 31, 2026</b> → NIT Trichy JEE 2027 🎯</div></div>`;}
 function switchPlan(view){document.querySelectorAll('.plan-tab').forEach(b=>b.classList.remove('active'));document.querySelectorAll('#page-plan .plan-tab')[{weekly:0,monthly:1,progress:2}[view]].classList.add('active');document.querySelectorAll('#page-plan .plan-view').forEach(v=>v.classList.remove('active'));document.getElementById('planview-'+view).classList.add('active');}
 
 /* ══ PAGE NAV ══ */
@@ -1429,6 +1428,21 @@ const MODES={focus:{mins:25,lbl:'FOCUS SESSION',c1:'#6366f1',c2:'#818cf8'},short
 let timerMode='focus',timerTotal=1500,timerLeft=1500,timerRunning=false,timerInterval=null,sessionStartTs=null,currentPreset=25;
 function setTimerMode(mode){if(timerRunning)return;timerMode=mode;document.querySelectorAll('.timer-mode-btn').forEach((b,i)=>b.classList.toggle('active',['focus','short','long'][i]===mode));const mo=MODES[mode];timerTotal=mo.mins*60;timerLeft=mo.mins*60;document.getElementById('timerModeLbl').textContent=mo.lbl;if(mode==='focus'){timerTotal=currentPreset*60;timerLeft=currentPreset*60;}if(mode==='short'||mode==='long'){const breakSecs=mode==='short'?5*60:15*60;startSudokuBreak(breakSecs);}updateDisplay();drawTimerRing(timerLeft,timerTotal);}
 function setPreset(mins){if(timerRunning)return;currentPreset=mins;document.querySelectorAll('.preset-btn').forEach(b=>b.classList.toggle('active',parseInt(b.dataset.mins)===mins));timerTotal=mins*60;timerLeft=mins*60;updateDisplay();drawTimerRing(timerLeft,timerTotal);}
+function setCustomTimer(){
+  if(timerRunning){showNotif('⏸ Pause or reset the timer before setting a new time');return;}
+  const inp=document.getElementById('customTimerInput');
+  let mins=parseInt(inp.value);
+  if(!mins||mins<1){showNotif('⚠️ Enter a valid number of minutes (e.g. 120 for 2 hours)');return;}
+  mins=Math.min(600,mins);
+  currentPreset=mins;
+  document.querySelectorAll('.preset-btn').forEach(b=>b.classList.remove('active'));
+  timerMode='focus';
+  document.querySelectorAll('.timer-mode-btn').forEach((b,i)=>b.classList.toggle('active',i===0));
+  document.getElementById('timerModeLbl').textContent='FOCUS SESSION';
+  timerTotal=mins*60;timerLeft=mins*60;
+  updateDisplay();drawTimerRing(timerLeft,timerTotal);
+  showNotif(`⏱ Custom timer set to ${fmtMins(mins)} — hit Start when ready!`);
+}
 function updateDisplay(){const m=Math.floor(timerLeft/60),s=timerLeft%60;document.getElementById('timerDisplay').textContent=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;document.title=timerRunning?`⏱ ${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')} — FocusForge`:'FocusForge';}
 function drawTimerRing(left,total){const c=document.getElementById('timerCanvas');if(!c)return;const ctx=c.getContext('2d'),sz=220,cx=110,cy=110,r=95,lw=10;ctx.clearRect(0,0,sz,sz);ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.strokeStyle='rgba(255,255,255,0.06)';ctx.lineWidth=lw;ctx.stroke();const pct=left/total;if(pct>0){const mo=MODES[timerMode];const g=ctx.createLinearGradient(cx-r,cy,cx+r,cy);g.addColorStop(0,mo.c1);g.addColorStop(1,mo.c2);ctx.beginPath();ctx.arc(cx,cy,r,-Math.PI/2,-Math.PI/2+pct*Math.PI*2);ctx.strokeStyle=g;ctx.lineWidth=lw;ctx.lineCap='round';ctx.stroke();}}
 function resetLive(){document.getElementById('liveStart').textContent='—';document.getElementById('liveStart').className='live-box-val';document.getElementById('liveElapsed').textContent='0m 0s';document.getElementById('liveElapsed').className='live-box-val';document.getElementById('liveEnd').textContent='—';document.getElementById('liveEnd').className='live-box-val';}
@@ -1491,7 +1505,7 @@ function setDate(){const d=new Date();document.getElementById('navDate').textCon
 /* ══ EXAM COUNTDOWN ══ */
 function tickClock(){
   const now=new Date();
-  const deadline=new Date('2026-10-24T23:59:59');
+  const deadline=new Date('2026-10-31T23:59:59');
   const diff=Math.max(0,deadline-now);
   const d=Math.floor(diff/(1000*60*60*24));
   const h=Math.floor((diff%(1000*60*60*24))/(1000*60*60));
