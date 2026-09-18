@@ -1,4 +1,4 @@
-HTML<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -812,56 +812,6 @@ main{
   background:rgba(99,102,241,.13);
 }
 
-
-.custom-timer-box{
-  margin-bottom:14px;
-  padding:11px;
-  border:1px solid var(--line);
-  border-radius:10px;
-  background:var(--panel2);
-}
-
-.custom-timer-title{
-  color:var(--text3);
-  font:600 .58rem 'DM Mono',monospace;
-  text-transform:uppercase;
-  letter-spacing:.08em;
-  margin-bottom:8px;
-}
-
-.custom-time-row{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:6px;
-}
-
-.custom-time-input{
-  width:58px;
-  padding:8px 5px;
-  border:1px solid var(--line);
-  border-radius:7px;
-  background:var(--panel);
-  color:var(--text);
-  text-align:center;
-  outline:none;
-  font:600 .72rem 'DM Mono',monospace;
-}
-
-.custom-time-input:focus{
-  border-color:var(--accent);
-}
-
-.custom-time-row span{
-  color:var(--text3);
-  font-weight:700;
-}
-
-.custom-time-row .btn{
-  padding:8px 12px;
-  font-size:.62rem;
-}
-
 .sessions{
   display:grid;
   gap:9px;
@@ -1329,16 +1279,19 @@ footer{
         <button class="preset" data-min="120">2h</button>
       </div>
 
-      <div class="custom-timer-box">
-        <div class="custom-timer-title">Custom Time</div>
-        <div class="custom-time-row">
-          <input id="customHours" class="custom-time-input" type="number" min="0" max="99" value="0" placeholder="HH" aria-label="Hours">
-          <span>:</span>
-          <input id="customMinutes" class="custom-time-input" type="number" min="0" max="59" value="30" placeholder="MM" aria-label="Minutes">
-          <span>:</span>
-          <input id="customSeconds" class="custom-time-input" type="number" min="0" max="59" value="0" placeholder="SS" aria-label="Seconds">
-          <button class="btn" id="customTimeApply" type="button">Apply</button>
-        </div>
+      <div style="display:flex;gap:7px;margin-bottom:12px">
+        <input
+          id="customMinutes"
+          class="timer-input"
+          style="margin:0;flex:1"
+          type="number"
+          min="1"
+          max="480"
+          step="1"
+          placeholder="Custom minutes"
+          aria-label="Custom timer minutes"
+        >
+        <button class="btn" id="customTimerBtn" type="button">Set</button>
       </div>
 
       <div class="timer-display">
@@ -3342,6 +3295,7 @@ let timerTotal = 25 * 60;
 let timerInterval = null;
 let timerRunning = false;
 let timerStartTime = null;
+let timerEndTime = null;
 let timerTask = '';
 
 function formatTime(seconds){
@@ -3391,187 +3345,142 @@ function updateTimerDisplay(){
 
 }
 
+function unlockTimerAudio(){
+  try{
+    const Ctx = window.AudioContext || window.webkitAudioContext;
+    if(!Ctx) return;
+    if(!window.__timerAudio) window.__timerAudio = new Ctx();
+    if(window.__timerAudio.state === 'suspended') window.__timerAudio.resume();
+  }catch(e){}
+}
 
+function playTimerEndSound(){
+  try{
+    const Ctx = window.AudioContext || window.webkitAudioContext;
+    if(!Ctx) return;
+    const ctx = window.__timerAudio || new Ctx();
+    window.__timerAudio = ctx;
+    if(ctx.state === 'suspended') ctx.resume();
 
-function applyCustomTime(){
+    const now = ctx.currentTime + 0.03;
+    const pattern = [880, 660, 880, 660, 1046, 784, 1046, 784];
 
-  if(timerRunning){
-    showToast('Pause the timer before changing the time.');
-    return;
+    pattern.forEach((freq, i) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'square';
+      osc.frequency.setValueAtTime(freq, now + i * 0.28);
+      gain.gain.setValueAtTime(0.0001, now + i * 0.28);
+      gain.gain.exponentialRampToValueAtTime(0.22, now + i * 0.28 + 0.015);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + i * 0.28 + 0.20);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now + i * 0.28);
+      osc.stop(now + i * 0.28 + 0.21);
+    });
+
+    if(navigator.vibrate){
+      navigator.vibrate([250,120,250,120,400]);
+    }
+  }catch(e){
+    console.warn('Timer sound could not play:', e);
   }
+}
 
-  const hours = Math.max(0, Math.min(99, Number(document.getElementById('customHours').value) || 0));
-  const minutes = Math.max(0, Math.min(59, Number(document.getElementById('customMinutes').value) || 0));
-  const seconds = Math.max(0, Math.min(59, Number(document.getElementById('customSeconds').value) || 0));
-  const total = hours * 3600 + minutes * 60 + seconds;
+function updateTimerFromClock(){
+  if(!timerRunning || !timerEndTime) return;
 
-  if(total < 1){
-    showToast('Enter a custom time greater than 00:00:00.');
-    return;
-  }
-
-  timerTotal = total;
-  timerSeconds = total;
-  timerStartTime = null;
-
-  document.querySelectorAll('.preset').forEach(button =>
-    button.classList.remove('active')
-  );
-
-  document.getElementById('timerStatus').textContent = 'CUSTOM TIME READY';
+  const remaining = Math.max(0, Math.ceil((timerEndTime - Date.now()) / 1000));
+  timerSeconds = remaining;
   updateTimerDisplay();
-  showToast('Custom timer set to ' + formatTime(total));
 
+  if(remaining <= 0){
+    completeTimer();
+  }
 }
 
 function startTimer(){
 
+  unlockTimerAudio();
+
   if(timerRunning){
+    updateTimerFromClock();
+    if(!timerRunning) return;
 
-    clearInterval(
-      timerInterval
-    );
+    timerSeconds = Math.max(0, Math.ceil((timerEndTime - Date.now()) / 1000));
+    clearInterval(timerInterval);
+    timerInterval = null;
+    timerEndTime = null;
+    timerRunning = false;
 
-    timerRunning =
-      false;
-
-    document.getElementById(
-      'timerStart'
-    ).textContent =
-      '▶ Resume';
-
-    document.getElementById(
-      'timerStatus'
-    ).textContent =
-      'PAUSED';
-
+    document.getElementById('timerStart').textContent = '▶ Resume';
+    document.getElementById('timerStatus').textContent = 'PAUSED';
+    updateTimerDisplay();
     return;
-
   }
 
-  if(
-    timerSeconds <= 0
-  ){
-
+  if(timerSeconds <= 0){
     resetTimer();
-
   }
 
-  timerRunning =
-    true;
+  timerRunning = true;
 
   if(!timerStartTime){
-
-    timerStartTime =
-      Date.now();
-
+    timerStartTime = Date.now();
   }
 
-  timerTask =
-    document.getElementById(
-      'taskInput'
-    ).value.trim()
-    || 'Focus session';
+  timerTask = document.getElementById('taskInput').value.trim() || 'Focus session';
+  timerEndTime = Date.now() + timerSeconds * 1000;
 
-  document.getElementById(
-    'timerStart'
-  ).textContent =
-    '⏸ Pause';
+  document.getElementById('timerStart').textContent = '⏸ Pause';
+  document.getElementById('timerStatus').textContent = 'FOCUSING';
 
-  document.getElementById(
-    'timerStatus'
-  ).textContent =
-    'FOCUSING';
-
-  timerInterval =
-    setInterval(
-      () => {
-
-        timerSeconds--;
-
-        updateTimerDisplay();
-
-        if(
-          timerSeconds <= 0
-        ){
-
-          completeTimer();
-
-        }
-
-      },
-      1000
-    );
-
+  clearInterval(timerInterval);
+  timerInterval = setInterval(updateTimerFromClock, 250);
+  updateTimerFromClock();
 }
 
 function completeTimer(){
 
-  clearInterval(
-    timerInterval
-  );
+  if(!timerRunning && timerSeconds > 0) return;
 
-  timerInterval =
-    null;
+  clearInterval(timerInterval);
+  timerInterval = null;
+  timerRunning = false;
+  timerEndTime = null;
+  timerSeconds = 0;
+  updateTimerDisplay();
 
-  timerRunning =
-    false;
-
-  const minutes =
-    Math.max(
-      1,
-      Math.round(
-        timerTotal / 60
-      )
-    );
+  const minutes = Math.max(1, Math.round(timerTotal / 60));
 
   state.sessions.push({
-
-    task:
-      timerTask
-      || 'Focus session',
-
+    task: timerTask || 'Focus session',
     minutes,
-
-    start:
-      timerStartTime
-      || Date.now(),
-
-    end:
-      Date.now(),
-
-    date:
-      todayKey()
-
+    start: timerStartTime || Date.now(),
+    end: Date.now(),
+    date: todayKey()
   });
 
   saveState();
+  playTimerEndSound();
 
-  alert(
-    '⏰ Focus session complete! Great work.'
-  );
+  document.title = '⏰ TIME UP! — FocusForge';
+  setTimeout(() => {
+    document.title = 'FocusForge — JEE 2027';
+  }, 5000);
 
-  timerStartTime =
-    null;
+  document.getElementById('timerStart').textContent = '▶ Start';
+  document.getElementById('timerStatus').textContent = 'SESSION COMPLETE';
 
-  timerSeconds =
-    timerTotal;
+  if(document.visibilityState === 'visible'){
+    setTimeout(() => alert('⏰ FOCUS SESSION COMPLETE! Great work.'), 150);
+  }
 
-  document.getElementById(
-    'timerStart'
-  ).textContent =
-    '▶ Start';
-
-  document.getElementById(
-    'timerStatus'
-  ).textContent =
-    'SESSION COMPLETE';
-
+  timerStartTime = null;
+  timerSeconds = timerTotal;
   updateTimerDisplay();
-
   renderSessions();
   updateStats();
-
 }
 
 /* ============================================================
@@ -3591,6 +3500,9 @@ function resetTimer(){
     false;
 
   timerStartTime =
+    null;
+
+  timerEndTime =
     null;
 
   timerSeconds =
@@ -4481,19 +4393,6 @@ document
   );
 
 document
-  .getElementById('customTimeApply')
-  .addEventListener(
-    'click',
-    applyCustomTime
-  );
-
-['customHours','customMinutes','customSeconds'].forEach(id => {
-  document.getElementById(id).addEventListener('keydown', event => {
-    if(event.key === 'Enter') applyCustomTime();
-  });
-});
-
-document
   .querySelectorAll('.preset')
   .forEach(button => {
 
@@ -4560,6 +4459,44 @@ function initialize(){
   );
 
 }
+
+/* ============================================================
+   CUSTOM TIMER + BACKGROUND TAB SUPPORT
+============================================================ */
+
+document.getElementById('customTimerBtn')?.addEventListener('click', () => {
+  const input = document.getElementById('customMinutes');
+  const minutes = Number(input.value);
+  if(!Number.isFinite(minutes) || minutes < 1 || minutes > 480){
+    showToast('Enter a time from 1 to 480 minutes');
+    return;
+  }
+
+  clearInterval(timerInterval);
+  timerInterval = null;
+  timerRunning = false;
+  timerStartTime = null;
+  timerEndTime = null;
+  timerTotal = Math.round(minutes) * 60;
+  timerSeconds = timerTotal;
+
+  document.querySelectorAll('.preset').forEach(button => button.classList.remove('active'));
+  document.getElementById('timerStart').textContent = '▶ Start';
+  document.getElementById('timerStatus').textContent = 'READY TO FOCUS';
+  updateTimerDisplay();
+  unlockTimerAudio();
+  showToast(`Custom timer set: ${Math.round(minutes)} minutes`);
+});
+
+document.getElementById('customMinutes')?.addEventListener('keydown', (event) => {
+  if(event.key === 'Enter') document.getElementById('customTimerBtn').click();
+});
+
+document.addEventListener('visibilitychange', () => {
+  if(timerRunning){
+    updateTimerFromClock();
+  }
+});
 
 initialize();
 
