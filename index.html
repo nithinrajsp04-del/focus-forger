@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+HTML<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -812,6 +812,56 @@ main{
   background:rgba(99,102,241,.13);
 }
 
+
+.custom-timer-box{
+  margin-bottom:14px;
+  padding:11px;
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:var(--panel2);
+}
+
+.custom-timer-title{
+  color:var(--text3);
+  font:600 .58rem 'DM Mono',monospace;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  margin-bottom:8px;
+}
+
+.custom-time-row{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+}
+
+.custom-time-input{
+  width:58px;
+  padding:8px 5px;
+  border:1px solid var(--line);
+  border-radius:7px;
+  background:var(--panel);
+  color:var(--text);
+  text-align:center;
+  outline:none;
+  font:600 .72rem 'DM Mono',monospace;
+}
+
+.custom-time-input:focus{
+  border-color:var(--accent);
+}
+
+.custom-time-row span{
+  color:var(--text3);
+  font-weight:700;
+}
+
+.custom-time-row .btn{
+  padding:8px 12px;
+  font-size:.62rem;
+}
+
 .sessions{
   display:grid;
   gap:9px;
@@ -1277,6 +1327,18 @@ footer{
         <button class="preset" data-min="50">50m</button>
         <button class="preset" data-min="90">90m</button>
         <button class="preset" data-min="120">2h</button>
+      </div>
+
+      <div class="custom-timer-box">
+        <div class="custom-timer-title">Custom Time</div>
+        <div class="custom-time-row">
+          <input id="customHours" class="custom-time-input" type="number" min="0" max="99" value="0" placeholder="HH" aria-label="Hours">
+          <span>:</span>
+          <input id="customMinutes" class="custom-time-input" type="number" min="0" max="59" value="30" placeholder="MM" aria-label="Minutes">
+          <span>:</span>
+          <input id="customSeconds" class="custom-time-input" type="number" min="0" max="59" value="0" placeholder="SS" aria-label="Seconds">
+          <button class="btn" id="customTimeApply" type="button">Apply</button>
+        </div>
       </div>
 
       <div class="timer-display">
@@ -3329,6 +3391,39 @@ function updateTimerDisplay(){
 
 }
 
+
+
+function applyCustomTime(){
+
+  if(timerRunning){
+    showToast('Pause the timer before changing the time.');
+    return;
+  }
+
+  const hours = Math.max(0, Math.min(99, Number(document.getElementById('customHours').value) || 0));
+  const minutes = Math.max(0, Math.min(59, Number(document.getElementById('customMinutes').value) || 0));
+  const seconds = Math.max(0, Math.min(59, Number(document.getElementById('customSeconds').value) || 0));
+  const total = hours * 3600 + minutes * 60 + seconds;
+
+  if(total < 1){
+    showToast('Enter a custom time greater than 00:00:00.');
+    return;
+  }
+
+  timerTotal = total;
+  timerSeconds = total;
+  timerStartTime = null;
+
+  document.querySelectorAll('.preset').forEach(button =>
+    button.classList.remove('active')
+  );
+
+  document.getElementById('timerStatus').textContent = 'CUSTOM TIME READY';
+  updateTimerDisplay();
+  showToast('Custom timer set to ' + formatTime(total));
+
+}
+
 function startTimer(){
 
   if(timerRunning){
@@ -4384,6 +4479,19 @@ document
     'click',
     resetTimer
   );
+
+document
+  .getElementById('customTimeApply')
+  .addEventListener(
+    'click',
+    applyCustomTime
+  );
+
+['customHours','customMinutes','customSeconds'].forEach(id => {
+  document.getElementById(id).addEventListener('keydown', event => {
+    if(event.key === 'Enter') applyCustomTime();
+  });
+});
 
 document
   .querySelectorAll('.preset')
