@@ -1,0 +1,3903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#090b12">
+<title>FocusForge — JEE 2027</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700;800&family=Syne:wght@600;700;800&display=swap');
+
+:root{
+  --bg:#080a10;
+  --bg2:#0d1018;
+  --panel:#11141d;
+  --panel2:#151925;
+  --panel3:#1a1f2d;
+  --line:rgba(255,255,255,.08);
+  --line2:rgba(255,255,255,.13);
+  --text:#f0f2ff;
+  --text2:#a8aec9;
+  --text3:#6c7290;
+  --accent:#6366f1;
+  --accent2:#818cf8;
+  --cyan:#06b6d4;
+  --green:#22c55e;
+  --amber:#f59e0b;
+  --red:#ef4444;
+  --purple:#a855f7;
+  --shadow:0 20px 60px rgba(0,0,0,.35);
+  --radius:18px;
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  min-height:100vh;
+  color:var(--text);
+  background:
+    radial-gradient(circle at 10% 0%,rgba(99,102,241,.12),transparent 30%),
+    radial-gradient(circle at 90% 10%,rgba(6,182,212,.08),transparent 25%),
+    var(--bg);
+  font-family:Inter,system-ui,sans-serif;
+}
+
+button,
+input{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+.app{
+  min-height:100vh;
+}
+
+/* ================= HEADER ================= */
+
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:100;
+  height:72px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 28px;
+  background:rgba(8,10,16,.88);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--line);
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.logo{
+  width:40px;
+  height:40px;
+  display:grid;
+  place-items:center;
+  border-radius:12px;
+  background:linear-gradient(135deg,#6366f1,#06b6d4);
+  color:#fff;
+  font-size:20px;
+  box-shadow:0 8px 30px rgba(99,102,241,.3);
+}
+
+.brand-title{
+  font-family:Syne,sans-serif;
+  font-size:1.15rem;
+  font-weight:800;
+  letter-spacing:-.03em;
+}
+
+.brand-sub{
+  font:500 .62rem 'DM Mono',monospace;
+  color:var(--text3);
+  margin-top:2px;
+}
+
+.nav{
+  display:flex;
+  gap:6px;
+}
+
+.nav-btn{
+  border:1px solid transparent;
+  background:transparent;
+  color:var(--text3);
+  padding:9px 13px;
+  border-radius:10px;
+  font-size:.78rem;
+  transition:.2s;
+}
+
+.nav-btn:hover{
+  color:var(--text);
+  background:rgba(255,255,255,.04);
+}
+
+.nav-btn.active{
+  color:#fff;
+  background:rgba(99,102,241,.15);
+  border-color:rgba(99,102,241,.25);
+}
+
+.streak{
+  color:#fbbf24;
+  font:500 .7rem 'DM Mono',monospace;
+}
+
+/* ================= MAIN ================= */
+
+main{
+  width:min(1280px,calc(100% - 36px));
+  margin:auto;
+  padding:30px 0 80px;
+}
+
+.page{
+  display:none;
+}
+
+.page.active{
+  display:block;
+}
+
+.hero{
+  display:grid;
+  grid-template-columns:1.6fr 1fr;
+  gap:18px;
+  margin-bottom:22px;
+}
+
+.hero-card{
+  min-height:230px;
+  padding:28px;
+  border:1px solid var(--line);
+  border-radius:24px;
+  background:
+    linear-gradient(135deg,rgba(99,102,241,.14),rgba(6,182,212,.04)),
+    var(--panel);
+  box-shadow:var(--shadow);
+  position:relative;
+  overflow:hidden;
+}
+
+.hero-card:after{
+  content:"";
+  position:absolute;
+  width:240px;
+  height:240px;
+  right:-100px;
+  top:-120px;
+  border-radius:50%;
+  background:rgba(99,102,241,.12);
+  filter:blur(10px);
+}
+
+.eyebrow{
+  color:var(--accent2);
+  font:500 .68rem 'DM Mono',monospace;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  margin-bottom:10px;
+}
+
+.hero h1{
+  font-family:Syne,sans-serif;
+  font-size:clamp(2rem,5vw,4rem);
+  line-height:.95;
+  letter-spacing:-.055em;
+  max-width:700px;
+}
+
+.hero p{
+  margin-top:16px;
+  color:var(--text2);
+  max-width:680px;
+  line-height:1.7;
+  font-size:.9rem;
+}
+
+.countdown{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:8px;
+  margin-top:24px;
+}
+
+.count-box{
+  padding:12px 8px;
+  border-radius:12px;
+  border:1px solid var(--line);
+  background:rgba(0,0,0,.18);
+  text-align:center;
+}
+
+.count-num{
+  font-family:Syne,sans-serif;
+  font-size:1.35rem;
+  font-weight:800;
+}
+
+.count-label{
+  color:var(--text3);
+  font:500 .56rem 'DM Mono',monospace;
+  text-transform:uppercase;
+}
+
+.deadline-card{
+  min-height:230px;
+  padding:26px;
+  border:1px solid var(--line);
+  border-radius:24px;
+  background:var(--panel);
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
+
+.deadline-date{
+  font-family:Syne,sans-serif;
+  font-size:2rem;
+  line-height:1;
+}
+
+.deadline-small{
+  color:var(--text3);
+  font:500 .68rem 'DM Mono',monospace;
+}
+
+.progress-track{
+  height:9px;
+  border-radius:20px;
+  background:rgba(255,255,255,.06);
+  overflow:hidden;
+}
+
+.progress-fill{
+  height:100%;
+  width:0;
+  background:linear-gradient(90deg,var(--accent),var(--cyan));
+  border-radius:inherit;
+  transition:.4s;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+  margin-bottom:22px;
+}
+
+.stat{
+  padding:18px;
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:16px;
+}
+
+.stat-label{
+  color:var(--text3);
+  font:500 .62rem 'DM Mono',monospace;
+  text-transform:uppercase;
+}
+
+.stat-value{
+  margin-top:8px;
+  font-family:Syne,sans-serif;
+  font-size:1.6rem;
+}
+
+.stat-sub{
+  margin-top:3px;
+  color:var(--text3);
+  font-size:.68rem;
+}
+
+/* ================= SECTION ================= */
+
+.section-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+  gap:16px;
+  margin:30px 0 14px;
+}
+
+.section-title{
+  font-family:Syne,sans-serif;
+  font-size:1.4rem;
+}
+
+.section-sub{
+  color:var(--text3);
+  font:500 .66rem 'DM Mono',monospace;
+  margin-top:4px;
+}
+
+.tabs{
+  display:flex;
+  gap:6px;
+}
+
+.tab{
+  border:1px solid var(--line);
+  color:var(--text3);
+  background:var(--panel);
+  padding:8px 12px;
+  border-radius:9px;
+  font-size:.7rem;
+}
+
+.tab.active{
+  color:#fff;
+  background:rgba(99,102,241,.15);
+  border-color:rgba(99,102,241,.3);
+}
+
+/* ================= WEEK ================= */
+
+.week-block{
+  margin-bottom:16px;
+  border:1px solid var(--line);
+  border-radius:18px;
+  background:var(--panel);
+  overflow:hidden;
+}
+
+.week-header{
+  padding:17px 18px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  border-bottom:1px solid var(--line);
+  background:rgba(255,255,255,.015);
+}
+
+.week-date{
+  color:var(--accent2);
+  font:500 .66rem 'DM Mono',monospace;
+}
+
+.week-title{
+  font-family:Syne,sans-serif;
+  font-size:1rem;
+  margin-top:3px;
+}
+
+.week-right{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.week-progress{
+  width:120px;
+}
+
+.week-percent{
+  color:var(--text2);
+  font:500 .65rem 'DM Mono',monospace;
+}
+
+.status{
+  padding:5px 9px;
+  border-radius:20px;
+  font:500 .57rem 'DM Mono',monospace;
+}
+
+.status.current{
+  color:#c7d2fe;
+  background:rgba(99,102,241,.14);
+  border:1px solid rgba(99,102,241,.25);
+}
+
+.status.done{
+  color:#86efac;
+  background:rgba(34,197,94,.1);
+}
+
+.status.upcoming{
+  color:var(--text3);
+  background:rgba(255,255,255,.04);
+}
+
+.week-body{
+  padding:16px;
+}
+
+.chapter-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:11px;
+}
+
+.chapter{
+  min-height:190px;
+  position:relative;
+  padding:16px;
+  border-radius:15px;
+  border:1px solid var(--line);
+  background:var(--panel2);
+  transition:.2s;
+}
+
+.chapter:hover{
+  transform:translateY(-2px);
+  border-color:var(--line2);
+}
+
+.chapter.physics{
+  border-left:3px solid var(--cyan);
+}
+
+.chapter.chemistry{
+  border-left:3px solid var(--green);
+}
+
+.chapter.maths{
+  border-left:3px solid var(--purple);
+}
+
+.chapter.done{
+  opacity:.68;
+}
+
+.subject{
+  font:600 .58rem 'DM Mono',monospace;
+  color:var(--text3);
+  text-transform:uppercase;
+}
+
+.chapter.physics .subject{
+  color:var(--cyan);
+}
+
+.chapter.chemistry .subject{
+  color:var(--green);
+}
+
+.chapter.maths .subject{
+  color:#c084fc;
+}
+
+.chapter-name{
+  font-family:Syne,sans-serif;
+  font-size:.95rem;
+  margin:8px 35px 7px 0;
+}
+
+.chapter-note{
+  color:var(--text2);
+  font-size:.69rem;
+  line-height:1.55;
+}
+
+.c11{
+  margin-top:10px;
+  color:var(--text3);
+  font:500 .59rem 'DM Mono',monospace;
+}
+
+.check{
+  position:absolute;
+  right:13px;
+  top:13px;
+  width:25px;
+  height:25px;
+  display:grid;
+  place-items:center;
+  border:1px solid var(--line2);
+  border-radius:8px;
+  color:transparent;
+  background:rgba(255,255,255,.03);
+  transition:.2s;
+}
+
+.check:hover{
+  border-color:var(--accent2);
+}
+
+.check.done{
+  color:#fff;
+  background:linear-gradient(135deg,var(--accent),var(--cyan));
+  border-color:transparent;
+}
+
+.timer-mini{
+  position:absolute;
+  left:14px;
+  right:14px;
+  bottom:13px;
+  display:flex;
+  gap:7px;
+}
+
+.timer-mini button{
+  flex:1;
+  border:1px solid rgba(99,102,241,.25);
+  background:rgba(99,102,241,.09);
+  color:#a5b4fc;
+  border-radius:8px;
+  padding:7px;
+  font-size:.62rem;
+}
+
+/* ================= REVISION ================= */
+
+.revision{
+  border:1px solid rgba(245,158,11,.18);
+  background:
+    linear-gradient(135deg,rgba(245,158,11,.07),rgba(239,68,68,.03)),
+    var(--panel);
+}
+
+.revision .week-date{
+  color:#fbbf24;
+}
+
+.revision-card{
+  border:1px solid rgba(245,158,11,.2);
+  background:rgba(245,158,11,.035);
+}
+
+.revision-tag{
+  display:inline-block;
+  padding:4px 7px;
+  border-radius:5px;
+  color:#fcd34d;
+  background:rgba(245,158,11,.1);
+  font:600 .53rem 'DM Mono',monospace;
+  margin-bottom:7px;
+}
+
+/* ================= TESTS ================= */
+
+.test-list{
+  display:grid;
+  gap:12px;
+}
+
+.test{
+  padding:18px;
+  border:1px solid var(--line);
+  background:var(--panel);
+  border-radius:16px;
+}
+
+.test-top{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  align-items:start;
+}
+
+.test-title{
+  font-family:Syne,sans-serif;
+  font-size:1rem;
+}
+
+.test-date{
+  color:var(--accent2);
+  font:500 .65rem 'DM Mono',monospace;
+  white-space:nowrap;
+}
+
+.test-type{
+  display:inline-block;
+  margin-bottom:8px;
+  padding:4px 7px;
+  border-radius:5px;
+  font:600 .53rem 'DM Mono',monospace;
+  background:rgba(99,102,241,.1);
+  color:#a5b4fc;
+}
+
+.test-chapters{
+  color:var(--text2);
+  font-size:.72rem;
+  line-height:1.7;
+  margin-top:12px;
+}
+
+.test-actions{
+  display:flex;
+  gap:8px;
+  margin-top:14px;
+}
+
+.btn{
+  border:1px solid var(--line);
+  background:var(--panel2);
+  color:var(--text2);
+  padding:9px 13px;
+  border-radius:9px;
+  font-size:.68rem;
+}
+
+.btn:hover{
+  color:#fff;
+  border-color:var(--line2);
+}
+
+.btn.primary{
+  color:#fff;
+  background:linear-gradient(135deg,var(--accent),#4f46e5);
+  border-color:transparent;
+}
+
+.btn.green{
+  color:#86efac;
+  background:rgba(34,197,94,.08);
+}
+
+/* ================= HABITS ================= */
+
+.habit-tabs{
+  display:flex;
+  gap:7px;
+  margin-bottom:14px;
+}
+
+.habit-list{
+  display:grid;
+  gap:9px;
+}
+
+.habit{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:14px;
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:13px;
+}
+
+.habit-check{
+  width:25px;
+  height:25px;
+  flex:none;
+  display:grid;
+  place-items:center;
+  border-radius:8px;
+  border:1px solid var(--line2);
+  color:transparent;
+}
+
+.habit.done .habit-check{
+  color:#fff;
+  background:var(--green);
+  border-color:transparent;
+}
+
+.habit-name{
+  flex:1;
+  font-size:.78rem;
+}
+
+.habit.done .habit-name{
+  text-decoration:line-through;
+  color:var(--text3);
+}
+
+.delete{
+  border:0;
+  background:transparent;
+  color:var(--text3);
+}
+
+.add-row{
+  display:flex;
+  gap:8px;
+  margin-top:12px;
+}
+
+.add-row input{
+  flex:1;
+  min-width:0;
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:var(--panel);
+  color:var(--text);
+  padding:11px;
+  outline:none;
+}
+
+.add-row input:focus{
+  border-color:var(--accent);
+}
+
+/* ================= TIMER ================= */
+
+.timer-layout{
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:18px;
+}
+
+.timer-card,
+.session-card{
+  padding:24px;
+  border:1px solid var(--line);
+  border-radius:20px;
+  background:var(--panel);
+}
+
+.timer-display{
+  width:260px;
+  height:260px;
+  margin:25px auto;
+  display:grid;
+  place-items:center;
+  position:relative;
+}
+
+.timer-circle{
+  position:absolute;
+  inset:0;
+  border-radius:50%;
+  background:
+    radial-gradient(circle at center,var(--panel) 61%,transparent 62%),
+    conic-gradient(var(--accent) 0deg,var(--cyan) 180deg,rgba(255,255,255,.05) 180deg);
+}
+
+.timer-time{
+  position:relative;
+  z-index:2;
+  font-family:Syne,sans-serif;
+  font-size:3.1rem;
+  letter-spacing:-.06em;
+}
+
+.timer-label{
+  text-align:center;
+  color:var(--text3);
+  font:500 .64rem 'DM Mono',monospace;
+}
+
+.timer-controls{
+  display:flex;
+  justify-content:center;
+  gap:8px;
+}
+
+.timer-input{
+  width:100%;
+  margin-bottom:10px;
+  padding:11px;
+  border:1px solid var(--line);
+  border-radius:9px;
+  background:var(--panel2);
+  color:var(--text);
+  outline:none;
+}
+
+.preset-row{
+  display:flex;
+  gap:7px;
+  margin-bottom:12px;
+}
+
+.preset{
+  flex:1;
+  padding:8px;
+  border:1px solid var(--line);
+  border-radius:8px;
+  background:var(--panel2);
+  color:var(--text2);
+  font-size:.65rem;
+}
+
+.preset.active{
+  color:#fff;
+  border-color:var(--accent);
+  background:rgba(99,102,241,.13);
+}
+
+.sessions{
+  display:grid;
+  gap:9px;
+  margin-top:14px;
+}
+
+.session{
+  padding:13px;
+  border-radius:11px;
+  background:var(--panel2);
+  border:1px solid var(--line);
+}
+
+.session-top{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.session-task{
+  font-size:.72rem;
+}
+
+.session-duration{
+  color:#67e8f9;
+  font:600 .65rem 'DM Mono',monospace;
+}
+
+/* ================= REPORTS ================= */
+
+.report-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
+
+.report-card{
+  padding:20px;
+  border:1px solid var(--line);
+  background:var(--panel);
+  border-radius:16px;
+}
+
+.report-card h3{
+  font-family:Syne,sans-serif;
+  font-size:.9rem;
+}
+
+.report-value{
+  margin-top:12px;
+  font-family:Syne,sans-serif;
+  font-size:2rem;
+}
+
+.report-muted{
+  color:var(--text3);
+  font-size:.65rem;
+  margin-top:4px;
+}
+
+.chart{
+  height:170px;
+  display:flex;
+  align-items:end;
+  gap:8px;
+  margin-top:20px;
+}
+
+.bar-wrap{
+  flex:1;
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  justify-content:end;
+  align-items:center;
+  gap:5px;
+}
+
+.bar{
+  width:100%;
+  max-width:32px;
+  min-height:2px;
+  border-radius:7px 7px 3px 3px;
+  background:linear-gradient(var(--accent),var(--cyan));
+}
+
+.bar-label{
+  color:var(--text3);
+  font:500 .5rem 'DM Mono',monospace;
+}
+
+/* ================= NOTIFICATION ================= */
+
+.toast{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  z-index:300;
+  max-width:340px;
+  padding:13px 16px;
+  border-radius:12px;
+  background:#181d2a;
+  border:1px solid var(--line2);
+  box-shadow:var(--shadow);
+  transform:translateY(20px);
+  opacity:0;
+  pointer-events:none;
+  transition:.25s;
+  font-size:.75rem;
+}
+
+.toast.show{
+  transform:translateY(0);
+  opacity:1;
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+  padding:35px 15px;
+  text-align:center;
+  color:var(--text3);
+  font:500 .6rem 'DM Mono',monospace;
+}
+
+/* ================= SUBJECT PRIORITY PLAN ================= */
+.subject-banner{display:flex;align-items:center;gap:15px;padding:20px;margin-bottom:16px;border:1px solid var(--line);border-left:3px solid var(--subject-accent);border-radius:18px;background:linear-gradient(135deg,rgba(99,102,241,.10),rgba(6,182,212,.035)),var(--panel);}
+.subject-banner-icon{width:48px;height:48px;display:grid;place-items:center;border-radius:14px;background:rgba(255,255,255,.06);font-size:1.45rem;}
+.subject-banner-title{font-family:Syne,sans-serif;font-size:1.65rem;font-weight:800;}
+.subject-banner-sub{color:var(--text2);font-size:.72rem;margin-top:4px;}
+.priority-group{margin:0 0 16px;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--panel);}
+.priority-group.highest{border-color:rgba(99,102,241,.28)} .priority-group.medium{border-color:rgba(245,158,11,.20)} .priority-group.lower{border-color:rgba(255,255,255,.10)}
+.priority-header{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:17px 18px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.018);}
+.priority-kicker{font:600 .58rem 'DM Mono',monospace;color:var(--accent2);letter-spacing:.08em;} .priority-group.medium .priority-kicker{color:#fbbf24}.priority-group.lower .priority-kicker{color:var(--text3)}
+.priority-title{font-family:Syne,sans-serif;font-size:1rem;margin-top:4px;} .priority-count{font:500 .62rem 'DM Mono',monospace;color:var(--text3);white-space:nowrap;}
+.priority-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;padding:14px;}
+.priority-card{position:relative;display:flex;align-items:center;gap:12px;min-height:58px;padding:11px 48px 11px 11px;border:1px solid var(--line);border-radius:12px;background:var(--panel2);transition:.2s;}
+.priority-card:hover{transform:translateY(-1px);border-color:var(--line2)} .priority-card.done{opacity:.58}.priority-card.done .priority-name{text-decoration:line-through;color:var(--text3)}
+.priority-rank{width:32px;height:32px;display:grid;place-items:center;flex:none;border-radius:9px;background:rgba(99,102,241,.12);color:#a5b4fc;font:600 .66rem 'DM Mono',monospace;}
+.priority-name{font-size:.72rem;line-height:1.35;} .priority-card .check{right:10px;top:50%;transform:translateY(-50%);width:28px;height:28px;min-width:28px;border-radius:8px;border:1px solid var(--line2);display:grid;place-items:center;cursor:pointer;background:var(--panel);color:#fff;font-weight:800}.priority-card .check.done{background:#10b981;border-color:#10b981;color:#04130d}
+@media(max-width:700px){.priority-grid{grid-template-columns:1fr}.subject-banner{align-items:flex-start}.priority-header{align-items:flex-start}}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:950px){
+  .hero,
+  .timer-layout{
+    grid-template-columns:1fr;
+  }
+
+  .chapter-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .report-grid{
+    grid-template-columns:1fr 1fr;
+  }
+}
+
+@media(max-width:700px){
+  .topbar{
+    height:auto;
+    min-height:65px;
+    padding:10px 14px;
+    gap:10px;
+    flex-wrap:wrap;
+  }
+
+  .nav{
+    order:3;
+    width:100%;
+    overflow:auto;
+    padding-bottom:2px;
+  }
+
+  .nav-btn{
+    white-space:nowrap;
+  }
+
+  main{
+    width:min(100% - 20px,1280px);
+    padding-top:18px;
+  }
+
+  .hero-card,
+  .deadline-card{
+    min-height:auto;
+  }
+
+  .stats{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .chapter-grid{
+    grid-template-columns:1fr;
+  }
+
+  .section-head{
+    align-items:start;
+    flex-direction:column;
+  }
+
+  .week-header{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+  .week-right{
+    width:100%;
+    justify-content:space-between;
+  }
+
+  .report-grid{
+    grid-template-columns:1fr;
+  }
+
+  .timer-display{
+    width:220px;
+    height:220px;
+  }
+
+  .timer-time{
+    font-size:2.6rem;
+  }
+}
+</style>
+
+<style id="ff-hide-duplicate-timer">
+  #page-timer > .section-head,
+  #page-timer > .timer-layout {
+    display: none !important;
+  }
+  #page-timer #ffTimerRepair {
+    display: block !important;
+  }
+</style>
+
+
+<style id="ff-remove-top-hero">
+  #page-plan > .note,
+  #page-plan > .hero { display: none !important; }
+</style>
+
+</head>
+
+<body>
+
+<div class="app">
+
+<header class="topbar">
+
+  <div class="brand">
+    <div class="logo">⚡</div>
+    <div>
+      <div class="brand-title">FocusForge</div>
+      <div class="brand-sub">JEE 2027 · NIT TRICHY TARGET</div>
+    </div>
+  </div>
+
+  <nav class="nav">
+    <button class="nav-btn active" data-page="plan">Plan</button>
+    <button class="nav-btn" data-page="tests">Tests</button>
+    <button class="nav-btn" data-page="habits">Habits</button>
+    <button class="nav-btn" data-page="timer">Timer</button>
+    <button class="nav-btn" data-page="reports">Reports</button>
+  </nav>
+
+  <div class="streak" id="streakDisplay">🔥 0 day streak</div>
+
+</header>
+
+<main>
+
+<!-- =========================================================
+     PLAN PAGE
+========================================================= -->
+
+<section class="page active" id="page-plan">
+  <div class="note" style="margin:0 0 18px">
+    <strong>50-DAY LOCKED PLAN · 12 OCT – 30 NOV 2026</strong><br>
+    Finish the planned PCM chapters by 30 November. From 1 December onward:
+    revision, PYQs, sectional tests, full mock tests and error analysis only.
+  </div>
+
+
+  <div class="hero">
+
+    <div class="hero-card">
+
+      <div class="eyebrow">
+        // JEE 2027 preparation system
+      </div>
+
+      <h1>
+        Build the<br>
+        <span style="color:#818cf8">future.</span>
+      </h1>
+
+      <p>
+        Your JEE 2027 plan now has a fixed <strong>50-day chapter deadline</strong>:
+        12 October – 30 November 2026. Use your Physics, Chemistry and Mathematics
+        priority groups to plan the work. From 1 December, focus only on revision,
+        PYQs, sectional tests, full mocks and mock analysis.
+      </p>
+
+      <div class="countdown">
+
+        <div class="count-box">
+          <div class="count-num" id="days">00</div>
+          <div class="count-label">Days</div>
+        </div>
+
+        <div class="count-box">
+          <div class="count-num" id="hours">00</div>
+          <div class="count-label">Hours</div>
+        </div>
+
+        <div class="count-box">
+          <div class="count-num" id="minutes">00</div>
+          <div class="count-label">Minutes</div>
+        </div>
+
+        <div class="count-box">
+          <div class="count-num" id="seconds">00</div>
+          <div class="count-label">Seconds</div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="deadline-card">
+
+      <div>
+        <div class="eyebrow">Priority system</div>
+
+        <div class="deadline-date">
+          Group 1
+        </div>
+
+        <div style="color:var(--text3);margin:7px 0 18px">
+          →
+        </div>
+
+        <div class="deadline-date">
+          Group 3
+        </div>
+      </div>
+
+      <div>
+        <div class="deadline-small">
+          JEE 2027 · 3 GROUPS
+        </div>
+
+        <div style="margin-top:10px" class="progress-track">
+          <div class="progress-fill" id="overallProgress"></div>
+        </div>
+
+        <div style="margin-top:8px;color:var(--text3);font-size:.65rem">
+          <span id="overallText">0% completed</span>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="stats">
+
+    <div class="stat">
+      <div class="stat-label">Chapters done</div>
+      <div class="stat-value" id="chapterStat">0</div>
+      <div class="stat-sub" id="chapterTotal">of 0 chapters</div>
+    </div>
+
+    <div class="stat">
+      <div class="stat-label">Study time today</div>
+      <div class="stat-value" id="todayStudyStat">0m</div>
+      <div class="stat-sub">focus sessions</div>
+    </div>
+
+    <div class="stat">
+      <div class="stat-label">Tests attended</div>
+      <div class="stat-value" id="testStat">0</div>
+      <div class="stat-sub" id="testTotal">of 0 tests</div>
+    </div>
+
+    <div class="stat">
+      <div class="stat-label">Current streak</div>
+      <div class="stat-value" id="streakStat">0</div>
+      <div class="stat-sub">days</div>
+    </div>
+
+  </div>
+
+  <div class="section-head">
+
+    <div>
+      <div class="section-title">Study Plan</div>
+      <div class="section-sub">
+        // Group 1 → Group 3, 2026 · chapters + revision
+      </div>
+    </div>
+
+    <div class="tabs" id="subjectTabs">
+      <button class="tab active" id="physicsTab">⚡ Physics</button>
+      <button class="tab" id="chemistryTab">🧪 Chemistry</button>
+      <button class="tab" id="mathsTab">📐 Mathematics</button>
+      <button class="tab" id="progressTab">📊 Progress</button>
+    </div>
+
+  </div>
+
+  <div id="weeklyView"></div>
+  <div id="monthlyView" style="display:none"></div>
+  <div id="progressView" style="display:none"></div>
+
+</section>
+
+<!-- =========================================================
+     TESTS
+========================================================= -->
+
+<section class="page" id="page-tests">
+
+  <div class="section-head">
+    <div>
+      <div class="section-title">Tests & Revision</div>
+      <div class="section-sub">
+        // Weekly checkpoints · revision papers · PYQs · mocks
+      </div>
+    </div>
+  </div>
+
+  <div class="test-list" id="testList"></div>
+
+</section>
+
+<!-- =========================================================
+     HABITS
+========================================================= -->
+
+<section class="page" id="page-habits">
+
+  <div class="section-head">
+    <div>
+      <div class="section-title">Habits</div>
+      <div class="section-sub">
+        // Build the routine that makes the plan possible
+      </div>
+    </div>
+  </div>
+
+  <div class="habit-tabs">
+    <button class="tab active" data-habit="daily">Daily</button>
+    <button class="tab" data-habit="weekly">Weekly</button>
+    <button class="tab" data-habit="monthly">Monthly</button>
+  </div>
+
+  <div class="habit-list" id="habitList"></div>
+
+  <div class="add-row">
+    <input
+      id="habitInput"
+      placeholder="Add a new habit..."
+      maxlength="100"
+    >
+    <button class="btn primary" id="addHabitBtn">
+      + Add
+    </button>
+  </div>
+
+</section>
+
+<!-- =========================================================
+     TIMER
+========================================================= -->
+
+<section class="page" id="page-timer">
+
+  <div class="section-head">
+    <div>
+      <div class="section-title">Focus Timer</div>
+      <div class="section-sub">
+        // Deep work · track every session
+      </div>
+    </div>
+  </div>
+
+  <div class="timer-layout">
+
+    <div class="timer-card">
+
+      <input
+        class="timer-input"
+        id="taskInput"
+        placeholder="What are you studying?"
+        maxlength="100"
+      >
+
+      <div class="preset-row">
+        <button class="preset active" data-min="25">25m</button>
+        <button class="preset" data-min="50">50m</button>
+        <button class="preset" data-min="90">90m</button>
+        <button class="preset" data-min="120">2h</button>
+      </div>
+
+      <div style="display:flex;gap:7px;margin-bottom:12px">
+        <input
+          id="customMinutes"
+          class="timer-input"
+          style="margin:0;flex:1"
+          type="number"
+          min="1"
+          max="480"
+          step="1"
+          placeholder="Custom minutes"
+          aria-label="Custom timer minutes"
+        >
+        <button class="btn" id="customTimerBtn" type="button">Set</button>
+      </div>
+
+      <div class="timer-display">
+
+        <div class="timer-circle" id="timerCircle"></div>
+
+        <div class="timer-time" id="timerDisplay">
+          25:00
+        </div>
+
+      </div>
+
+      <div class="timer-label" id="timerStatus">
+        READY TO FOCUS
+      </div>
+
+      <div class="timer-controls" style="margin-top:15px">
+        <button class="btn primary" id="timerStart">
+          ▶ Start
+        </button>
+        <button class="btn" id="timerReset">
+          Reset
+        </button>
+      </div>
+
+    </div>
+
+    <div class="session-card">
+
+      <div class="section-title" style="font-size:1rem">
+        Today's Sessions
+      </div>
+
+      <div class="section-sub">
+        // <span id="sessionCount">0</span> sessions
+      </div>
+
+      <div style="margin-top:18px">
+        <div style="display:flex;justify-content:space-between;color:var(--text3);font-size:.65rem">
+          <span>Daily focus goal</span>
+          <span id="focusPercent">0%</span>
+        </div>
+
+        <div class="progress-track" style="margin-top:7px">
+          <div class="progress-fill" id="focusProgress"></div>
+        </div>
+      </div>
+
+      <div class="sessions" id="sessions"></div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =========================================================
+     REPORTS
+========================================================= -->
+
+<section class="page" id="page-reports">
+
+  <div class="section-head">
+    <div>
+      <div class="section-title">Reports</div>
+      <div class="section-sub">
+        // Measure consistency, not just intentions
+      </div>
+    </div>
+  </div>
+
+  <div class="report-grid">
+
+    <div class="report-card">
+      <h3>Overall Completion</h3>
+      <div class="report-value" id="reportCompletion">0%</div>
+      <div class="report-muted">
+        planned chapters completed
+      </div>
+    </div>
+
+    <div class="report-card">
+      <h3>Focus Time</h3>
+      <div class="report-value" id="reportFocus">0h</div>
+      <div class="report-muted">
+        total recorded sessions
+      </div>
+    </div>
+
+    <div class="report-card">
+      <h3>Test Attendance</h3>
+      <div class="report-value" id="reportTests">0%</div>
+      <div class="report-muted">
+        tests attended
+      </div>
+    </div>
+
+  </div>
+
+  <div class="report-card" style="margin-top:14px">
+
+    <h3>Focus — Last 7 Days</h3>
+
+    <div class="chart" id="chart"></div>
+
+  </div>
+
+  <div class="report-card" style="margin-top:14px">
+
+    <h3>Plan Milestones</h3>
+
+    <div style="display:grid;gap:12px;margin-top:18px">
+
+      <div>
+        <div style="display:flex;justify-content:space-between;font-size:.7rem">
+          <span>Study start</span>
+          <strong>Group 1</strong>
+        </div>
+      </div>
+
+      <div>
+        <div style="display:flex;justify-content:space-between;font-size:.7rem">
+          <span>50-day chapter completion starts</span>
+          <strong>Oct 12</strong>
+        </div>
+      </div>
+
+      <div>
+        <div style="display:flex;justify-content:space-between;font-size:.7rem">
+          <span>Revision + mock tests only</span>
+          <strong>Dec 1</strong>
+        </div>
+      </div>
+
+      <div>
+        <div style="display:flex;justify-content:space-between;font-size:.7rem">
+          <span>50-day chapter deadline</span>
+          <strong style="color:#f87171">Nov 30</strong>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+</main>
+
+<footer>
+  FocusForge · JEE 2027 · 50-day chapter plan · 12 Oct – 30 Nov 2026 ·
+  Target: NIT Trichy · <span id="year"></span>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+</div>
+
+<script>
+/* ============================================================
+   FOCUSFORGE
+   COMPLETE STANDALONE VERSION
+   START: OCTOBER 12, 2026
+   END: NOVEMBER 30, 2026
+   PRIORITY MODEL: GROUP 1 → GROUP 2 → GROUP 3
+============================================================ */
+
+/* ============================================================
+   CONSTANTS
+============================================================ */
+
+const PLAN_START = new Date('2026-10-12T00:00:00');
+const PLAN_END = new Date('2026-11-30T23:59:59');
+
+const STORAGE_KEY = 'focusforge_complete_v3';
+
+const DAILY_GOAL = 300;
+
+/* ============================================================
+   SCHEDULE
+============================================================ */
+
+const PRIORITY_GROUPS = {
+  PHY: { title:'Physics', icon:'⚡', accent:'var(--cyan)', groups:[
+    {name:'GROUP 1 — HIGHEST PRIORITY', tone:'highest', items:['Current Electricity', 'Electrostatic Potential & Capacitance', 'Electric Charges & Fields', 'Ray Optics & Optical Instruments', 'Semiconductor Electronics', 'Moving Charges & Magnetism', 'Electromagnetic Induction', 'Alternating Current', 'Dual Nature of Radiation & Matter', 'Atoms & Nuclei', 'Units & Measurements', 'Work, Energy & Power', 'Kinematics', 'Laws of Motion', 'Thermodynamics', 'Kinetic Theory of Gases', 'Simple Harmonic Motion', 'Waves', 'Gravitation', 'Rotational Motion']},
+    {name:'GROUP 2 — MEDIUM PRIORITY', tone:'medium', items:['Wave Optics', 'Electromagnetic Waves', 'Mechanical Properties of Fluids', 'Thermal Properties of Matter', 'Centre of Mass & System of Particles', 'Motion in a Plane', 'Properties of Solids', 'Experimental Physics', 'Advanced Work, Energy & Power', 'Advanced Rotational Motion', 'Advanced Gravitation']},
+    {name:'GROUP 3 — LOWER PRIORITY', tone:'lower', items:['Mechanical Properties of Solids — advanced problems', 'Fluid Mechanics — advanced problems', 'SHM — advanced problems', 'Waves — advanced problems', 'Rotation — advanced problems', 'Kinematics — advanced problems']}
+  ]},
+  CHE: { title:'Chemistry', icon:'🧪', accent:'var(--green)', groups:[
+    {name:'GROUP 1 — HIGHEST PRIORITY', tone:'highest', items:['Chemical Bonding', 'General Organic Chemistry (GOC)', 'Coordination Compounds', 'Periodic Table & Periodic Properties', 'Mole Concept & Solutions', 'Electrochemistry', 'Chemical Kinetics', 'Thermodynamics', 'Equilibrium', 'd- & f-Block Elements', 'Aldehydes, Ketones & Carboxylic Acids', 'Amines', 'Structure of Atom', 'Isomerism']},
+    {name:'GROUP 2 — MEDIUM PRIORITY', tone:'medium', items:['Haloalkanes & Haloarenes', 'Alcohols, Phenols & Ethers', 'Biomolecules', 'p-Block Elements', 'Redox Reactions', 'Hydrocarbons', 'Practical Chemistry / Qualitative Analysis', 'Solutions — advanced problems', 'Atomic Structure — advanced problems']},
+    {name:'GROUP 3 — LOWER PRIORITY', tone:'lower', items:['Polymers', 'Chemistry in Everyday Life', 'Environmental Chemistry', 'Remaining isolated Inorganic Chemistry portions', 'Lower-frequency subtopics from completed chapters']}
+  ]},
+  MAT: { title:'Mathematics', icon:'📐', accent:'var(--purple)', groups:[
+    {name:'GROUP 1 — HIGHEST PRIORITY · RANK 1–22', tone:'highest', items:['Linear Differential Equations', 'Point, Projection & Reflection with a Line', 'Measures of Dispersion', 'Evaluation of Definite Integrals', 'Area involving Special Curves & Functions', 'System of Linear Equations', 'Arithmetic Progression', 'Terms & Coefficients in Binomial Expansion', 'Areas using Integration', 'Standard Equation & Geometric Elements of Hyperbola', 'Dot Product', 'Relations Between Lines in Space', 'Properties of Definite Integrals', 'Maxima & Minima', 'Adjoint of a Matrix', 'Standard Equation & Geometric Elements of an Ellipse', 'Linear Permutations & Word/Number Formation', 'Roots & Coefficients', 'Shortest Distance & Common Perpendicular', 'Classical & Combinatorial Probability', 'Functional Equations', 'Continuity at a Point']},
+    {name:'GROUP 2 — MEDIUM PRIORITY · RANK 23–44', tone:'medium', items:['Equations Reducible to Quadratic', 'Vector Equations & Identities', 'Domain of Functions', 'Geometric Progression', 'Types of Functions & Mapping', 'Matrix Powers, Polynomials & Cayley-Hamilton', 'Total Probability & Bayes’ Theorem', 'Lines in Space: Equations & Construction', 'Coordinate Geometry of Triangle Centres', 'Variable-Separable Equations', 'Properties of Relations', 'Telescoping & Special Series', 'Complex Equations', 'Distance, Projection & Reflection — Straight Lines', 'Compound, Multiple & Submultiple Angles', 'Equations & Representations of a Circle', 'Random Variables & Probability Distributions', 'General Principle & Interval Solutions', 'Cross Product', 'Line-Circle Intersection & Chords', 'Properties of Binomial Coefficients', 'Standard Summation / Sigma Notation']},
+    {name:'GROUP 3 — LOWER PRIORITY · RANK 45–65', tone:'lower', items:['Substitution in Indefinite Integration', 'Increasing & Decreasing Functions', 'Limits', 'Locus in the Complex Plane', 'Advanced Binomial Theorem Topics', 'Inverse Trigonometric Functions', 'Remaining Complex Numbers Topics', 'Remaining Indefinite Integration Topics', 'Remaining Application of Derivatives Topics', 'Advanced Sequence & Series Topics', 'Remaining Probability Topics', 'Mixed AP-GP & Transformed Progressions', 'Focal Chords & Focal Properties', 'Combinations & Selections', 'Homogeneous Differential Equations', 'Angles, Direction & Angle Bisectors', 'Greatest Integer, Fractional Part & Signum Functions', 'Variable Limits & Leibniz Rule', 'Parametric Representation of a Parabola', 'Geometric, Graph & Path Counting', 'Advanced Limit Methods']}
+  ]}
+};
+
+const PLAN_WEEKS = Object.entries(PRIORITY_GROUPS).flatMap(([sub, subject]) => subject.groups.map((group, gi) => ({id:`${sub.toLowerCase()}-g${gi+1}`, start:'2026-10-12', end:'2026-11-30', date:'12 Oct – 30 Nov', label:group.name, revision:false, chapters:group.items.map((name,i)=>({id:`${sub.toLowerCase()}-g${gi+1}-${i+1}`,sub,name,note:group.name,c11:'JEE Main priority',hard:gi===0}))})));
+
+/* ============================================================
+   STATE
+============================================================ */
+
+let state = {
+  chapters:{},
+  tests:{},
+  habits:JSON.parse(JSON.stringify(DEFAULT_HABITS)),
+  sessions:[],
+  streak:0,
+  bestStreak:0,
+  lastHabitDate:'',
+  currentHabitTab:'daily'
+};
+
+/* ============================================================
+   STORAGE
+============================================================ */
+
+function loadState(){
+
+  try{
+
+    const raw =
+      localStorage.getItem(STORAGE_KEY);
+
+    if(raw){
+
+      const saved =
+        JSON.parse(raw);
+
+      state = {
+        ...state,
+        ...saved
+      };
+
+      state.habits = {
+        ...JSON.parse(JSON.stringify(DEFAULT_HABITS)),
+        ...(saved.habits || {})
+      };
+
+    }
+
+  }catch(error){
+
+    console.warn(
+      'Unable to load FocusForge data',
+      error
+    );
+
+  }
+
+  checkDailyReset();
+
+}
+
+function saveState(){
+
+  try{
+
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify(state)
+    );
+
+  }catch(error){
+
+    console.warn(
+      'Unable to save FocusForge data',
+      error
+    );
+
+  }
+
+}
+
+/* ============================================================
+   DATE HELPERS
+============================================================ */
+
+function todayKey(){
+
+  const d =
+    new Date();
+
+  return [
+    d.getFullYear(),
+    String(d.getMonth()+1).padStart(2,'0'),
+    String(d.getDate()).padStart(2,'0')
+  ].join('-');
+
+}
+
+function dateFromDisplay(value){
+
+  const months = {
+    Jan:0,
+    Feb:1,
+    Mar:2,
+    Apr:3,
+    May:4,
+    Jun:5,
+    Jul:6,
+    Aug:7,
+    Sep:8,
+    Oct:9,
+    Nov:10,
+    Dec:11
+  };
+
+  const parts =
+    value.split(' ');
+
+  return new Date(
+    2026,
+    months[parts[0]],
+    Number(parts[1]),
+    23,
+    59,
+    59
+  );
+
+}
+
+function getCurrentWeek(){
+
+  const now =
+    new Date();
+
+  let current =
+    PLAN_WEEKS[0];
+
+  for(const week of PLAN_WEEKS){
+
+    const start =
+      new Date(
+        week.start+'T00:00:00'
+      );
+
+    if(now >= start){
+      current = week;
+    }
+
+  }
+
+  return current;
+
+}
+
+/* ============================================================
+   DAILY HABIT RESET
+============================================================ */
+
+function checkDailyReset(){
+
+  const today =
+    todayKey();
+
+  if(
+    state.lastHabitDate &&
+    state.lastHabitDate !== today
+  ){
+
+    const previous =
+      state.habits.daily || [];
+
+    const allDone =
+      previous.length > 0 &&
+      previous.every(
+        habit => habit.done
+      );
+
+    if(allDone){
+
+      state.streak =
+        Number(state.streak || 0) + 1;
+
+      state.bestStreak =
+        Math.max(
+          Number(state.bestStreak || 0),
+          state.streak
+        );
+
+    }else{
+
+      state.streak = 0;
+
+    }
+
+    Object.values(state.habits)
+      .flat()
+      .forEach(habit => {
+        habit.done = false;
+      });
+
+  }
+
+  state.lastHabitDate =
+    today;
+
+  saveState();
+
+}
+
+/* ============================================================
+   CHAPTER HELPERS
+============================================================ */
+
+function allChapters(){
+
+  return PLAN_WEEKS.flatMap(
+    week => week.chapters
+  );
+
+}
+
+function chapterCompleted(id){
+
+  return Boolean(
+    state.chapters[id]
+  );
+
+}
+
+function toggleChapter(id){
+
+  state.chapters[id] =
+    !state.chapters[id];
+
+  saveState();
+
+  renderAll();
+
+  showToast(
+    state.chapters[id]
+      ? '✅ Chapter completed!'
+      : 'Chapter marked incomplete.'
+  );
+
+}
+
+function chapterSubjectClass(sub){
+
+  if(sub === 'PHY'){
+    return 'physics';
+  }
+
+  if(sub === 'CHE'){
+    return 'chemistry';
+  }
+
+  if(sub === 'MAT'){
+    return 'maths';
+  }
+
+  return 'physics';
+
+}
+
+/* ============================================================
+   WEEK PROGRESS
+============================================================ */
+
+function weekProgress(week){
+
+  const total =
+    week.chapters.length;
+
+  const done =
+    week.chapters.filter(
+      chapter =>
+        chapterCompleted(chapter.id)
+    ).length;
+
+  return {
+    total,
+    done,
+    pct: total
+      ? Math.round(done / total * 100)
+      : 0
+  };
+
+}
+
+/* ============================================================
+   CHAPTER CARD
+============================================================ */
+
+function chapterCard(chapter){
+
+  const done =
+    chapterCompleted(chapter.id);
+
+  const cls =
+    chapterSubjectClass(
+      chapter.sub
+    );
+
+  const hard =
+    chapter.hard
+      ? ' · HARD'
+      : ' · EASY';
+
+  const revision =
+    chapter.revision
+      ? '<div class="revision-tag">REVISION</div>'
+      : '';
+
+  return `
+
+    <div class="chapter ${cls} ${done ? 'done':''}">
+
+      <div class="subject">
+        ${chapter.rank ? '#'+chapter.rank+' · ' : ''}${chapter.sub}${hard}
+      </div>
+
+      ${revision}
+
+      <div class="chapter-name">
+        ${chapter.name}
+      </div>
+
+      <div class="chapter-note">
+        ${chapter.note}
+      </div>
+
+      <div class="c11">
+        Class 11 needed: ${chapter.c11}
+      </div>
+
+      <button
+        class="check ${done ? 'done':''}"
+        onclick="toggleChapter('${chapter.id}')"
+        aria-label="Mark chapter complete"
+      >
+        ${done ? '✓' : ''}
+      </button>
+
+      <div class="timer-mini">
+
+        <button
+          onclick="startChapterTimer('${chapter.name.replace(/'/g,"&#39;")}')"
+        >
+          ▶ Start Timer
+        </button>
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+/* ============================================================
+   WEEKLY PLAN
+============================================================ */
+
+function renderWeekly(subjectCode = state.currentSubject || 'PHY') {
+  const container = document.getElementById('weeklyView');
+  state.currentSubject = subjectCode;
+  const subject = PRIORITY_GROUPS[subjectCode];
+  if (!subject) return;
+  const rankStart = [1,23,45];
+  container.innerHTML = `
+    <div class="subject-banner" style="--subject-accent:${subject.accent}">
+      <div class="subject-banner-icon">${subject.icon}</div>
+      <div><div class="eyebrow">// JEE MAIN 2027 · PRIORITY SYSTEM</div><div class="subject-banner-title">${subject.title}</div><div class="subject-banner-sub">Finish Group 1 first → then Group 2 → then Group 3</div></div>
+    </div>
+    ${subject.groups.map((group,gi)=>`
+      <div class="priority-group ${group.tone}">
+        <div class="priority-header"><div><div class="priority-kicker">PRIORITY ${gi+1}</div><div class="priority-title">${group.name}</div></div><div class="priority-count">${group.items.length} topics</div></div>
+        <div class="priority-grid">
+          ${group.items.map((name,i)=>{ const id=`${subjectCode.toLowerCase()}-g${gi+1}-${i+1}`; const done=chapterCompleted(id); const rank=subjectCode==='MAT'?rankStart[gi]+i:i+1; return `<div class="priority-card ${done?'done':''}"><div class="priority-rank">${rank}</div><div class="priority-name">${name}</div><button class="check ${done?'done':''}" onclick="toggleChapter('${id}')" aria-label="Mark ${name} complete">${done?'✓':''}</button></div>`; }).join('')}
+        </div>
+      </div>`).join('')}
+  `;
+}
+
+/* ============================================================
+   MONTHLY PLAN
+
+============================================================ */
+
+function renderMonthly(){
+
+  const container =
+    document.getElementById(
+      'monthlyView'
+    );
+
+  const subjects = [
+    ['Physics','PHY','physics'],
+    ['Chemistry','CHE','chemistry'],
+    ['Mathematics','MAT','maths']
+  ];
+
+  container.innerHTML =
+    subjects.map(([name,code,cls]) => {
+
+      const chapters =
+        allChapters().filter(
+          chapter => chapter.sub === code
+        );
+
+      const done =
+        chapters.filter(
+          chapter => chapterCompleted(chapter.id)
+        ).length;
+
+      const pct =
+        chapters.length
+          ? Math.round(done / chapters.length * 100)
+          : 0;
+
+      return `
+
+        <div class="week-block">
+
+          <div class="week-header">
+
+            <div>
+              <div class="week-date">
+                SUBJECT
+              </div>
+
+              <div class="week-title">
+                ${name}
+              </div>
+            </div>
+
+            <div class="week-percent">
+              ${done}/${chapters.length}
+              · ${pct}%
+            </div>
+
+          </div>
+
+          <div class="week-body">
+
+            <div class="progress-track">
+              <div
+                class="progress-fill"
+                style="width:${pct}%"
+              ></div>
+            </div>
+
+            <div style="height:14px"></div>
+
+            <div class="chapter-grid">
+              ${chapters.map(chapterCard).join('')}
+            </div>
+
+          </div>
+
+        </div>
+
+      `;
+
+    }).join('');
+
+}
+
+/* ============================================================
+   PROGRESS VIEW
+
+============================================================ */
+
+function renderProgress(){
+
+  const container =
+    document.getElementById(
+      'progressView'
+    );
+
+  const chapters =
+    allChapters();
+
+  const total =
+    chapters.length;
+
+  const done =
+    chapters.filter(
+      chapter =>
+        chapterCompleted(chapter.id)
+    ).length;
+
+  const pct =
+    total
+      ? Math.round(done / total * 100)
+      : 0;
+
+  const subjects = [
+    ['Physics','PHY','physics'],
+    ['Chemistry','CHE','chemistry'],
+    ['Mathematics','MAT','maths']
+  ];
+
+  container.innerHTML = `
+
+    <div class="stats">
+
+      <div class="stat">
+        <div class="stat-label">
+          Overall
+        </div>
+        <div class="stat-value">
+          ${pct}%
+        </div>
+        <div class="stat-sub">
+          ${done}/${total}
+        </div>
+      </div>
+
+      ${subjects.map(
+        ([name,code,cls]) => {
+
+          const items =
+            chapters.filter(
+              c => c.sub === code
+            );
+
+          const finished =
+            items.filter(
+              c =>
+                chapterCompleted(c.id)
+            ).length;
+
+          const p =
+            items.length
+              ? Math.round(
+                  finished /
+                  items.length *
+                  100
+                )
+              : 0;
+
+          return `
+
+            <div class="stat">
+
+              <div class="stat-label">
+                ${name}
+              </div>
+
+              <div class="stat-value">
+                ${p}%
+              </div>
+
+              <div class="stat-sub">
+                ${finished}/${items.length}
+              </div>
+
+            </div>
+
+          `;
+
+        }
+      ).join('')}
+
+    </div>
+
+    <div class="week-block">
+
+      <div class="week-header">
+
+        <div>
+          <div class="week-date">
+            FINAL DEADLINE
+          </div>
+
+          <div class="week-title">
+            November 30, 2026
+          </div>
+        </div>
+
+        <div class="status current">
+          ${pct}% COMPLETE
+        </div>
+
+      </div>
+
+      <div class="week-body">
+
+        <div class="progress-track">
+          <div
+            class="progress-fill"
+            style="width:${pct}%"
+          ></div>
+        </div>
+
+        <div style="
+          margin-top:14px;
+          color:var(--text2);
+          font-size:.72rem;
+          line-height:1.7;
+        ">
+          The final phase includes revision, JEE Main PYQs,
+          full mock papers and error analysis.
+          Keep completing the planned work rather than
+          carrying unfinished work into another week.
+        </div>
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+/* ============================================================
+   TEST HELPERS
+============================================================ */
+
+function testDate(test){
+
+  return dateFromDisplay(
+    test.date
+  );
+
+}
+
+function toggleTest(id){
+
+  state.tests[id] =
+    !state.tests[id];
+
+  saveState();
+
+  renderTests();
+  updateStats();
+
+  showToast(
+    state.tests[id]
+      ? '✅ Test marked attended.'
+      : 'Test marked not attended.'
+  );
+
+}
+
+/* ============================================================
+   TEST RENDER
+============================================================ */
+
+function renderTests(){
+
+  const container =
+    document.getElementById(
+      'testList'
+    );
+
+  container.innerHTML =
+    TESTS.map(test => {
+
+      const attended =
+        Boolean(
+          state.tests[test.id]
+        );
+
+      return `
+
+        <div class="test">
+
+          <div class="test-top">
+
+            <div>
+
+              <div class="test-type">
+                ${test.type}
+              </div>
+
+              <div class="test-title">
+                ${test.title}
+              </div>
+
+            </div>
+
+            <div class="test-date">
+              📅 ${test.date}
+            </div>
+
+          </div>
+
+          <div class="test-chapters">
+
+            ${test.chapters
+              .map(
+                chapter =>
+                  `▸ ${chapter}`
+              )
+              .join('<br>')}
+
+          </div>
+
+          <div class="test-actions">
+
+            <button
+              class="btn primary"
+              onclick="startTestTimer('${test.title.replace(/'/g,"&#39;")}',${test.minutes})"
+            >
+              ⏱ ${test.minutes} min Timer
+            </button>
+
+            <button
+              class="btn ${attended ? 'green':''}"
+              onclick="toggleTest('${test.id}')"
+            >
+              ${attended
+                ? '✓ Attended'
+                : 'Mark Attended'}
+            </button>
+
+          </div>
+
+        </div>
+
+      `;
+
+    }).join('');
+
+}
+
+/* ============================================================
+   HABITS
+============================================================ */
+
+function renderHabits(){
+
+  const tab =
+    state.currentHabitTab;
+
+  const list =
+    document.getElementById(
+      'habitList'
+    );
+
+  const habits =
+    state.habits[tab] || [];
+
+  list.innerHTML =
+    habits.map(
+      habit => `
+
+        <div
+          class="habit ${habit.done ? 'done':''}"
+          onclick="toggleHabit(${habit.id})"
+        >
+
+          <div class="habit-check">
+            ${habit.done ? '✓':''}
+          </div>
+
+          <div class="habit-name">
+            ${habit.name}
+          </div>
+
+          <button
+            class="delete"
+            onclick="event.stopPropagation();deleteHabit(${habit.id})"
+            title="Delete habit"
+          >
+            ✕
+          </button>
+
+        </div>
+
+      `
+    ).join('');
+
+  document
+    .querySelectorAll('[data-habit]')
+    .forEach(button => {
+
+      button.classList.toggle(
+        'active',
+        button.dataset.habit === tab
+      );
+
+    });
+
+}
+
+/* ============================================================
+   HABIT TOGGLE
+============================================================ */
+
+function toggleHabit(id){
+
+  const habit =
+    state.habits[
+      state.currentHabitTab
+    ].find(
+      item => item.id === id
+    );
+
+  if(!habit){
+    return;
+  }
+
+  habit.done =
+    !habit.done;
+
+  saveState();
+
+  renderHabits();
+  updateStats();
+
+}
+
+/* ============================================================
+   DELETE HABIT
+============================================================ */
+
+function deleteHabit(id){
+
+  state.habits[
+    state.currentHabitTab
+  ] =
+    state.habits[
+      state.currentHabitTab
+    ].filter(
+      habit =>
+        habit.id !== id
+    );
+
+  saveState();
+
+  renderHabits();
+  updateStats();
+
+}
+
+/* ============================================================
+   ADD HABIT
+============================================================ */
+
+function addHabit(){
+
+  const input =
+    document.getElementById(
+      'habitInput'
+    );
+
+  const name =
+    input.value.trim();
+
+  if(!name){
+    return;
+  }
+
+  const all =
+    Object.values(
+      state.habits
+    ).flat();
+
+  const maxId =
+    all.reduce(
+      (max,habit) =>
+        Math.max(max,habit.id),
+      10
+    );
+
+  state.habits[
+    state.currentHabitTab
+  ].push({
+    id:maxId+1,
+    name,
+    done:false
+  });
+
+  input.value='';
+
+  saveState();
+
+  renderHabits();
+
+  showToast(
+    'Habit added.'
+  );
+
+}
+
+/* ============================================================
+   TIMER
+============================================================ */
+
+let timerSeconds = 25 * 60;
+let timerTotal = 25 * 60;
+let timerInterval = null;
+let timerRunning = false;
+let timerStartTime = null;
+let timerEndTime = null;
+let timerTask = '';
+
+function formatTime(seconds){
+
+  const mins =
+    Math.floor(
+      seconds / 60
+    );
+
+  const secs =
+    seconds % 60;
+
+  return (
+    String(mins).padStart(2,'0')
+    + ':' +
+    String(secs).padStart(2,'0')
+  );
+
+}
+
+function updateTimerDisplay(){
+
+  document.getElementById(
+    'timerDisplay'
+  ).textContent =
+    formatTime(timerSeconds);
+
+  const elapsed =
+    1 -
+    timerSeconds /
+    timerTotal;
+
+  const degrees =
+    Math.max(
+      0,
+      Math.min(
+        360,
+        elapsed * 360
+      )
+    );
+
+  document.getElementById(
+    'timerCircle'
+  ).style.background =
+    `radial-gradient(circle at center,var(--panel) 61%,transparent 62%),
+     conic-gradient(var(--accent) 0deg,var(--cyan) ${degrees}deg,rgba(255,255,255,.05) ${degrees}deg)`;
+
+}
+
+function unlockTimerAudio(){
+  try{
+    const Ctx = window.AudioContext || window.webkitAudioContext;
+    if(!Ctx) return;
+    if(!window.__timerAudio) window.__timerAudio = new Ctx();
+    if(window.__timerAudio.state === 'suspended') window.__timerAudio.resume();
+  }catch(e){}
+}
+
+function playTimerEndSound(){
+  try{
+    const Ctx = window.AudioContext || window.webkitAudioContext;
+    if(!Ctx) return;
+    const ctx = window.__timerAudio || new Ctx();
+    window.__timerAudio = ctx;
+    if(ctx.state === 'suspended') ctx.resume();
+
+    const now = ctx.currentTime + 0.03;
+    const pattern = [880, 660, 880, 660, 1046, 784, 1046, 784];
+
+    pattern.forEach((freq, i) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'square';
+      osc.frequency.setValueAtTime(freq, now + i * 0.28);
+      gain.gain.setValueAtTime(0.0001, now + i * 0.28);
+      gain.gain.exponentialRampToValueAtTime(0.22, now + i * 0.28 + 0.015);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + i * 0.28 + 0.20);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now + i * 0.28);
+      osc.stop(now + i * 0.28 + 0.21);
+    });
+
+    if(navigator.vibrate){
+      navigator.vibrate([250,120,250,120,400]);
+    }
+  }catch(e){
+    console.warn('Timer sound could not play:', e);
+  }
+}
+
+function updateTimerFromClock(){
+  if(!timerRunning || !timerEndTime) return;
+
+  const remaining = Math.max(0, Math.ceil((timerEndTime - Date.now()) / 1000));
+  timerSeconds = remaining;
+  updateTimerDisplay();
+
+  if(remaining <= 0){
+    completeTimer();
+  }
+}
+
+function startTimer(){
+
+  unlockTimerAudio();
+
+  if(timerRunning){
+    updateTimerFromClock();
+    if(!timerRunning) return;
+
+    timerSeconds = Math.max(0, Math.ceil((timerEndTime - Date.now()) / 1000));
+    clearInterval(timerInterval);
+    timerInterval = null;
+    timerEndTime = null;
+    timerRunning = false;
+
+    document.getElementById('timerStart').textContent = '▶ Resume';
+    document.getElementById('timerStatus').textContent = 'PAUSED';
+    updateTimerDisplay();
+    return;
+  }
+
+  if(timerSeconds <= 0){
+    resetTimer();
+  }
+
+  timerRunning = true;
+
+  if(!timerStartTime){
+    timerStartTime = Date.now();
+  }
+
+  timerTask = document.getElementById('taskInput').value.trim() || 'Focus session';
+  timerEndTime = Date.now() + timerSeconds * 1000;
+
+  document.getElementById('timerStart').textContent = '⏸ Pause';
+  document.getElementById('timerStatus').textContent = 'FOCUSING';
+
+  clearInterval(timerInterval);
+  timerInterval = setInterval(updateTimerFromClock, 250);
+  updateTimerFromClock();
+}
+
+function completeTimer(){
+
+  if(!timerRunning && timerSeconds > 0) return;
+
+  clearInterval(timerInterval);
+  timerInterval = null;
+  timerRunning = false;
+  timerEndTime = null;
+  timerSeconds = 0;
+  updateTimerDisplay();
+
+  const minutes = Math.max(1, Math.round(timerTotal / 60));
+
+  state.sessions.push({
+    task: timerTask || 'Focus session',
+    minutes,
+    start: timerStartTime || Date.now(),
+    end: Date.now(),
+    date: todayKey()
+  });
+
+  saveState();
+  playTimerEndSound();
+
+  document.title = '⏰ TIME UP! — FocusForge';
+  setTimeout(() => {
+    document.title = 'FocusForge — JEE 2027';
+  }, 5000);
+
+  document.getElementById('timerStart').textContent = '▶ Start';
+  document.getElementById('timerStatus').textContent = 'SESSION COMPLETE';
+
+  if(document.visibilityState === 'visible'){
+    setTimeout(() => alert('⏰ FOCUS SESSION COMPLETE! Great work.'), 150);
+  }
+
+  timerStartTime = null;
+  timerSeconds = timerTotal;
+  updateTimerDisplay();
+  renderSessions();
+  updateStats();
+}
+
+/* ============================================================
+   RESET TIMER
+============================================================ */
+
+function resetTimer(){
+
+  clearInterval(
+    timerInterval
+  );
+
+  timerInterval =
+    null;
+
+  timerRunning =
+    false;
+
+  timerStartTime =
+    null;
+
+  timerEndTime =
+    null;
+
+  timerSeconds =
+    timerTotal;
+
+  document.getElementById(
+    'timerStart'
+  ).textContent =
+    '▶ Start';
+
+  document.getElementById(
+    'timerStatus'
+  ).textContent =
+    'READY TO FOCUS';
+
+  updateTimerDisplay();
+
+}
+
+/* ============================================================
+   CHAPTER TIMER
+============================================================ */
+
+function startChapterTimer(name){
+
+  document
+    .querySelectorAll('.nav-btn')
+    .forEach(button => {
+
+      button.classList.toggle(
+        'active',
+        button.dataset.page === 'timer'
+      );
+
+    });
+
+  document
+    .querySelectorAll('.page')
+    .forEach(page =>
+      page.classList.remove('active')
+    );
+
+  document
+    .getElementById('page-timer')
+    .classList.add('active');
+
+  document.getElementById(
+    'taskInput'
+  ).value =
+    name;
+
+  timerTotal =
+    50 * 60;
+
+  timerSeconds =
+    timerTotal;
+
+  document
+    .querySelectorAll('.preset')
+    .forEach(button =>
+      button.classList.toggle(
+        'active',
+        button.dataset.min === '50'
+      )
+    );
+
+  updateTimerDisplay();
+
+  showToast(
+    'Timer prepared for '+name
+  );
+
+}
+
+/* ============================================================
+   TEST TIMER
+============================================================ */
+
+function startTestTimer(name,minutes){
+
+  document
+    .querySelectorAll('.nav-btn')
+    .forEach(button => {
+
+      button.classList.toggle(
+        'active',
+        button.dataset.page === 'timer'
+      );
+
+    });
+
+  document
+    .querySelectorAll('.page')
+    .forEach(page =>
+      page.classList.remove('active')
+    );
+
+  document
+    .getElementById('page-timer')
+    .classList.add('active');
+
+  document.getElementById(
+    'taskInput'
+  ).value =
+    name;
+
+  timerTotal =
+    minutes * 60;
+
+  timerSeconds =
+    timerTotal;
+
+  document
+    .querySelectorAll('.preset')
+    .forEach(button =>
+      button.classList.remove('active')
+    );
+
+  updateTimerDisplay();
+
+  showToast(
+    'Test timer prepared.'
+  );
+
+}
+
+/* ============================================================
+   SESSIONS
+============================================================ */
+
+function todaySessions(){
+
+  const key =
+    todayKey();
+
+  return state.sessions.filter(
+    session =>
+      session.date === key
+  );
+
+}
+
+function todayMinutes(){
+
+  return todaySessions()
+    .reduce(
+      (total,session) =>
+        total +
+        Number(session.minutes || 0),
+      0
+    );
+
+}
+
+function formatMinutes(minutes){
+
+  if(minutes < 60){
+
+    return `${minutes}m`;
+
+  }
+
+  const h =
+    Math.floor(
+      minutes / 60
+    );
+
+  const m =
+    minutes % 60;
+
+  return m
+    ? `${h}h ${m}m`
+    : `${h}h`;
+
+}
+
+/* ============================================================
+   SESSION RENDER
+============================================================ */
+
+function renderSessions(){
+
+  const list =
+    document.getElementById(
+      'sessions'
+    );
+
+  const sessions =
+    todaySessions();
+
+  document.getElementById(
+    'sessionCount'
+  ).textContent =
+    sessions.length;
+
+  if(!sessions.length){
+
+    list.innerHTML = `
+
+      <div style="
+        padding:25px 10px;
+        color:var(--text3);
+        text-align:center;
+        font-size:.7rem;
+      ">
+        No sessions yet.<br>
+        Start your first focus session.
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+  list.innerHTML =
+    [...sessions]
+      .reverse()
+      .map(
+        session => `
+
+          <div class="session">
+
+            <div class="session-top">
+
+              <div class="session-task">
+                ${escapeHTML(session.task)}
+              </div>
+
+              <div class="session-duration">
+                ${formatMinutes(session.minutes)}
+              </div>
+
+            </div>
+
+            <div style="
+              color:var(--text3);
+              font:500 .55rem 'DM Mono',monospace;
+              margin-top:6px;
+            ">
+              ${new Date(session.start).toLocaleTimeString([],{
+                hour:'2-digit',
+                minute:'2-digit'
+              })}
+              →
+              ${new Date(session.end).toLocaleTimeString([],{
+                hour:'2-digit',
+                minute:'2-digit'
+              })}
+            </div>
+
+          </div>
+
+        `
+      )
+      .join('');
+
+  const mins =
+    todayMinutes();
+
+  const pct =
+    Math.min(
+      100,
+      Math.round(
+        mins /
+        DAILY_GOAL *
+        100
+      )
+    );
+
+  document.getElementById(
+    'focusProgress'
+  ).style.width =
+    pct+'%';
+
+  document.getElementById(
+    'focusPercent'
+  ).textContent =
+    pct+'%';
+
+}
+
+/* ============================================================
+   ESCAPE HTML
+============================================================ */
+
+function escapeHTML(value){
+
+  return String(value)
+    .replaceAll('&','&amp;')
+    .replaceAll('<','&lt;')
+    .replaceAll('>','&gt;')
+    .replaceAll('"','&quot;')
+    .replaceAll("'","&#039;");
+
+}
+
+/* ============================================================
+   STATS
+============================================================ */
+
+function updateStats(){
+
+  const chapters =
+    allChapters();
+
+  const done =
+    chapters.filter(
+      chapter =>
+        chapterCompleted(chapter.id)
+    ).length;
+
+  const total =
+    chapters.length;
+
+  const pct =
+    total
+      ? Math.round(
+          done /
+          total *
+          100
+        )
+      : 0;
+
+  document.getElementById(
+    'chapterStat'
+  ).textContent =
+    done;
+
+  document.getElementById(
+    'chapterTotal'
+  ).textContent =
+    `of ${total} chapters`;
+
+  document.getElementById(
+    'overallProgress'
+  ).style.width =
+    pct+'%';
+
+  document.getElementById(
+    'overallText'
+  ).textContent =
+    `${pct}% completed`;
+
+  document.getElementById(
+    'todayStudyStat'
+  ).textContent =
+    formatMinutes(
+      todayMinutes()
+    );
+
+  const testsDone =
+    TESTS.filter(
+      test =>
+        state.tests[test.id]
+    ).length;
+
+  document.getElementById(
+    'testStat'
+  ).textContent =
+    testsDone;
+
+  document.getElementById(
+    'testTotal'
+  ).textContent =
+    `of ${TESTS.length} tests`;
+
+  document.getElementById(
+    'streakStat'
+  ).textContent =
+    state.streak || 0;
+
+  document.getElementById(
+    'streakDisplay'
+  ).textContent =
+    `🔥 ${state.streak || 0} day streak`;
+
+  document.getElementById(
+    'reportCompletion'
+  ).textContent =
+    pct+'%';
+
+  const totalFocus =
+    state.sessions.reduce(
+      (sum,session) =>
+        sum +
+        Number(session.minutes || 0),
+      0
+    );
+
+  document.getElementById(
+    'reportFocus'
+  ).textContent =
+    formatMinutes(
+      totalFocus
+    );
+
+  const testPct =
+    TESTS.length
+      ? Math.round(
+          testsDone /
+          TESTS.length *
+          100
+        )
+      : 0;
+
+  document.getElementById(
+    'reportTests'
+  ).textContent =
+    testPct+'%';
+
+}
+
+/* ============================================================
+   REPORT CHART
+============================================================ */
+
+function renderChart(){
+
+  const container =
+    document.getElementById(
+      'chart'
+    );
+
+  const now =
+    new Date();
+
+  const data = [];
+
+  for(
+    let i=6;
+    i>=0;
+    i--
+  ){
+
+    const date =
+      new Date(now);
+
+    date.setDate(
+      now.getDate()-i
+    );
+
+    const key =
+      [
+        date.getFullYear(),
+        String(date.getMonth()+1)
+          .padStart(2,'0'),
+        String(date.getDate())
+          .padStart(2,'0')
+      ].join('-');
+
+    const mins =
+      state.sessions
+        .filter(
+          session =>
+            session.date === key
+        )
+        .reduce(
+          (sum,session) =>
+            sum +
+            Number(session.minutes || 0),
+          0
+        );
+
+    data.push({
+      label:
+        date.toLocaleDateString(
+          'en-IN',
+          {weekday:'short'}
+        ),
+      value:mins
+    });
+
+  }
+
+  const max =
+    Math.max(
+      DAILY_GOAL,
+      ...data.map(
+        item => item.value
+      ),
+      1
+    );
+
+  container.innerHTML =
+    data.map(
+      item => {
+
+        const height =
+          Math.max(
+            2,
+            item.value /
+            max *
+            140
+          );
+
+        return `
+
+          <div class="bar-wrap">
+
+            <div style="
+              color:var(--text3);
+              font:500 .5rem 'DM Mono',monospace;
+            ">
+              ${item.value}m
+            </div>
+
+            <div
+              class="bar"
+              style="height:${height}px"
+            ></div>
+
+            <div class="bar-label">
+              ${item.label}
+            </div>
+
+          </div>
+
+        `;
+
+      }
+    ).join('');
+
+}
+
+/* ============================================================
+   COUNTDOWN
+============================================================ */
+
+function updateCountdown(){
+
+  const now =
+    new Date();
+
+  const diff =
+    Math.max(
+      0,
+      PLAN_END.getTime() -
+      now.getTime()
+    );
+
+  const days =
+    Math.floor(
+      diff /
+      (1000*60*60*24)
+    );
+
+  const hours =
+    Math.floor(
+      (
+        diff %
+        (1000*60*60*24)
+      ) /
+      (1000*60*60)
+    );
+
+  const minutes =
+    Math.floor(
+      (
+        diff %
+        (1000*60*60)
+      ) /
+      (1000*60)
+    );
+
+  const seconds =
+    Math.floor(
+      (
+        diff %
+        (1000*60)
+      ) /
+      1000
+    );
+
+  document.getElementById(
+    'days'
+  ).textContent =
+    String(days)
+      .padStart(2,'0');
+
+  document.getElementById(
+    'hours'
+  ).textContent =
+    String(hours)
+      .padStart(2,'0');
+
+  document.getElementById(
+    'minutes'
+  ).textContent =
+    String(minutes)
+      .padStart(2,'0');
+
+  document.getElementById(
+    'seconds'
+  ).textContent =
+    String(seconds)
+      .padStart(2,'0');
+
+}
+
+/* ============================================================
+   TOAST
+============================================================ */
+
+let toastTimer = null;
+
+function showToast(message){
+
+  const toast =
+    document.getElementById(
+      'toast'
+    );
+
+  toast.textContent =
+    message;
+
+  toast.classList.add(
+    'show'
+  );
+
+  clearTimeout(
+    toastTimer
+  );
+
+  toastTimer =
+    setTimeout(
+      () =>
+        toast.classList.remove(
+          'show'
+        ),
+      2500
+    );
+
+}
+
+/* ============================================================
+   NAVIGATION
+============================================================ */
+
+function showPage(page){
+
+  document
+    .querySelectorAll('.page')
+    .forEach(
+      section =>
+        section.classList.remove(
+          'active'
+        )
+    );
+
+  document
+    .getElementById(
+      'page-'+page
+    )
+    .classList.add(
+      'active'
+    );
+
+  document
+    .querySelectorAll('.nav-btn')
+    .forEach(button =>
+      button.classList.toggle(
+        'active',
+        button.dataset.page === page
+      )
+    );
+
+  if(page === 'plan'){
+
+    renderWeekly();
+    renderMonthly();
+    renderProgress();
+
+  }
+
+  if(page === 'tests'){
+    renderTests();
+  }
+
+  if(page === 'habits'){
+    renderHabits();
+  }
+
+  if(page === 'timer'){
+    renderSessions();
+  }
+
+  if(page === 'reports'){
+    renderReports();
+  }
+
+}
+
+/* ============================================================
+   REPORTS
+============================================================ */
+
+function renderReports(){
+
+  updateStats();
+  renderChart();
+
+}
+
+/* ============================================================
+   PLAN TABS
+============================================================ */
+
+function showPlanTab(tab){
+  const weekly=document.getElementById('weeklyView');
+  const monthly=document.getElementById('monthlyView');
+  const progress=document.getElementById('progressView');
+  weekly.style.display=tab==='progress'?'none':'block';
+  monthly.style.display='none';
+  progress.style.display=tab==='progress'?'block':'none';
+  document.querySelectorAll('#page-plan .tab').forEach(b=>b.classList.remove('active'));
+  const map={physics:'physicsTab',chemistry:'chemistryTab',maths:'mathsTab',progress:'progressTab'};
+  document.getElementById(map[tab])?.classList.add('active');
+  if(tab==='physics') renderWeekly('PHY');
+  if(tab==='chemistry') renderWeekly('CHE');
+  if(tab==='maths') renderWeekly('MAT');
+}
+
+/* ============================================================
+   RENDER EVERYTHING
+============================================================ */
+
+function renderAll(){
+
+  renderWeekly();
+  renderMonthly();
+  renderProgress();
+  renderTests();
+  renderHabits();
+  renderSessions();
+  updateStats();
+  renderChart();
+
+}
+
+/* ============================================================
+   EVENT LISTENERS
+============================================================ */
+
+document
+  .querySelectorAll('.nav-btn')
+  .forEach(button => {
+
+    button.addEventListener(
+      'click',
+      () =>
+        showPage(
+          button.dataset.page
+        )
+    );
+
+  });
+
+document.getElementById('physicsTab').addEventListener('click',()=>showPlanTab('physics'));
+document.getElementById('chemistryTab').addEventListener('click',()=>showPlanTab('chemistry'));
+document.getElementById('mathsTab').addEventListener('click',()=>showPlanTab('maths'));
+document.getElementById('progressTab').addEventListener('click',()=>showPlanTab('progress'));
+
+document
+  .querySelectorAll('[data-habit]')
+  .forEach(button => {
+
+    button.addEventListener(
+      'click',
+      () => {
+
+        state.currentHabitTab =
+          button.dataset.habit;
+
+        renderHabits();
+
+      }
+    );
+
+  });
+
+document
+  .getElementById('addHabitBtn')
+  .addEventListener(
+    'click',
+    addHabit
+  );
+
+document
+  .getElementById('habitInput')
+  .addEventListener(
+    'keydown',
+    event => {
+
+      if(
+        event.key === 'Enter'
+      ){
+
+        addHabit();
+
+      }
+
+    }
+  );
+
+document
+  .getElementById('timerStart')
+  .addEventListener(
+    'click',
+    startTimer
+  );
+
+document
+  .getElementById('timerReset')
+  .addEventListener(
+    'click',
+    resetTimer
+  );
+
+document
+  .querySelectorAll('.preset')
+  .forEach(button => {
+
+    button.addEventListener(
+      'click',
+      () => {
+
+        if(timerRunning){
+          return;
+        }
+
+        const minutes =
+          Number(
+            button.dataset.min
+          );
+
+        timerTotal =
+          minutes * 60;
+
+        timerSeconds =
+          timerTotal;
+
+        document
+          .querySelectorAll('.preset')
+          .forEach(
+            b =>
+              b.classList.remove(
+                'active'
+              )
+          );
+
+        button.classList.add(
+          'active'
+        );
+
+        updateTimerDisplay();
+
+      }
+    );
+
+  });
+
+/* ============================================================
+   INITIALIZATION
+============================================================ */
+
+function initialize(){
+
+  loadState();
+
+  document.getElementById(
+    'year'
+  ).textContent =
+    new Date().getFullYear();
+
+  updateCountdown();
+
+  updateTimerDisplay();
+
+  renderAll();
+
+  showPage('plan');
+  showPlanTab('physics');
+  renderWeekly('PHY');
+
+}
+
+/* ============================================================
+   CUSTOM TIMER + BACKGROUND TAB SUPPORT
+============================================================ */
+
+document.getElementById('customTimerBtn')?.addEventListener('click', () => {
+  const input = document.getElementById('customMinutes');
+  const minutes = Number(input.value);
+  if(!Number.isFinite(minutes) || minutes < 1 || minutes > 480){
+    showToast('Enter a time from 1 to 480 minutes');
+    return;
+  }
+
+  clearInterval(timerInterval);
+  timerInterval = null;
+  timerRunning = false;
+  timerStartTime = null;
+  timerEndTime = null;
+  timerTotal = Math.round(minutes) * 60;
+  timerSeconds = timerTotal;
+
+  document.querySelectorAll('.preset').forEach(button => button.classList.remove('active'));
+  document.getElementById('timerStart').textContent = '▶ Start';
+  document.getElementById('timerStatus').textContent = 'READY TO FOCUS';
+  updateTimerDisplay();
+  unlockTimerAudio();
+  showToast(`Custom timer set: ${Math.round(minutes)} minutes`);
+});
+
+document.getElementById('customMinutes')?.addEventListener('keydown', (event) => {
+  if(event.key === 'Enter') document.getElementById('customTimerBtn').click();
+});
+
+document.addEventListener('visibilitychange', () => {
+  if(timerRunning){
+    updateTimerFromClock();
+  }
+});
+
+initialize();
+
+/* ============================================================
+   INTERVALS
+============================================================ */
+
+setInterval(
+  updateCountdown,
+  1000
+);
+
+setInterval(
+  () => {
+
+    checkDailyReset();
+    updateStats();
+
+  },
+  60000
+);
+
+</script>
+
+
+<script>
+/* FocusForge recovery layer: renders the plan even if an earlier initializer fails. */
+(function () {
+  const groups = {
+    PHY: {
+      title: "Physics", icon: "⚡", accent: "var(--cyan)",
+      groups: [
+        {name:"GROUP 1 — HIGHEST PRIORITY", tone:"highest", items:["Current Electricity","Electrostatic Potential & Capacitance","Electric Charges & Fields","Ray Optics & Optical Instruments","Semiconductor Electronics","Moving Charges & Magnetism","Electromagnetic Induction","Alternating Current","Dual Nature of Radiation & Matter","Atoms & Nuclei","Units & Measurements","Work, Energy & Power","Kinematics","Laws of Motion","Thermodynamics","Kinetic Theory of Gases","Simple Harmonic Motion","Waves","Gravitation","Rotational Motion"]},
+        {name:"GROUP 2 — MEDIUM PRIORITY", tone:"medium", items:["Wave Optics","Electromagnetic Waves","Mechanical Properties of Fluids","Thermal Properties of Matter","Centre of Mass & System of Particles","Motion in a Plane","Properties of Solids","Experimental Physics","Advanced Work, Energy & Power","Advanced Rotational Motion","Advanced Gravitation"]},
+        {name:"GROUP 3 — LOWER PRIORITY", tone:"lower", items:["Mechanical Properties of Solids — advanced problems","Fluid Mechanics — advanced problems","SHM — advanced problems","Waves — advanced problems","Rotation — advanced problems","Kinematics — advanced problems"]}
+      ]
+    },
+    CHE: {
+      title: "Chemistry", icon: "🧪", accent: "var(--green)",
+      groups: [
+        {name:"GROUP 1 — HIGHEST PRIORITY", tone:"highest", items:["Chemical Bonding","General Organic Chemistry (GOC)","Coordination Compounds","Periodic Table & Periodic Properties","Mole Concept & Solutions","Electrochemistry","Chemical Kinetics","Thermodynamics","Equilibrium","d- & f-Block Elements","Aldehydes, Ketones & Carboxylic Acids","Amines","Structure of Atom","Isomerism"]},
+        {name:"GROUP 2 — MEDIUM PRIORITY", tone:"medium", items:["Haloalkanes & Haloarenes","Alcohols, Phenols & Ethers","Biomolecules","p-Block Elements","Redox Reactions","Hydrocarbons","Practical Chemistry / Qualitative Analysis","Solutions — advanced problems","Atomic Structure — advanced problems"]},
+        {name:"GROUP 3 — LOWER PRIORITY", tone:"lower", items:["Polymers","Chemistry in Everyday Life","Environmental Chemistry","Remaining isolated Inorganic Chemistry portions","Lower-frequency subtopics from completed chapters"]}
+      ]
+    },
+    MAT: {
+      title: "Mathematics", icon: "📐", accent: "var(--purple)",
+      groups: [
+        {name:"GROUP 1 — HIGHEST PRIORITY", tone:"highest", items:["Linear Differential Equations","Point, Projection & Reflection with a Line","Measures of Dispersion","Evaluation of Definite Integrals","Area involving Special Curves & Functions","System of Linear Equations","Arithmetic Progression","Terms & Coefficients in Binomial Expansion","Areas using Integration","Standard Equation & Geometric Elements of Hyperbola","Dot Product","Relations Between Lines in Space","Properties of Definite Integrals","Maxima & Minima","Adjoint of a Matrix","Standard Equation & Geometric Elements of an Ellipse","Linear Permutations & Word/Number Formation","Roots & Coefficients","Shortest Distance & Common Perpendicular","Classical & Combinatorial Probability","Functional Equations","Continuity at a Point"]},
+        {name:"GROUP 2 — MEDIUM PRIORITY", tone:"medium", items:["Equations Reducible to Quadratic","Vector Equations & Identities","Domain of Functions","Geometric Progression","Types of Functions & Mapping","Matrix Powers, Polynomials & Cayley-Hamilton","Total Probability & Bayes’ Theorem","Lines in Space: Equations & Construction","Coordinate Geometry of Triangle Centres","Variable-Separable Equations","Properties of Relations","Telescoping & Special Series","Complex Equations","Distance, Projection & Reflection — Straight Lines","Compound, Multiple & Submultiple Angles","Equations & Representations of a Circle","Random Variables & Probability Distributions","General Principle & Interval Solutions","Cross Product","Line-Circle Intersection & Chords","Properties of Binomial Coefficients","Standard Summation / Sigma Notation"]},
+        {name:"GROUP 3 — LOWER PRIORITY", tone:"lower", items:["Substitution in Indefinite Integration","Increasing & Decreasing Functions","Limits","Locus in the Complex Plane","Advanced Binomial Theorem Topics","Inverse Trigonometric Functions","Remaining Complex Numbers Topics","Remaining Indefinite Integration Topics","Remaining Application of Derivatives Topics","Advanced Sequence & Series Topics","Remaining Probability Topics","Mixed AP-GP & Transformed Progressions","Focal Chords & Focal Properties","Combinations & Selections","Homogeneous Differential Equations","Angles, Direction & Angle Bisectors","Greatest Integer, Fractional Part & Signum Functions","Variable Limits & Leibniz Rule","Parametric Representation of a Parabola","Geometric, Graph & Path Counting","Advanced Limit Methods"]}
+      ]
+    }
+  };
+
+  function safeLoad() {
+    try { return JSON.parse(localStorage.getItem("focusforge_fixed_v2_state") || "{}"); }
+    catch (_) { return {}; }
+  }
+  const saved = safeLoad();
+  if (!saved.chapters || typeof saved.chapters !== "object") saved.chapters = {};
+  function save() {
+    try { localStorage.setItem("focusforge_fixed_v2_state", JSON.stringify(saved)); } catch (_) {}
+  }
+  function render(subjectCode) {
+    const host = document.getElementById("weeklyView");
+    if (!host) return;
+    const subject = groups[subjectCode] || groups.PHY;
+    host.innerHTML = `
+      <div class="subject-banner" style="--subject-accent:${subject.accent}">
+        <div class="subject-banner-icon">${subject.icon}</div>
+        <div><div class="eyebrow">// JEE MAIN 2027 · PRIORITY SYSTEM</div>
+        <div class="subject-banner-title">${subject.title}</div>
+        <div class="subject-banner-sub">Finish Group 1 first → then Group 2 → then Group 3</div></div>
+      </div>
+      ${subject.groups.map((group, gi) => {
+        const ids = group.items.map((_, i) => `${subjectCode.toLowerCase()}-g${gi+1}-${i+1}`);
+        const count = ids.filter(id => saved.chapters[id]).length;
+        return `<section class="priority-group ${group.tone}">
+          <div class="priority-header"><div><div class="priority-kicker">PRIORITY ${gi+1}</div>
+          <div class="priority-title">${group.name}</div></div><div class="priority-count">${count}/${group.items.length} complete</div></div>
+          <div class="priority-grid">${group.items.map((name, i) => {
+            const id = ids[i], done = !!saved.chapters[id];
+            return `<div class="priority-card ${done ? "done" : ""}">
+              <div class="priority-rank">${subjectCode === "MAT" ? [1,23,45][gi]+i : i+1}</div>
+              <div class="priority-name">${name}</div>
+              <button type="button" class="check ${done ? "done" : ""}" data-chapter-id="${id}" aria-label="Mark ${name} complete">${done ? "✓" : ""}</button>
+            </div>`;
+          }).join("")}</div></section>`;
+      }).join("")}`;
+    host.querySelectorAll("[data-chapter-id]").forEach(btn => btn.addEventListener("click", () => {
+      const id = btn.dataset.chapterId;
+      saved.chapters[id] = !saved.chapters[id]; save(); render(subjectCode); updateCounts();
+    }));
+    updateCounts();
+  }
+  function updateCounts() {
+    const total = Object.values(groups).reduce((sum, s) => sum + s.groups.reduce((n,g) => n + g.items.length, 0), 0);
+    const done = Object.values(saved.chapters).filter(Boolean).length;
+    const stat = document.getElementById("chapterStat");
+    const totalNode = document.getElementById("chapterTotal");
+    if (stat) stat.textContent = done;
+    if (totalNode) totalNode.textContent = `of ${total} chapters`;
+    const pct = document.querySelector("#overallProgress, #progressPercent");
+    if (pct) pct.textContent = `${Math.round(done / total * 100)}%`;
+  }
+  function showSubject(code) {
+    const w = document.getElementById("weeklyView"), m = document.getElementById("monthlyView"), p = document.getElementById("progressView");
+    if (w) w.style.display = "block";
+    if (m) m.style.display = "none";
+    if (p) p.style.display = "none";
+    document.querySelectorAll("#page-plan .tab").forEach(b => b.classList.remove("active"));
+    const tab = {PHY:"physicsTab",CHE:"chemistryTab",MAT:"mathsTab"}[code];
+    const el = document.getElementById(tab); if (el) el.classList.add("active");
+    render(code);
+  }
+  function rescueInit() {
+    const planButtons = [
+      ["physicsTab", "PHY"], ["chemistryTab", "CHE"], ["mathsTab", "MAT"]
+    ];
+    planButtons.forEach(([id, code]) => {
+      const old = document.getElementById(id);
+      if (old && !old.dataset.recoveryBound) {
+        old.dataset.recoveryBound = "1";
+        old.addEventListener("click", () => showSubject(code));
+      }
+    });
+    const plan = document.querySelector('[data-page="plan"]');
+    if (plan && !plan.dataset.recoveryBound) {
+      plan.dataset.recoveryBound = "1";
+      plan.addEventListener("click", () => showSubject("PHY"));
+    }
+    // Keep the existing timer page and make sure navigation can reach it.
+    document.querySelectorAll(".nav-btn[data-page]").forEach(btn => {
+      if (btn.dataset.recoveryNav) return;
+      btn.dataset.recoveryNav = "1";
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+        const target = document.getElementById("page-" + btn.dataset.page);
+        if (target) target.classList.add("active");
+        document.querySelectorAll(".nav-btn").forEach(b => b.classList.toggle("active", b === btn));
+        if (btn.dataset.page === "plan") showSubject("PHY");
+      });
+    });
+    showSubject("PHY");
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", rescueInit);
+  else rescueInit();
+})();
+</script>
+
+
+<script>
+/* Reliable FocusForge timer + loud completion alarm */
+(function () {
+  let intervalId = null;
+  let remaining = 25 * 60;
+  let total = remaining;
+  let running = false;
+  let audioCtx = null;
+  let alarmInterval = null;
+  let alarmEnabled = true;
+
+  function getAudioContext() {
+    const Ctx = window.AudioContext || window.webkitAudioContext;
+    if (!Ctx) return null;
+    if (!audioCtx) audioCtx = new Ctx();
+    if (audioCtx.state === "suspended") audioCtx.resume().catch(() => {});
+    return audioCtx;
+  }
+  function loudChime() {
+    const ctx = getAudioContext();
+    if (!ctx) return;
+    const now = ctx.currentTime;
+    // Bright, audible multi-tone chord, repeated several times.
+    [880, 1174.66, 1396.91].forEach((freq, i) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = "square";
+      osc.frequency.value = freq;
+      gain.gain.setValueAtTime(0.0001, now);
+      gain.gain.exponentialRampToValueAtTime(0.65, now + 0.04);
+      gain.gain.setValueAtTime(0.65, now + 0.28);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.62);
+      osc.connect(gain); gain.connect(ctx.destination);
+      osc.start(now); osc.stop(now + 0.64);
+    });
+  }
+  function startAlarm() {
+    stopAlarm();
+    loudChime();
+    let repeats = 0;
+    alarmInterval = setInterval(() => {
+      loudChime();
+      repeats++;
+      if (repeats >= 8) stopAlarm();
+    }, 950);
+  }
+  function stopAlarm() {
+    if (alarmInterval) clearInterval(alarmInterval);
+    alarmInterval = null;
+  }
+  function format(s) {
+    const mm = Math.floor(s / 60), ss = s % 60;
+    return `${String(mm).padStart(2,"0")}:${String(ss).padStart(2,"0")}`;
+  }
+  function ensurePanel() {
+    let page = document.getElementById("page-timer");
+    if (!page) {
+      page = document.createElement("section");
+      page.id = "page-timer";
+      page.className = "page";
+      document.body.appendChild(page);
+    }
+    let panel = document.getElementById("ffTimerRepair");
+    if (!panel) {
+      panel = document.createElement("div");
+      panel.id = "ffTimerRepair";
+      panel.style.cssText = "max-width:760px;margin:28px auto;padding:28px;border:1px solid #293653;border-radius:22px;background:linear-gradient(145deg,#11182a,#090d17);color:#f3f6ff;text-align:center;box-shadow:0 20px 55px #0008;font-family:inherit";
+      page.appendChild(panel);
+    }
+    panel.innerHTML = `
+      <div style="font-size:12px;letter-spacing:2px;color:#7fa4ff">FOCUSFORGE · FOCUS TIMER</div>
+      <h2 style="margin:10px 0 4px;font-size:30px">Focus Session</h2>
+      <div id="ffTimerDisplay" aria-live="polite" style="font-size:clamp(56px,10vw,88px);font-weight:800;letter-spacing:2px;margin:14px 0;color:#fff">25:00</div>
+      <div id="ffTimerStatus" style="color:#aab7d6;margin-bottom:18px">Ready when you are.</div>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:16px">
+        <button id="ffStart" style="padding:13px 24px;border:0;border-radius:12px;background:linear-gradient(90deg,#4f46ff,#8b5cf6);color:white;font-size:16px;font-weight:700;cursor:pointer">▶ Start</button>
+        <button id="ffPause" style="padding:13px 24px;border:1px solid #33415e;border-radius:12px;background:#141b2a;color:white;font-size:16px;cursor:pointer">Ⅱ Pause</button>
+        <button id="ffReset" style="padding:13px 24px;border:1px solid #33415e;border-radius:12px;background:#141b2a;color:white;font-size:16px;cursor:pointer">↻ Reset</button>
+        <button id="ffStopAlarm" style="padding:13px 24px;border:1px solid #33415e;border-radius:12px;background:#141b2a;color:white;font-size:16px;cursor:pointer">🔇 Stop sound</button>
+      </div>
+      <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
+        ${[25,50,90,120].map(m=>`<button data-minutes="${m}" style="padding:9px 16px;border:1px solid #33415e;border-radius:10px;background:#0d1421;color:#dbe7ff;cursor:pointer">${m} min</button>`).join("")}
+      </div>
+      <p style="font-size:12px;color:#8796b8;margin:18px 0 0">Keep this tab open. Your browser must allow sound; click Start once to enable audio.</p>
+    `;
+    document.getElementById("ffStart").onclick = start;
+    document.getElementById("ffPause").onclick = pause;
+    document.getElementById("ffReset").onclick = reset;
+    document.getElementById("ffStopAlarm").onclick = stopAlarm;
+    panel.querySelectorAll("[data-minutes]").forEach(btn => btn.onclick = () => {
+      pause(); stopAlarm(); total = Number(btn.dataset.minutes) * 60; remaining = total;
+      running = false; update("Timer set to " + btn.dataset.minutes + " minutes.");
+    });
+    update("Ready when you are.");
+  }
+  function update(status) {
+    const display = document.getElementById("ffTimerDisplay");
+    const state = document.getElementById("ffTimerStatus");
+    if (display) display.textContent = format(remaining);
+    if (state && status) state.textContent = status;
+    document.title = running ? `(${format(remaining)}) FocusForge` : "FocusForge";
+  }
+  function start() {
+    getAudioContext(); // User gesture unlocks audio.
+    if (running) return;
+    if (remaining <= 0) remaining = total;
+    running = true;
+    update("Focus session in progress.");
+    if (intervalId) clearInterval(intervalId);
+    intervalId = setInterval(() => {
+      remaining--;
+      if (remaining <= 0) {
+        remaining = 0; running = false;
+        clearInterval(intervalId); intervalId = null;
+        update("⏰ Time is up! Take a break.");
+        startAlarm();
+        return;
+      }
+      update();
+    }, 1000);
+  }
+  function pause() {
+    running = false;
+    if (intervalId) clearInterval(intervalId);
+    intervalId = null;
+    update("Timer paused.");
+  }
+  function reset() {
+    pause(); stopAlarm(); remaining = total; update("Timer reset.");
+  }
+  function showTimerPage() {
+    document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+    const page = document.getElementById("page-timer");
+    if (page) page.classList.add("active");
+    document.querySelectorAll(".nav-btn").forEach(b => b.classList.toggle("active", b.dataset.page === "timer"));
+  }
+  function bindNav() {
+    document.querySelectorAll(".nav-btn[data-page='timer']").forEach(btn => {
+      btn.addEventListener("click", showTimerPage);
+    });
+    // If no Timer nav button exists, provide a visible navigation button.
+    if (!document.querySelector(".nav-btn[data-page='timer']")) {
+      const nav = document.querySelector("nav");
+      if (nav) {
+        const b = document.createElement("button");
+        b.className = "nav-btn"; b.dataset.page = "timer"; b.textContent = "Timer";
+        b.onclick = showTimerPage; nav.appendChild(b);
+      }
+    }
+  }
+  function init() { ensurePanel(); bindNav(); }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
+  else init();
+})();
+</script>
+
+
+<style id="ff-countdown-style">
+#ffPlanCountdown{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:14px 0 22px}
+#ffPlanCountdown .ff-time-unit{border:1px solid var(--border,#292d38);border-radius:13px;background:rgba(255,255,255,.025);padding:13px 6px;text-align:center;min-width:0}
+#ffPlanCountdown .ff-time-value{font-size:clamp(20px,3vw,30px);font-weight:800;line-height:1.2;color:var(--text,#f4f6ff);font-variant-numeric:tabular-nums}
+#ffPlanCountdown .ff-time-label{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted,#8d9bbd);margin-top:4px}
+@media(max-width:520px){#ffPlanCountdown{gap:5px}#ffPlanCountdown .ff-time-unit{padding:10px 3px}}
+</style>
+<script id="ff-plan-countdown">
+(function(){
+  function initPlanCountdown(){
+    if(document.getElementById("ffPlanCountdown")) return;
+    const host = document.querySelector("#page-plan");
+    if(!host) return;
+    const wrap=document.createElement("div");
+    wrap.id="ffPlanCountdown";
+    wrap.setAttribute("aria-label","Countdown to the end of the 50-day study plan");
+    wrap.innerHTML=[["days","DAYS"],["hours","HOURS"],["minutes","MINUTES"],["seconds","SECONDS"]].map(([id,label])=>`<div class="ff-time-unit"><div class="ff-time-value" id="ffTime-${id}">00</div><div class="ff-time-label">${label}</div></div>`).join("");
+    host.insertBefore(wrap, host.firstChild);
+    function tick(){
+      const end=new Date(2026,10,30,23,59,59).getTime();
+      let diff=Math.max(0,end-Date.now());
+      const vals={days:Math.floor(diff/86400000),hours:Math.floor(diff%86400000/3600000),minutes:Math.floor(diff%3600000/60000),seconds:Math.floor(diff%60000/1000)};
+      Object.keys(vals).forEach(k=>{const el=document.getElementById("ffTime-"+k);if(el)el.textContent=String(vals[k]).padStart(2,"0")});
+    }
+    tick(); setInterval(tick,1000);
+  }
+  if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",initPlanCountdown);
+  else initPlanCountdown();
+  setTimeout(initPlanCountdown,500);
+})();
+</script>
+
+</body>
+</html>
